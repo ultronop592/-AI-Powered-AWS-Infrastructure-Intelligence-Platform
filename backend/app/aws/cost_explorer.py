@@ -19,6 +19,9 @@ class CostExplorerService:
         region: str = None,
         boto3_session: boto3.Session = None,
     ):
+        # Track whether we are using a live authenticated session.
+        # When True, errors return $0.00 instead of mock $14.67.
+        self._is_live = boto3_session is not None
         try:
             if boto3_session is not None:
                 client = AWSClient.from_session(boto3_session)
@@ -30,8 +33,9 @@ class CostExplorerService:
             self.client = None
 
     def get_monthly_cost(self) -> dict:
+        _fallback = {"monthly_cost": 0.0 if self._is_live else 14.67, "currency": "USD"}
         if not self.client:
-            return {"monthly_cost": 14.67, "currency": "USD"}
+            return _fallback
 
         today = date.today()
         start = today.replace(day=1)
@@ -54,7 +58,7 @@ class CostExplorerService:
             return {"monthly_cost": round(float(amount), 2), "currency": "USD"}
         except Exception as exc:
             logger.warning("get_monthly_cost failed: %s", exc)
-            return {"monthly_cost": 14.67, "currency": "USD"}
+            return _fallback
 
     def get_cost_by_service(self) -> list:
         if not self.client:

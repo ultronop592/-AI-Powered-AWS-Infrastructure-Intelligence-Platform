@@ -4,7 +4,7 @@ import React from 'react';
 import { AIReport } from '../lib/api';
 
 interface AIReportCardProps {
-  report: AIReport | string;
+  report: AIReport | string | null;
 }
 
 function ScoreBadge({ label, score, maxScore = 100 }: { label: string; score: number; maxScore?: number }) {
@@ -34,6 +34,35 @@ function ScoreBadge({ label, score, maxScore = 100 }: { label: string; score: nu
 }
 
 export default function AIReportCard({ report }: AIReportCardProps) {
+  if (!report) {
+    return (
+      <div className="aws-card" style={{ border: '1px solid #d5dbdb' }}>
+        <div className="aws-card-header" style={{ backgroundColor: '#16191f', color: '#ffffff' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{
+              backgroundColor: '#ec7211',
+              color: '#ffffff',
+              padding: '3px 6px',
+              borderRadius: '2px',
+              fontWeight: 700,
+              fontSize: '11px'
+            }}>
+              BEDROCK AI
+            </div>
+            <span style={{ fontWeight: 600, fontSize: '15px' }}>
+              Amazon Bedrock Infrastructure Intelligence Report
+            </span>
+          </div>
+        </div>
+        <div className="aws-card-body" style={{ backgroundColor: '#ffffff', padding: '36px', textAlign: 'center' }}>
+          <p style={{ color: '#545b64', fontSize: '14px', margin: 0 }}>
+            No AI intelligence report generated yet for this account. Click Refresh or connect credentials to run an analysis.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   const isStringReport = typeof report === 'string';
   const reportObj = !isStringReport ? (report as AIReport) : null;
 

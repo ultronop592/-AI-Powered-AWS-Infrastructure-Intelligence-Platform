@@ -346,10 +346,10 @@ class DashboardService:
         )
         deep_summary = deep_services.get_summary()
 
-        # CloudWatch (best-effort)
+        # CloudWatch (best-effort: only query real instance IDs, never fake ones)
         try:
-            first_ec2 = ec2[0]["InstanceId"] if ec2 else "i-0a123456789abcdef"
-            cw_metrics = cloudwatch_service.get_ec2_metrics(first_ec2)
+            first_ec2 = ec2[0]["InstanceId"] if ec2 else None
+            cw_metrics = cloudwatch_service.get_ec2_metrics(first_ec2) if first_ec2 else {}
         except Exception:
             cw_metrics = {}
 
@@ -412,6 +412,8 @@ class DashboardService:
             "recommendations": recommendations,
             "region": target_region,
             "is_demo": False,
+            "is_mock": False,
+            "account_id": getattr(getattr(boto3_session, '_session', None), 'get_config_variable', lambda x: '')("account_id") if boto3_session else None,
             "aws_fetch_ms": round(elapsed * 1000),
         }
 

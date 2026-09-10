@@ -18,7 +18,7 @@ export default function CloudWatchMetricsPage() {
   const [data, setData] = useState<DashboardResponse>(MOCK_DASHBOARD);
   const [loading, setLoading] = useState<boolean>(true);
   const [isBackendOnline, setIsBackendOnline] = useState<boolean>(false);
-  const [selectedInstance, setSelectedInstance] = useState<string>('i-0a123456789abcdef');
+  const [selectedInstance, setSelectedInstance] = useState<string>('');
   const [timeWindow, setTimeWindow] = useState<string>('24h');
 
   const loadData = useCallback(async () => {
@@ -34,27 +34,36 @@ export default function CloudWatchMetricsPage() {
     loadData();
   }, [loadData]);
 
-  // Adjust metrics based on selected instance
-  let metrics: CloudWatchMetrics = data.cloudwatch_metrics || MOCK_CLOUDWATCH_METRICS;
-  if (selectedInstance === 'i-0b987654321fedcba') {
-    metrics = {
-      instance_id: 'i-0b987654321fedcba',
-      timestamps: ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'],
-      cpu: { label: 'CPU Utilization (%)', values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], unit: '%' },
-      ram: { label: 'Memory Utilization (%)', values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], unit: '%' },
-      net_in: { label: 'Network In (MB)', values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], unit: 'MB' },
-      net_out: { label: 'Network Out (MB)', values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], unit: 'MB' },
-      disk_io: { label: 'Disk Read/Write (MB/s)', values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], unit: 'MB/s' },
-    };
-  }
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
+  // Build instance list from real EC2 data; fall back to mock IDs only in demo mode
+  const liveInstances = data.ec2 ?? [];
+  const demoInstances = MOCK_DASHBOARD.ec2 || [];
+  const ec2Instances = isDemo ? demoInstances : liveInstances;
 
-  const cpuPeak = Math.max(...(metrics.cpu?.values || [0]));
-  const ramPeak = Math.max(...(metrics.ram?.values || [0]));
-  const netInTotal = (metrics.net_in?.values || []).reduce((a, b) => a + b, 0);
+  // In live mode, default to first real instance; in demo mode use mock ID
+  const defaultInstanceId = ec2Instances.length > 0 ? ec2Instances[0].InstanceId : '';
+
+  // When data loads, default to first real instance
+  useEffect(() => {
+    if (!isDemo && data.ec2 && data.ec2.length > 0 && !selectedInstance) {
+      setSelectedInstance(data.ec2[0].InstanceId);
+    } else if (isDemo && !selectedInstance) {
+      setSelectedInstance('i-0a123456789abcdef');
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data.ec2, isDemo]);
+
+  // Adjust metrics based on selected instance
+  const metricsSource = data.cloudwatch_metrics || (isDemo ? MOCK_CLOUDWATCH_METRICS : null);
+  const metrics = selectedInstance && metricsSource ? metricsSource : null;
+
+  const cpuPeak = metrics ? Math.max(...(metrics.cpu?.values || [0])) : 0;
+  const ramPeak = metrics ? Math.max(...(metrics.ram?.values || [0])) : 0;
+  const netInTotal = metrics ? (metrics.net_in?.values || []).reduce((a: number, b: number) => a + b, 0) : 0;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar isBackendOnline={isBackendOnline} isMockData={data.is_mock} onRefresh={loadData} isLoading={loading} />
+      <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
@@ -87,8 +96,15 @@ export default function CloudWatchMetricsPage() {
                   outline: 'none'
                 }}
               >
-                <option value="i-0a123456789abcdef">i-0a123456789abcdef (t3.micro - Running)</option>
-                <option value="i-0b987654321fedcba">i-0b987654321fedcba (t2.medium - Stopped)</option>
+                {ec2Instances.length === 0 ? (
+                  <option value="">No EC2 instances in {data.region || 'us-east-1'}</option>
+                ) : (
+                  ec2Instances.map(inst => (
+                    <option key={inst.InstanceId} value={inst.InstanceId}>
+                      {inst.InstanceId} ({inst.InstanceType} - {(inst.State || '').charAt(0).toUpperCase() + (inst.State || '').slice(1)})
+                    </option>
+                  ))
+                )}
               </select>
 
               <div style={{ display: 'flex', backgroundColor: '#ffffff', border: '1px solid #d5dbdb', borderRadius: '2px', overflow: 'hidden' }}>
@@ -136,41 +152,61 @@ export default function CloudWatchMetricsPage() {
           </div>
 
           {/* Time-Series Line Charts Grid */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(480px, 1fr))', gap: '24px', marginBottom: '24px' }}>
-            <MetricChart
-              title="CPU Utilization"
-              timestamps={metrics.timestamps || []}
-              series={metrics.cpu}
-              lineColor="#0073bb"
-              fillColor="rgba(0, 115, 187, 0.08)"
-              maxValue={100}
-            />
+          {metrics ? (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(480px, 1fr))', gap: '24px', marginBottom: '24px' }}>
+              <MetricChart
+                title="CPU Utilization"
+                timestamps={metrics.timestamps || []}
+                series={metrics.cpu}
+                lineColor="#0073bb"
+                fillColor="rgba(0, 115, 187, 0.08)"
+                maxValue={100}
+              />
 
-            <MetricChart
-              title="Memory Load (CWAgent)"
-              timestamps={metrics.timestamps || []}
-              series={metrics.ram}
-              lineColor="#ec7211"
-              fillColor="rgba(236, 114, 17, 0.08)"
-              maxValue={100}
-            />
+              <MetricChart
+                title="Memory Load (CWAgent)"
+                timestamps={metrics.timestamps || []}
+                series={metrics.ram}
+                lineColor="#ec7211"
+                fillColor="rgba(236, 114, 17, 0.08)"
+                maxValue={100}
+              />
 
-            <MetricChart
-              title="Network Throughput (NetworkIn)"
-              timestamps={metrics.timestamps || []}
-              series={metrics.net_in}
-              lineColor="#137333"
-              fillColor="rgba(19, 115, 51, 0.08)"
-            />
+              <MetricChart
+                title="Network Throughput (NetworkIn)"
+                timestamps={metrics.timestamps || []}
+                series={metrics.net_in}
+                lineColor="#137333"
+                fillColor="rgba(19, 115, 51, 0.08)"
+              />
 
-            <MetricChart
-              title="Disk Read / Write I/O"
-              timestamps={metrics.timestamps || []}
-              series={metrics.disk_io}
-              lineColor="#b06000"
-              fillColor="rgba(176, 96, 0, 0.08)"
-            />
-          </div>
+              <MetricChart
+                title="Disk Read / Write I/O"
+                timestamps={metrics.timestamps || []}
+                series={metrics.disk_io}
+                lineColor="#b06000"
+                fillColor="rgba(176, 96, 0, 0.08)"
+              />
+            </div>
+          ) : (
+            <div style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid #eaeded',
+              borderRadius: '4px',
+              padding: '48px 24px',
+              textAlign: 'center',
+              marginTop: '16px',
+            }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#16191f', marginBottom: '8px' }}>
+                No CloudWatch Telemetry Available
+              </h3>
+              <p style={{ fontSize: '13px', color: '#545b64', maxWidth: '500px', margin: '0 auto' }}>
+                {ec2Instances.length === 0
+                  ? `No EC2 instances were detected in your connected AWS account (${data.region || 'selected region'}). Launch an instance or switch regions to view metrics.`
+                  : 'Metrics are still collecting from CloudWatch for the selected instance, or CloudWatch Detailed Monitoring is not yet enabled.'}
+              </p>
+            </div>
+          )}
         </main>
       </div>
     </div>

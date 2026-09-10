@@ -25,11 +25,17 @@ export default function S3Page() {
     loadData();
   }, [loadData]);
 
-  const buckets = data.s3 || MOCK_DASHBOARD.s3;
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
+  // In live mode, never fall back to mock data — show real resources or empty state
+  const buckets = isDemo ? (data.s3 || MOCK_DASHBOARD.s3) : (data.s3 ?? []);
+  const encryptedCount = buckets.filter(b => b.Encrypted).length;
+  const publicCount = buckets.filter(b => b.PublicAccess).length;
+  const encryptionPct = buckets.length > 0 ? Math.round((encryptedCount / buckets.length) * 100) : 100;
+  const publicStatus = buckets.length === 0 ? 'N/A' : publicCount === 0 ? 'All Blocked' : `${publicCount} Public`;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar isBackendOnline={isBackendOnline} isMockData={data.is_mock} onRefresh={loadData} isLoading={loading} />
+      <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
@@ -48,20 +54,20 @@ export default function S3Page() {
             <MetricCard
               title="Total S3 Buckets"
               value={buckets.length}
-              subtitle="All buckets in account"
+              subtitle={isDemo ? 'All buckets in account' : `All buckets in AWS account`}
               accentColor="#137333"
             />
             <MetricCard
               title="Default Encryption"
-              value="100%"
-              subtitle="AES-256 Enabled"
+              value={`${encryptionPct}%`}
+              subtitle={isDemo ? 'AES-256 Enabled' : `${encryptedCount} of ${buckets.length} encrypted`}
               accentColor="#0073bb"
             />
             <MetricCard
               title="Public Access Status"
-              value="Blocked"
-              subtitle="All buckets private"
-              accentColor="#137333"
+              value={publicStatus}
+              subtitle={publicCount > 0 ? `${publicCount} bucket(s) with public access` : 'No public buckets detected'}
+              accentColor={publicCount > 0 ? '#c5221f' : '#137333'}
             />
           </div>
 

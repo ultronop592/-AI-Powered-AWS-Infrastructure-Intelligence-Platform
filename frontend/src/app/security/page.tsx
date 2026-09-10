@@ -26,13 +26,18 @@ export default function SecurityPage() {
     loadData();
   }, [loadData]);
 
-  const securityGroups = data.security_groups || MOCK_SECURITY_GROUPS;
-  const securitySummary = data.security_summary || MOCK_SECURITY_SUMMARY;
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
+  // In live mode, never fall back to mock data — show real resources or empty state
+  const securityGroups = isDemo ? (data.security_groups || MOCK_SECURITY_GROUPS) : (data.security_groups ?? []);
+  const securitySummary = isDemo ? (data.security_summary || MOCK_SECURITY_SUMMARY) : (data.security_summary || { total_security_groups: 0, critical_risk_count: 0, high_risk_count: 0, total_open_ports: 0, security_health_score: 100, security_score: 100 });
+  type IAMGuardrails = { root_account_mfa: boolean; root_api_keys: boolean; unused_roles_count: number; overprivileged_policies: number };
+  const _ss = data.security_summary as (typeof data.security_summary & { iam_guardrails?: IAMGuardrails }) | undefined;
+  const iamGuardrails: IAMGuardrails = _ss?.iam_guardrails || { root_account_mfa: true, root_api_keys: false, unused_roles_count: 0, overprivileged_policies: 0 };
   const securityRecs = (data.recommendations || []).filter(r => r.category === 'Security Guardrails');
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar isBackendOnline={isBackendOnline} isMockData={data.is_mock} onRefresh={loadData} isLoading={loading} />
+      <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
@@ -96,8 +101,8 @@ export default function SecurityPage() {
                   <div style={{ fontSize: '11px', color: '#545b64', fontWeight: 600, textTransform: 'uppercase' }}>
                     Root Account MFA
                   </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#137333', marginTop: '4px' }}>
-                    ✓ ENABLED
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.root_account_mfa ? '#137333' : '#c5221f', marginTop: '4px' }}>
+                    {iamGuardrails.root_account_mfa ? '✓ ENABLED' : '✗ NOT ENABLED'}
                   </div>
                 </div>
 
@@ -105,8 +110,8 @@ export default function SecurityPage() {
                   <div style={{ fontSize: '11px', color: '#545b64', fontWeight: 600, textTransform: 'uppercase' }}>
                     Root Account API Keys
                   </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#137333', marginTop: '4px' }}>
-                    ✓ NONE (Compliant)
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.root_api_keys ? '#c5221f' : '#137333', marginTop: '4px' }}>
+                    {iamGuardrails.root_api_keys ? '✗ API KEYS PRESENT' : '✓ NONE (Compliant)'}
                   </div>
                 </div>
 
@@ -114,8 +119,8 @@ export default function SecurityPage() {
                   <div style={{ fontSize: '11px', color: '#545b64', fontWeight: 600, textTransform: 'uppercase' }}>
                     Unused IAM Roles
                   </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#b06000', marginTop: '4px' }}>
-                    ⚠️ 1 Role Unused &gt;90d
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.unused_roles_count > 0 ? '#b06000' : '#137333', marginTop: '4px' }}>
+                    {iamGuardrails.unused_roles_count > 0 ? `${iamGuardrails.unused_roles_count} Role(s) Unused >90d` : '\u2713 None Detected'}
                   </div>
                 </div>
 
@@ -123,8 +128,8 @@ export default function SecurityPage() {
                   <div style={{ fontSize: '11px', color: '#545b64', fontWeight: 600, textTransform: 'uppercase' }}>
                     Over-Privileged Inline Policies
                   </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: '#c5221f', marginTop: '4px' }}>
-                    🚨 1 Policy (`*:*`)
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.overprivileged_policies > 0 ? '#c5221f' : '#137333', marginTop: '4px' }}>
+                    {iamGuardrails.overprivileged_policies > 0 ? `${iamGuardrails.overprivileged_policies} Policy (*:*)` : '✓ None Detected'}
                   </div>
                 </div>
               </div>

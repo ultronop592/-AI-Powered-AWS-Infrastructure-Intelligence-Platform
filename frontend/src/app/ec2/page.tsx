@@ -25,25 +25,36 @@ export default function EC2Page() {
     loadData();
   }, [loadData]);
 
-  const instances = data.ec2 || MOCK_DASHBOARD.ec2;
-  const runningCount = instances.filter(i => i.State.toLowerCase() === 'running').length;
-  const stoppedCount = instances.filter(i => i.State.toLowerCase() === 'stopped').length;
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
+  // In live mode, never fall back to mock data — show real resources or empty state
+  const instances = isDemo ? (data.ec2 || MOCK_DASHBOARD.ec2) : (data.ec2 ?? []);
+  const runningCount = instances.filter(i => (i.State || '').toLowerCase() === 'running').length;
+  const stoppedCount = instances.filter(i => (i.State || '').toLowerCase() === 'stopped').length;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar isBackendOnline={isBackendOnline} isMockData={data.is_mock} onRefresh={loadData} isLoading={loading} />
+      <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
 
         <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f2f3f3' }}>
           <div style={{ marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #eaeded' }}>
-            <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#16191f' }}>
-              Amazon EC2 Compute Monitoring
-            </h1>
-            <p style={{ fontSize: '13px', color: '#545b64', marginTop: '2px' }}>
-              List and health status of all EC2 virtual server instances in region us-east-1.
-            </p>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div>
+                <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#16191f' }}>
+                  Amazon EC2 Compute Monitoring
+                </h1>
+                <p style={{ fontSize: '13px', color: '#545b64', marginTop: '2px' }}>
+                  List and health status of all EC2 virtual server instances in region {data.region || 'us-east-1'}.
+                </p>
+              </div>
+              {!isDemo && (
+                <span className="aws-badge aws-badge-success" style={{ fontSize: '11px' }}>
+                  LIVE AWS DATA
+                </span>
+              )}
+            </div>
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '24px' }}>

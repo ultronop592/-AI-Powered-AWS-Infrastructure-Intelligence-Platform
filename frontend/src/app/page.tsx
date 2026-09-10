@@ -34,10 +34,11 @@ export default function DashboardOverview() {
     loadData();
   }, [loadData]);
 
-  const summary = data.summary || MOCK_DASHBOARD.summary;
-  const recommendations = data.recommendations || [];
-  const runningEC2Count = (data.ec2 || []).filter(i => i.State.toLowerCase() === 'running').length;
   const isDemo = data.is_demo ?? data.is_mock ?? true;
+  // In live mode, never fall back to mock data — show real resources or empty state
+  const summary = isDemo ? (data.summary || MOCK_DASHBOARD.summary) : (data.summary || { monthly_cost: 0, currency: 'USD', ec2_count: 0, s3_bucket_count: 0 });
+  const recommendations = data.recommendations || [];
+  const runningEC2Count = (data.ec2 ?? []).filter(i => (i.State || '').toLowerCase() === 'running').length;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>

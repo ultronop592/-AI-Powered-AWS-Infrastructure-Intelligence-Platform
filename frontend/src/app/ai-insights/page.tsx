@@ -26,12 +26,14 @@ export default function AIInsightsPage() {
     loadData();
   }, [loadData]);
 
-  const report = data.ai_report || MOCK_DASHBOARD.ai_report;
-  const recommendations = data.recommendations || MOCK_DASHBOARD.recommendations;
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
+  // In live mode, use real AI report; fall back to mock only in demo mode
+  const report = isDemo ? (data.ai_report || MOCK_DASHBOARD.ai_report) : (data.ai_report || null);
+  const recommendations = isDemo ? (data.recommendations || MOCK_DASHBOARD.recommendations) : (data.recommendations ?? []);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar isBackendOnline={isBackendOnline} isMockData={data.is_mock} onRefresh={loadData} isLoading={loading} />
+      <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
@@ -55,7 +57,7 @@ export default function AIInsightsPage() {
             />
             <MetricCard
               title="Estimated Monthly Savings"
-              value={typeof report === 'object' ? (report.estimated_savings || '$5.40/mo') : '$5.40/mo'}
+              value={typeof report === 'object' && report !== null ? (report.estimated_savings || (isDemo ? '$5.40/mo' : '$0.00/mo')) : (isDemo ? '$5.40/mo' : '$0.00/mo')}
               subtitle="Recommended cost optimization"
               accentColor="#137333"
               trend="36.8% Savings"

@@ -28,6 +28,9 @@ class SecurityService:
         region: str = None,
         boto3_session: boto3.Session = None,
     ):
+        # Track whether we are using a live authenticated session.
+        # When True, errors return [] instead of mock data.
+        self._is_live = boto3_session is not None
         try:
             if boto3_session is not None:
                 client = AWSClient.from_session(boto3_session)
@@ -46,7 +49,7 @@ class SecurityService:
 
     def list_security_groups(self) -> list:
         if not self.ec2_client:
-            return self._mock_security_groups()
+            return [] if self._is_live else self._mock_security_groups()
 
         try:
             response = self.ec2_client.describe_security_groups()
@@ -126,7 +129,7 @@ class SecurityService:
 
         except Exception as exc:
             logger.warning("list_security_groups failed: %s", exc)
-            return self._mock_security_groups()
+            return [] if self._is_live else self._mock_security_groups()
 
     # ------------------------------------------------------------------ #
     # IAM
@@ -134,11 +137,12 @@ class SecurityService:
 
     def get_iam_summary(self) -> dict:
         """Returns basic IAM guardrails (MFA, root keys, unused roles)."""
+        # In live mode default to safe/unknown state; in demo mode show sample findings
         defaults = {
             "root_account_mfa": True,
             "root_api_keys": False,
-            "unused_roles_count": 1,
-            "overprivileged_policies": 1,
+            "unused_roles_count": 0 if self._is_live else 1,
+            "overprivileged_policies": 0 if self._is_live else 1,
         }
         if not self.iam_client:
             return defaults
@@ -147,8 +151,8 @@ class SecurityService:
             return {
                 "root_account_mfa": summary.get("AccountMFAEnabled", 0) == 1,
                 "root_api_keys": summary.get("AccountAccessKeysPresent", 0) > 0,
-                "unused_roles_count": defaults["unused_roles_count"],
-                "overprivileged_policies": defaults["overprivileged_policies"],
+                "unused_roles_count": 0,  # Requires AWS Access Analyzer — default to 0
+                "overprivileged_policies": 0,  # Requires IAM Access Analyzer — default to 0
             }
         except Exception as exc:
             logger.warning("get_iam_summary failed: %s", exc)

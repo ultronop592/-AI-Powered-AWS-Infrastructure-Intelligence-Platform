@@ -19,6 +19,8 @@ class CloudWatchService:
         region: str = None,
         boto3_session: boto3.Session = None,
     ):
+        # Track whether we are using a live authenticated session.
+        self._is_live = boto3_session is not None
         try:
             if boto3_session is not None:
                 client = AWSClient.from_session(boto3_session)
@@ -29,9 +31,13 @@ class CloudWatchService:
             logger.warning("CloudWatch client init failed: %s", exc)
             self.cw_client = None
 
-    def get_ec2_metrics(self, instance_id="i-0a123456789abcdef"):
+    def get_ec2_metrics(self, instance_id: str = None):
+        # Never query CloudWatch with a fake or None instance ID in live mode
+        if instance_id is None:
+            return {}
+
         if not self.cw_client:
-            return self._get_mock_cloudwatch_metrics(instance_id)
+            return {} if self._is_live else self._get_mock_cloudwatch_metrics(instance_id)
 
         try:
             end_time = datetime.utcnow()
@@ -99,8 +105,8 @@ class CloudWatchService:
                 "network_out": results.get("net_out", {}),
             }
         except Exception as exc:
-            logger.warning("get_ec2_metrics failed: %s", exc)
-            return self._get_mock_cloudwatch_metrics(instance_id)
+            logger.warning("get_ec2_metrics failed for %s: %s", instance_id, exc)
+            return {} if self._is_live else self._get_mock_cloudwatch_metrics(instance_id)
 
     def _get_mock_cloudwatch_metrics(self, instance_id="i-0a123456789abcdef"):
         timestamps = ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "20:00", "22:00"]

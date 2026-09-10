@@ -27,13 +27,18 @@ export default function CostPage() {
     loadData();
   }, [loadData]);
 
-  const summary = data.summary || MOCK_DASHBOARD.summary;
-  const costItems = data.cost_by_service || MOCK_DASHBOARD.cost_by_service;
-  const wasteData = data.waste_analysis || MOCK_DASHBOARD.waste_analysis || [];
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
+  // In live mode, never fall back to mock data — show real resources or empty state
+  const summary = isDemo ? (data.summary || MOCK_DASHBOARD.summary) : (data.summary || { monthly_cost: 0, currency: 'USD', ec2_count: 0, s3_bucket_count: 0 });
+  const costItems = isDemo ? (data.cost_by_service || MOCK_DASHBOARD.cost_by_service) : (data.cost_by_service ?? []);
+  const wasteData = isDemo ? (data.waste_analysis || MOCK_DASHBOARD.waste_analysis || []) : (data.waste_analysis ?? []);
+  const topServicePct = summary.monthly_cost > 0
+    ? (((costItems[0]?.cost || 0) / summary.monthly_cost) * 100).toFixed(1)
+    : '0.0';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f2f3f3' }}>
-      <Navbar isBackendOnline={isBackendOnline} isMockData={data.is_mock} onRefresh={loadData} isLoading={loading} />
+      <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
@@ -111,7 +116,7 @@ export default function CostPage() {
             <MetricCard
               title="Top Cost Contributor"
               value={costItems[0]?.service || 'Amazon EC2'}
-              subtitle={`$${(costItems[0]?.cost || 0).toFixed(2)} (${(((costItems[0]?.cost || 0) / summary.monthly_cost) * 100).toFixed(1)}%)`}
+              subtitle={`$${(costItems[0]?.cost || 0).toFixed(2)} (${topServicePct}%)`}
               accentColor="#0073bb"
             />
             <MetricCard

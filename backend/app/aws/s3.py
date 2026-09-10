@@ -24,6 +24,9 @@ class S3Service:
         region: str = None,
         boto3_session: boto3.Session = None,
     ):
+        # Track whether we are using a live authenticated session.
+        # When True, errors return [] instead of mock data.
+        self._is_live = boto3_session is not None
         try:
             if boto3_session is not None:
                 client = AWSClient.from_session(boto3_session)
@@ -38,7 +41,7 @@ class S3Service:
 
     def list_buckets(self):
         if not self.client:
-            return self._mock_buckets()
+            return [] if self._is_live else self._mock_buckets()
 
         try:
             response = self.client.list_buckets()
@@ -70,7 +73,7 @@ class S3Service:
 
         except Exception as exc:
             logger.warning("S3 list_buckets failed: %s", exc)
-            return self._mock_buckets()
+            return [] if self._is_live else self._mock_buckets()
 
     # ------------------------------------------------------------------ #
     # S3 security helpers

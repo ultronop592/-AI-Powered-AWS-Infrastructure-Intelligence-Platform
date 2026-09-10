@@ -29,7 +29,8 @@ export default function GraphPage() {
     loadData();
   }, [loadData]);
 
-  const summary = graphData.summary || MOCK_RESOURCE_GRAPH.summary;
+  const isDemo = graphData.is_demo ?? true;
+  const summary = isDemo ? (graphData.summary || MOCK_RESOURCE_GRAPH.summary) : (graphData.summary || { total_nodes: 0, total_edges: 0, by_service: {} });
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f2f3f3' }}>

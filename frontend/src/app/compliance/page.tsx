@@ -31,13 +31,15 @@ export default function CompliancePage() {
     loadData();
   }, [loadData]);
 
-  const compliance = data.compliance || MOCK_DASHBOARD.compliance!;
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
+  // In live mode, use real compliance data; fall back to mock only in demo mode
+  const compliance = isDemo ? (data.compliance || MOCK_DASHBOARD.compliance!) : (data.compliance || null);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f2f3f3' }}>
       <Navbar
         isBackendOnline={isBackendOnline}
-        isMockData={data.is_mock}
+        isMockData={isDemo}
         onRefresh={loadData}
         isLoading={loading}
       />
@@ -71,7 +73,7 @@ export default function CompliancePage() {
                   padding: '5px 10px',
                   borderRadius: '2px',
                 }}>
-                  Region: <strong>{compliance.region || 'us-east-1'}</strong>
+                  Region: <strong>{compliance?.region || data.region || 'us-east-1'}</strong>
                 </span>
 
                 <button
@@ -97,32 +99,68 @@ export default function CompliancePage() {
             </div>
           </div>
 
-          {/* Compliance Scorecard (Overview Gauge + Spider Radar Chart + 5 Pillar Cards) */}
-          <ComplianceScoreCard
-            compliance={compliance}
-            selectedPillar={selectedPillar}
-            onSelectPillar={setSelectedPillar}
-          />
-
-          {/* Pillar Details (Filterable Checks, Remediations & Findings) */}
-          <div style={{ marginTop: '24px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <div>
-                <h2 style={{ fontSize: '16px', fontWeight: 700, color: '#16191f', margin: 0 }}>
-                  Well-Architected Pillar Findings & Guardrails
-                </h2>
-                <span style={{ fontSize: '12px', color: '#545b64' }}>
-                  Review specific check items, failure criteria, and production remediation guidance.
-                </span>
-              </div>
+          {!compliance ? (
+            <div style={{
+              backgroundColor: '#ffffff',
+              border: '1px solid #eaeded',
+              borderRadius: '4px',
+              padding: '48px 24px',
+              textAlign: 'center',
+              marginTop: '16px',
+            }}>
+              <h3 style={{ fontSize: '16px', fontWeight: 600, color: '#16191f', marginBottom: '8px' }}>
+                No Well-Architected Evaluation Available
+              </h3>
+              <p style={{ fontSize: '13px', color: '#545b64', maxWidth: '500px', margin: '0 auto 16px' }}>
+                Connect your AWS credentials to scan and score your cloud resources across Security, Cost, Reliability, Performance, and Operational Excellence.
+              </p>
+              <button
+                onClick={loadData}
+                disabled={loading}
+                style={{
+                  backgroundColor: '#ec7211',
+                  color: '#ffffff',
+                  border: 'none',
+                  borderRadius: '2px',
+                  padding: '8px 16px',
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  cursor: loading ? 'not-allowed' : 'pointer',
+                }}
+              >
+                {loading ? 'Evaluating...' : 'Run Compliance Scan'}
+              </button>
             </div>
+          ) : (
+            <>
+              {/* Compliance Scorecard (Overview Gauge + Spider Radar Chart + 5 Pillar Cards) */}
+              <ComplianceScoreCard
+                compliance={compliance}
+                selectedPillar={selectedPillar}
+                onSelectPillar={setSelectedPillar}
+              />
 
-            <PillarDetails
-              compliance={compliance}
-              activePillar={selectedPillar}
-              onSelectPillar={setSelectedPillar}
-            />
-          </div>
+              {/* Pillar Details (Filterable Checks, Remediations & Findings) */}
+              <div style={{ marginTop: '24px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
+                  <div>
+                    <h2 style={{ fontSize: '16px', fontWeight: 700, color: '#16191f', margin: 0 }}>
+                      Well-Architected Pillar Findings & Guardrails
+                    </h2>
+                    <span style={{ fontSize: '12px', color: '#545b64' }}>
+                      Review specific check items, failure criteria, and production remediation guidance.
+                    </span>
+                  </div>
+                </div>
+
+                <PillarDetails
+                  compliance={compliance}
+                  activePillar={selectedPillar}
+                  onSelectPillar={setSelectedPillar}
+                />
+              </div>
+            </>
+          )}
         </main>
       </div>
     </div>

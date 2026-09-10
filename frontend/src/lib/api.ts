@@ -316,6 +316,8 @@ export interface DashboardResponse {
   waste_analysis?: ServiceWasteItem[];
   is_mock?: boolean;
   is_demo?: boolean;
+  region?: string;
+  account_id?: string;
   fetched_at?: string;
   aws_fetch_ms?: number;
   cache_hit?: boolean;
@@ -801,11 +803,28 @@ export const MOCK_DASHBOARD: DashboardResponse = {
 
 export async function fetchDashboardData(): Promise<DashboardResponse> {
   const session = getActiveSession();
+  const isLive = !!session?.session_token;
   const headers: Record<string, string> = { Accept: 'application/json' };
 
   if (session?.session_token) {
     headers['X-Session-Token'] = session.session_token;
   }
+
+  // Empty-state response for live accounts with no/failed data
+  // Never shows mock data when the user has a real AWS session.
+  const emptyLiveResponse: DashboardResponse = {
+    summary: { monthly_cost: 0, currency: 'USD', ec2_count: 0, s3_bucket_count: 0 },
+    cost_by_service: [],
+    ec2: [],
+    s3: [],
+    security_groups: [],
+    security_summary: { total_security_groups: 0, critical_risk_count: 0, high_risk_count: 0, total_open_ports: 0, security_health_score: 100 },
+    recommendations: [],
+    ai_report: 'Connect your AWS account to generate live AI analysis.',
+    is_mock: false,
+    is_demo: false,
+    fetched_at: new Date().toISOString(),
+  };
 
   try {
     const res = await fetch(`${API_BASE_URL}/dashboard/`, {
@@ -814,19 +833,30 @@ export async function fetchDashboardData(): Promise<DashboardResponse> {
     });
 
     if (!res.ok) {
-      console.warn(`[CloudOps API] HTTP ${res.status} — falling back to mock data.`);
-      return { ...MOCK_DASHBOARD, is_demo: !session, fetched_at: new Date().toISOString() };
+      if (isLive) {
+        // User has a session — return empty live response, not fake mock data
+        console.warn(`[CloudOps API] HTTP ${res.status} — live session active, returning empty state (no mock data).`);
+        return { ...emptyLiveResponse, fetched_at: new Date().toISOString() };
+      }
+      console.warn(`[CloudOps API] HTTP ${res.status} — no session, using demo data.`);
+      return { ...MOCK_DASHBOARD, is_demo: true, is_mock: true, fetched_at: new Date().toISOString() };
     }
 
     const data = await res.json();
     return {
       ...data,
-      is_demo: data.is_demo ?? !session,
+      // Backend sets is_demo: false for live sessions; preserve that
+      is_demo: data.is_demo ?? !isLive,
+      is_mock: data.is_mock ?? !isLive,
       fetched_at: new Date().toISOString(),
     };
   } catch (error) {
-    console.warn('[CloudOps API] Network error — using local mock data:', error);
-    return { ...MOCK_DASHBOARD, is_demo: !session, fetched_at: new Date().toISOString() };
+    console.warn('[CloudOps API] Network error:', error);
+    if (isLive) {
+      // Still has session — show empty state not fake data
+      return { ...emptyLiveResponse, fetched_at: new Date().toISOString() };
+    }
+    return { ...MOCK_DASHBOARD, is_demo: true, is_mock: true, fetched_at: new Date().toISOString() };
   }
 }
 
@@ -947,10 +977,19 @@ export const MOCK_RESOURCE_GRAPH: ResourceGraphResponse = {
 
 export async function fetchResourceGraph(): Promise<ResourceGraphResponse> {
   const session = getActiveSession();
+  const isLive = !!session?.session_token;
   const headers: Record<string, string> = { Accept: 'application/json' };
   if (session?.session_token) {
     headers['X-Session-Token'] = session.session_token;
   }
+
+  const emptyLiveGraph: ResourceGraphResponse = {
+    nodes: [],
+    edges: [],
+    summary: { total_nodes: 0, total_edges: 0, by_service: {} },
+    region: session?.region || 'us-east-1',
+    is_demo: false,
+  };
 
   try {
     const res = await fetch(`${API_BASE_URL}/graph/`, {
@@ -959,11 +998,16 @@ export async function fetchResourceGraph(): Promise<ResourceGraphResponse> {
     });
     if (res.ok) {
       const data = await res.json();
-      return data;
+      return { ...data, is_demo: data.is_demo ?? !isLive };
     }
   } catch {
     // Fallback on network or offline error
   }
-  return { ...MOCK_RESOURCE_GRAPH, is_demo: !session };
+
+  // Only show mock graph when genuinely in demo mode (no session)
+  if (isLive) {
+    return { ...emptyLiveGraph };
+  }
+  return { ...MOCK_RESOURCE_GRAPH, is_demo: true };
 }
 

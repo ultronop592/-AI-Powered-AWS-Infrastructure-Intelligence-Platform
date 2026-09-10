@@ -37,12 +37,31 @@ I have loaded your live AWS telemetry:
     setIsBackendOnline(health.is_online);
     const res = await fetchDashboardData();
     setData(res);
+    // Update welcome message with live account context
+    setMessages(prev => [{
+      ...prev[0],
+      text: (res.is_demo ?? true)
+        ? prev[0].text
+        : `Welcome to the **AWS CloudOps AI Copilot Workspace**!
+
+I have loaded your live AWS telemetry:
+- **Monthly Spend**: $${(res.summary?.monthly_cost || 0).toFixed(2)} USD
+- **EC2 Instances**: ${res.summary?.ec2_count || 0}
+- **S3 Buckets**: ${res.summary?.s3_bucket_count || 0}
+- **Region**: ${res.region || 'us-east-1'}
+
+**What would you like me to do?**
+1. Ask questions about your EC2, S3, RDS, or Lambda setup.
+2. Click **"Generate Terraform"** to generate production HCL code for any recommendation!`,
+    }, ...prev.slice(1)]);
     setLoading(false);
   }, []);
 
   useEffect(() => {
     loadData();
   }, [loadData]);
+
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
 
   const handleSend = async (customMsg?: string, customMode?: 'chat' | 'terraform') => {
     const textToSend = customMsg || input;
@@ -86,7 +105,7 @@ I have loaded your live AWS telemetry:
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar isBackendOnline={isBackendOnline} isMockData={data.is_mock} onRefresh={loadData} isLoading={loading} />
+      <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />

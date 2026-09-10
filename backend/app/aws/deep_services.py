@@ -18,6 +18,9 @@ class DeepServicesService:
         region: str = None,
         boto3_session: boto3.Session = None,
     ):
+        # Track whether we are using a live authenticated session.
+        # When True, errors return [] instead of mock data.
+        self._is_live = boto3_session is not None
         try:
             if boto3_session is not None:
                 client = AWSClient.from_session(boto3_session)
@@ -36,7 +39,7 @@ class DeepServicesService:
 
     def list_rds_instances(self):
         if not self.rds_client:
-            return self._get_mock_rds_instances()
+            return [] if self._is_live else self._get_mock_rds_instances()
 
         try:
             res = self.rds_client.describe_db_instances()
@@ -50,41 +53,46 @@ class DeepServicesService:
                     "MultiAZ": db.get("MultiAZ", False),
                     "AllocatedStorage": db.get("AllocatedStorage", 0),
                     "StorageType": db.get("StorageType", "gp2"),
+                    "StorageEncrypted": db.get("StorageEncrypted", True),
                     "Endpoint": db.get("Endpoint", {}).get("Address", "N/A"),
                     "Port": db.get("Endpoint", {}).get("Port", 5432),
-                    "CPUUtilization": 18.4,
-                    "Connections": 12
+                    "CPUUtilization": 0.0,
+                    "Connections": 0
                 })
             return instances
-        except Exception:
-            return self._get_mock_rds_instances()
+        except Exception as exc:
+            logger.warning("list_rds_instances failed: %s", exc)
+            return [] if self._is_live else self._get_mock_rds_instances()
 
     def list_lambda_functions(self):
         if not self.lambda_client:
-            return self._get_mock_lambda_functions()
+            return [] if self._is_live else self._get_mock_lambda_functions()
 
         try:
             res = self.lambda_client.list_functions()
             funcs = []
             for f in res.get("Functions", []):
+                # Memory efficiency estimated from configured vs reported usage
+                memory_size = f.get("MemorySize", 128)
                 funcs.append({
                     "FunctionName": f.get("FunctionName"),
                     "Runtime": f.get("Runtime", "python3.12"),
-                    "MemorySize": f.get("MemorySize", 512),
+                    "MemorySize": memory_size,
                     "CodeSize": round(f.get("CodeSize", 0) / (1024 * 1024), 2),
                     "LastModified": f.get("LastModified"),
-                    "AvgDurationMs": 142,
-                    "ColdStartMs": 310,
+                    "AvgDurationMs": 0,
+                    "ColdStartMs": 0,
                     "ErrorRatePercent": 0.0,
-                    "MemoryEfficiencyPercent": 24.5
+                    "MemoryEfficiencyPercent": 50.0  # Default until CW metrics available
                 })
             return funcs
-        except Exception:
-            return self._get_mock_lambda_functions()
+        except Exception as exc:
+            logger.warning("list_lambda_functions failed: %s", exc)
+            return [] if self._is_live else self._get_mock_lambda_functions()
 
     def list_ebs_volumes(self):
         if not self.ec2_client:
-            return self._get_mock_ebs_volumes()
+            return [] if self._is_live else self._get_mock_ebs_volumes()
 
         try:
             res = self.ec2_client.describe_volumes()
@@ -96,6 +104,7 @@ class DeepServicesService:
                 state = v.get("State")
                 attachments = v.get("Attachments", [])
                 attached_instance = attachments[0].get("InstanceId") if attachments else "Unattached"
+                encrypted = v.get("Encrypted", False)
 
                 # Calculate gp2 -> gp3 migration savings ($0.10/GB gp2 vs $0.08/GB gp3 = 20% savings)
                 gp3_eligible = vol_type == "gp2"
@@ -109,22 +118,25 @@ class DeepServicesService:
                     "VolumeType": vol_type,
                     "State": state,
                     "AttachedInstance": attached_instance,
+                    "Encrypted": encrypted,
                     "GP3Eligible": gp3_eligible,
                     "MonthlySavingsUSD": savings
                 })
             return vols
-        except Exception:
-            return self._get_mock_ebs_volumes()
+        except Exception as exc:
+            logger.warning("list_ebs_volumes failed: %s", exc)
+            return [] if self._is_live else self._get_mock_ebs_volumes()
 
     def list_ecs_clusters(self):
         if not self.ecs_client:
-            return self._get_mock_ecs_clusters()
+            return [] if self._is_live else self._get_mock_ecs_clusters()
 
         try:
             res = self.ecs_client.list_clusters()
             cluster_arns = res.get("clusterArns", [])
             if not cluster_arns:
-                return self._get_mock_ecs_clusters()
+                # Live account with no ECS clusters — return empty list
+                return []
 
             desc = self.ecs_client.describe_clusters(clusters=cluster_arns)
             clusters = []
@@ -138,8 +150,9 @@ class DeepServicesService:
                     "RegisteredContainerInstancesCount": c.get("registeredContainerInstancesCount", 0)
                 })
             return clusters
-        except Exception:
-            return self._get_mock_ecs_clusters()
+        except Exception as exc:
+            logger.warning("list_ecs_clusters failed: %s", exc)
+            return [] if self._is_live else self._get_mock_ecs_clusters()
 
     def get_summary(self):
         rds = self.list_rds_instances()

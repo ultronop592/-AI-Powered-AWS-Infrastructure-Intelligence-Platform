@@ -38,17 +38,19 @@ export default function ServicesAnalyticsPage() {
     loadData();
   }, [loadData]);
 
-  const rdsInstances = data.rds || MOCK_RDS_INSTANCES;
-  const lambdas = data.lambdas || MOCK_LAMBDA_FUNCTIONS;
-  const volumes = data.ebs || MOCK_EBS_VOLUMES;
-  const deepSummary = data.deep_summary || MOCK_DEEP_SUMMARY;
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
+  // In live mode, never fall back to mock data — show real resources or empty state
+  const rdsInstances = isDemo ? (data.rds || MOCK_RDS_INSTANCES) : (data.rds ?? []);
+  const lambdas = isDemo ? (data.lambdas || MOCK_LAMBDA_FUNCTIONS) : (data.lambdas ?? []);
+  const volumes = isDemo ? (data.ebs || MOCK_EBS_VOLUMES) : (data.ebs ?? []);
+  const deepSummary = isDemo ? (data.deep_summary || MOCK_DEEP_SUMMARY) : (data.deep_summary || { total_rds_count: rdsInstances.length, multi_az_rds_count: 0, unattached_rds_snapshots: 0, total_lambda_count: lambdas.length, overprovisioned_lambda_count: 0, total_ebs_count: volumes.length, gp2_migration_count: 0, gp3_monthly_savings: 0, unattached_ebs_count: 0, total_ecs_clusters: 0, total_ecs_running_tasks: 0 });
   const deepRecs = (data.recommendations || []).filter(r =>
     ['EBS Storage Optimization', 'Serverless Efficiency', 'Cost Optimization'].includes(r.category || '')
   );
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar isBackendOnline={isBackendOnline} isMockData={data.is_mock} onRefresh={loadData} isLoading={loading} />
+      <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />

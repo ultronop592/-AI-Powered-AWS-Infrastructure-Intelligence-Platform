@@ -42,9 +42,11 @@ export default function SettingsPage() {
     loadData();
   };
 
+  const isDemo = data.is_demo ?? data.is_mock ?? true;
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar isBackendOnline={isBackendOnline} isMockData={data.is_mock} onRefresh={loadData} isLoading={loading} />
+      <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <AWSConnectModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} onConnected={loadData} />
 

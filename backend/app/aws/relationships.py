@@ -77,8 +77,10 @@ class RelationshipService:
             vid = sg.get("VpcId")
             if vid:
                 vpc_set.add(vid)
-        if not vpc_set:
-            vpc_set.add("vpc-0123456789abcdef0")
+        # Only add a placeholder VPC if we have SGs that reference one in demo mode.
+        # In live mode with no security groups, leave vpc_set empty — no fake VPC node.
+        if not vpc_set and security_groups:
+            vpc_set.add("vpc-default")
 
         vpc_y = 60
         for vid in sorted(list(vpc_set)):
