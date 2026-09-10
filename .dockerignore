@@ -1,0 +1,58 @@
+# =============================================================================
+# .dockerignore — CloudOps AI (root build context)
+# Used when building the root Dockerfile (docker-compose / CI pipeline).
+# =============================================================================
+
+# ---- Frontend (not needed in backend image) --------------------------------
+frontend/
+
+# ---- Python artifacts -------------------------------------------------------
+**/__pycache__/
+**/*.py[cod]
+**/*.pyo
+**/*.so
+
+# ---- Virtual environments ---------------------------------------------------
+backend/venv/
+backend/.venv/
+**/venv/
+**/.venv/
+**/env/
+
+# ---- Secrets & local config -------------------------------------------------
+.env
+*.env
+**/.env
+**/secrets/
+
+# ---- IDE / editor -----------------------------------------------------------
+.idea/
+.vscode/
+**/.DS_Store
+**/Thumbs.db
+
+# ---- Version control --------------------------------------------------------
+.git/
+.gitignore
+.gitattributes
+
+# ---- Tests & CI -------------------------------------------------------------
+**/tests/
+**/test_*.py
+**/*_test.py
+**/.pytest_cache/
+**/.coverage
+**/htmlcov/
+
+# ---- Documentation ----------------------------------------------------------
+README.md
+CHANGELOG.md
+docs/
+
+# ---- Docker artifacts -------------------------------------------------------
+docker-compose*.yml
+frontend/Dockerfile
+
+# ---- Misc -------------------------------------------------------------------
+Makefile
+*.md

@@ -1,0 +1,57 @@
+# =============================================================================
+# CloudOps AI - Render Blueprint Deployment Specification
+# =============================================================================
+#
+# How to deploy on Render:
+#
+# 1. Push this repo to GitHub.
+#
+# 2. In Render dashboard:
+#    - Click "New +" -> "Blueprint"
+#    - Connect your GitHub repository:
+#      -AI-Powered-AWS-Infrastructure-Intelligence-Platform
+#
+# 3. Render will detect this render.yaml and configure the backend service.
+#
+# 4. When prompted, provide GROQ_API_KEY as a secret/environment variable.
+#
+# =============================================================================
+
+services:
+  - type: web
+    name: cloudops-ai-backend
+    runtime: python
+    region: oregon
+    plan: free
+
+    rootDir: backend
+
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+
+    healthCheckPath: /
+
+    autoDeploy: true
+
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+
+      - key: AWS_REGION
+        value: us-east-1
+
+      # IMPORTANT:
+      # Do NOT put the actual Groq API key here.
+      # Render will ask for this value during deployment.
+      - key: GROQ_API_KEY
+        sync: false
+
+      - key: GROQ_MODEL
+        value: qwen/qwen3.8-27b
+
+      - key: APP_NAME
+        value: CloudOps AI
+
+      - key: APP_VERSION
+        value: "2.0.0"

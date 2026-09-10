@@ -1,0 +1,50 @@
+{
+  "family": "cloudops-ai-backend",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::<ACCOUNT_ID>:role/cloudops-ai-task-role",
+  "containerDefinitions": [
+    {
+      "name": "cloudops-ai-backend",
+      "image": "<ACCOUNT_ID>.dkr.ecr.<REGION>.amazonaws.com/cloudops-ai-backend:latest",
+      "essential": true,
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "hostPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "AWS_DEFAULT_REGION",  "value": "<REGION>" },
+        { "name": "BEDROCK_MODEL_ID",    "value": "amazon.nova-lite-v1:0" },
+        { "name": "SESSION_TTL_SECONDS", "value": "3600" },
+        { "name": "CACHE_TTL_SECONDS",   "value": "300"  },
+        { "name": "MAX_WORKERS",         "value": "4"    }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group":         "/ecs/cloudops-ai-backend",
+          "awslogs-region":        "<REGION>",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "python -c \"import urllib.request; urllib.request.urlopen('http://localhost:8000/')\" || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 15
+      },
+      "readonlyRootFilesystem": false,
+      "user": "1001"
+    }
+  ]
+}

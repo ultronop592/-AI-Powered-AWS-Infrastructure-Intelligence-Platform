@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+:root {
+  --aws-bg: #f2f3f3;
+  --aws-surface: #ffffff;
+  --aws-header-bg: #16191f;
+  --aws-sidebar-bg: #ffffff;
+  --aws-border: #eaeded;
+  --aws-border-dark: #d5dbdb;
+  
+  --aws-text-primary: #16191f;
+  --aws-text-secondary: #545b64;
+  --aws-text-muted: #879596;
+  
+  --aws-orange: #ec7211;
+  --aws-orange-hover: #eb5f07;
+  --aws-blue: #0073bb;
+  --aws-blue-hover: #005276;
+  
+  --aws-status-green-bg: #e6f4ea;
+  --aws-status-green-text: #137333;
+  --aws-status-amber-bg: #fef7e0;
+  --aws-status-amber-text: #b06000;
+  --aws-status-red-bg: #fce8e6;
+  --aws-status-red-text: #c5221f;
+  --aws-status-blue-bg: #e8f0fe;
+  --aws-status-blue-text: #1a73e8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--aws-bg);
+  color: var(--aws-text-primary);
+  line-height: 1.5;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Zero glow effect, clean crisp components */
+.aws-card {
+  background: var(--aws-surface);
+  border: 1px solid var(--aws-border);
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.aws-card-header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--aws-border);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--aws-text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fafafa;
+}
+
+.aws-card-body {
+  padding: 20px;
+}
+
+/* AWS Buttons */
+.aws-btn-primary {
+  background-color: var(--aws-orange);
+  color: #ffffff;
+  border: 1px solid var(--aws-orange);
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  box-shadow: none !important;
+  text-decoration: none;
+}
+
+.aws-btn-primary:hover {
+  background-color: var(--aws-orange-hover);
+  border-color: var(--aws-orange-hover);
+}
+
+.aws-btn-secondary {
+  background-color: #ffffff;
+  color: var(--aws-text-primary);
+  border: 1px solid var(--aws-text-secondary);
+  padding: 7px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 2px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  box-shadow: none !important;
+  text-decoration: none;
+}
+
+.aws-btn-secondary:hover {
+  background-color: #f8f9fa;
+  border-color: var(--aws-text-primary);
+}
+
+/* AWS Badges */
+.aws-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.aws-badge-success {
+  background-color: var(--aws-status-green-bg);
+  color: var(--aws-status-green-text);
+  border: 1px solid rgba(19, 115, 51, 0.2);
+}
+
+.aws-badge-warning {
+  background-color: var(--aws-status-amber-bg);
+  color: var(--aws-status-amber-text);
+  border: 1px solid rgba(176, 96, 0, 0.2);
+}
+
+.aws-badge-danger {
+  background-color: var(--aws-status-red-bg);
+  color: var(--aws-status-red-text);
+  border: 1px solid rgba(197, 34, 31, 0.2);
+}
+
+.aws-badge-info {
+  background-color: var(--aws-status-blue-bg);
+  color: var(--aws-status-blue-text);
+  border: 1px solid rgba(26, 115, 232, 0.2);
+}
+
+/* AWS Table */
+.aws-table-container {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--aws-border);
+  border-radius: 4px;
+  background: var(--aws-surface);
+}
+
+.aws-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 13px;
+}
+
+.aws-table th {
+  background-color: #fafafa;
+  color: var(--aws-text-secondary);
+  font-weight: 600;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--aws-border-dark);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+.aws-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--aws-border);
+  color: var(--aws-text-primary);
+}
+
+.aws-table tr:last-child td {
+  border-bottom: none;
+}
+
+.aws-table tr:hover td {
+  background-color: #f8f9fa;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}

@@ -1,0 +1,54 @@
+version: '3.8'
+
+# =============================================================================
+# CloudOps AI — Docker Compose (local development / integration testing)
+#
+# For ECS Fargate production:
+#   - Environment variables are injected via ECS Task Definition or
+#     AWS Secrets Manager (not .env files).
+#   - This compose file is for LOCAL DEV only.
+# =============================================================================
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      # Cache-busting: rebuild only when requirements or source changes
+      args:
+        BUILDKIT_INLINE_CACHE: "1"
+    image: cloudops-ai-backend:local
+    container_name: cloudops-ai-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # All secrets come from environment variables — never hardcoded.
+      # In ECS: set these in the Task Definition under "environment" or
+      # reference AWS Secrets Manager via "secrets".
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - BEDROCK_MODEL_ID=${BEDROCK_MODEL_ID:-amazon.nova-lite-v1:0}
+      - SESSION_TTL_SECONDS=${SESSION_TTL_SECONDS:-3600}
+      - CACHE_TTL_SECONDS=${CACHE_TTL_SECONDS:-300}
+      - MAX_WORKERS=${MAX_WORKERS:-8}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    image: cloudops-ai-frontend:local
+    container_name: cloudops-ai-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped

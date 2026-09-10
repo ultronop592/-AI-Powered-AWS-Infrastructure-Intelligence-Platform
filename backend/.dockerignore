@@ -1,0 +1,85 @@
+# =============================================================================
+# .dockerignore — CloudOps AI Backend (ECS Fargate)
+# Keeps the Docker build context lean: excludes everything that isn't needed
+# inside the container.  Smaller context = faster CI/CD pipeline and smaller
+# ECR image layers.
+# =============================================================================
+
+# ---- Python artifacts -------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.so
+
+# ---- Virtual environments ---------------------------------------------------
+venv/
+.venv/
+env/
+ENV/
+.env.local
+.env.development
+.env.test
+
+# ---- Secrets & local config -------------------------------------------------
+# The .env file must NEVER be baked into the image.
+# Inject secrets at runtime via ECS Task Definition environment variables
+# or AWS Secrets Manager / Parameter Store.
+.env
+*.env
+secrets/
+.secrets/
+
+# ---- IDE / editor -----------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ---- Version control --------------------------------------------------------
+.git/
+.gitignore
+.gitattributes
+
+# ---- Tests & CI -------------------------------------------------------------
+tests/
+test_*.py
+*_test.py
+pytest.ini
+setup.cfg
+tox.ini
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+
+# ---- Documentation ----------------------------------------------------------
+README.md
+CHANGELOG.md
+docs/
+*.md
+
+# ---- Tooling config files ---------------------------------------------------
+Makefile
+.pre-commit-config.yaml
+.editorconfig
+.flake8
+.mypy.ini
+pyproject.toml
+setup.py
+
+# ---- Docker artifacts (prevent recursion) -----------------------------------
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# ---- Misc build artifacts ---------------------------------------------------
+dist/
+build/
+*.egg-info/
+.eggs/
+*.whl
