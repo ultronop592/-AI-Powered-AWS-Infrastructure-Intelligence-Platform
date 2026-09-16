@@ -1,14 +1,31 @@
 'use client';
 
-import React from 'react';
-import { EBSVolume } from '../lib/api';
+import React, { useState } from 'react';
+import { EBSVolume, Recommendation, RemediationResult } from '../lib/api';
+import RemediationModal from './RemediationModal';
 
 interface EBSTableProps {
   volumes: EBSVolume[];
+  onRefresh?: () => void;
 }
 
-export default function EBSTable({ volumes }: EBSTableProps) {
+export default function EBSTable({ volumes, onRefresh }: EBSTableProps) {
+  const [activeRec, setActiveRec] = useState<Recommendation | null>(null);
   const totalSavings = volumes.reduce((acc, v) => acc + (v.GP3Eligible ? v.MonthlySavingsUSD : 0), 0);
+
+  const handleFixVolume = (vol: EBSVolume) => {
+    setActiveRec({
+      id: 'EBS-001',
+      severity: 'MEDIUM',
+      category: 'EBS Storage Optimization',
+      title: `Migrate ${vol.VolumeId} to gp3`,
+      description: `EBS volume ${vol.VolumeId} (${vol.SizeGB} GB) is currently using legacy gp2 storage. Converting to gp3 saves ~20% ($0.02/GB) with baseline 3,000 IOPS and 125 MB/s throughput.`,
+      resource_id: vol.VolumeId,
+      affected_resources: [vol.VolumeId],
+      remediation_available: true,
+      remediation_action: 'UPGRADE_EBS_GP3',
+    });
+  };
 
   return (
     <div className="aws-card">
@@ -89,9 +106,26 @@ export default function EBSTable({ volumes }: EBSTableProps) {
 
                       <td>
                         {vol.GP3Eligible ? (
-                          <span className="aws-badge aws-badge-warning">
-                            ⚡ Migrate to gp3 (20% Cheaper)
-                          </span>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span className="aws-badge aws-badge-warning">
+                              ⚡ gp2 (Upgrade)
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleFixVolume(vol)}
+                              className="aws-btn-primary"
+                              style={{
+                                backgroundColor: '#ec7211',
+                                borderColor: '#ec7211',
+                                padding: '2px 8px',
+                                fontSize: '11px',
+                                fontWeight: 700,
+                                cursor: 'pointer',
+                              }}
+                            >
+                              Auto-Fix
+                            </button>
+                          </div>
                         ) : (
                           <span className="aws-badge aws-badge-success">
                             ✓ Optimized (gp3)
@@ -110,6 +144,15 @@ export default function EBSTable({ volumes }: EBSTableProps) {
           </div>
         )}
       </div>
+
+      <RemediationModal
+        isOpen={!!activeRec}
+        recommendation={activeRec}
+        onClose={() => setActiveRec(null)}
+        onRemediated={() => {
+          if (onRefresh) onRefresh();
+        }}
+      />
     </div>
   );
 }

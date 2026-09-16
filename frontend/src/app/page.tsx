@@ -169,7 +169,7 @@ export default function DashboardOverview() {
               currency={summary.currency || 'USD'}
             />
 
-            <RecommendationsList recommendations={recommendations} />
+            <RecommendationsList recommendations={recommendations} onRefresh={loadData} />
           </div>
 
           {/* Full Width AI Bedrock Report */}
@@ -180,7 +180,7 @@ export default function DashboardOverview() {
           {/* Infrastructure Tables Grid */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px', marginBottom: '24px' }}>
             <EC2Table instances={data.ec2 || []} />
-            <S3Table buckets={data.s3 || []} />
+            <S3Table buckets={data.s3 || []} onRefresh={loadData} />
           </div>
         </main>
       </div>

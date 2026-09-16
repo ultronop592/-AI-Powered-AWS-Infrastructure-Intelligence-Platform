@@ -72,7 +72,7 @@ export default function AIInsightsPage() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px', marginBottom: '24px' }}>
             <AIReportCard report={report} />
-            <RecommendationsList recommendations={recommendations} />
+            <RecommendationsList recommendations={recommendations} onRefresh={loadData} />
           </div>
         </main>
       </div>

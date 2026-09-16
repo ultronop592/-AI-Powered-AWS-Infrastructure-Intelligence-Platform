@@ -1,13 +1,45 @@
 'use client';
 
-import React from 'react';
-import { S3Bucket, formatDateString } from '../lib/api';
+import React, { useState } from 'react';
+import { S3Bucket, Recommendation, formatDateString } from '../lib/api';
+import RemediationModal from './RemediationModal';
 
 interface S3TableProps {
   buckets: S3Bucket[];
+  onRefresh?: () => void;
 }
 
-export default function S3Table({ buckets }: S3TableProps) {
+export default function S3Table({ buckets, onRefresh }: S3TableProps) {
+  const [activeRec, setActiveRec] = useState<Recommendation | null>(null);
+
+  const handleFixEncryption = (bucketName: string) => {
+    setActiveRec({
+      id: 'S3-001',
+      severity: 'HIGH',
+      category: 'S3 Security',
+      title: `Enable Default Encryption on ${bucketName}`,
+      description: `Bucket ${bucketName} does not have default server-side encryption enabled. Auto-fix will enforce AES-256 (SSE-S3) encryption with S3 Bucket Keys enabled.`,
+      resource_id: bucketName,
+      affected_resources: [bucketName],
+      remediation_available: true,
+      remediation_action: 'ENABLE_S3_ENCRYPTION',
+    });
+  };
+
+  const handleFixPublicAccess = (bucketName: string) => {
+    setActiveRec({
+      id: 'S3-002',
+      severity: 'HIGH',
+      category: 'S3 Security',
+      title: `Block Public Access on ${bucketName}`,
+      description: `Bucket ${bucketName} has public access enabled. Auto-fix will turn on all 4 S3 Public Access Block settings immediately.`,
+      resource_id: bucketName,
+      affected_resources: [bucketName],
+      remediation_available: true,
+      remediation_action: 'ENABLE_S3_PUBLIC_ACCESS_BLOCK',
+    });
+  };
+
   return (
     <div className="aws-card">
       <div className="aws-card-header">
@@ -31,38 +63,99 @@ export default function S3Table({ buckets }: S3TableProps) {
                 <tr>
                   <th>Bucket Name</th>
                   <th>Region</th>
-                  <th>Encryption</th>
-                  <th>Public Access</th>
+                  <th>Encryption Posture</th>
+                  <th>Public Access Status</th>
                   <th>Creation Date</th>
                 </tr>
               </thead>
               <tbody>
-                {buckets.map((b) => (
-                  <tr key={b.Name}>
-                    <td style={{ fontWeight: 600, color: '#0073bb', fontFamily: 'monospace' }}>
-                      {b.Name}
-                    </td>
-                    <td>{b.Region || 'us-east-1'}</td>
-                    <td>
-                      <span className="aws-badge aws-badge-success">
-                        AES-256 (SSE-S3)
-                      </span>
-                    </td>
-                    <td>
-                      <span className="aws-badge aws-badge-info">
-                        Blocked
-                      </span>
-                    </td>
-                    <td style={{ color: '#545b64', fontSize: '12px' }}>
-                      {formatDateString(b.CreationDate)}
-                    </td>
-                  </tr>
-                ))}
+                {buckets.map((b) => {
+                  const isEncrypted = b.Encrypted !== false;
+                  const isPublic = b.PublicAccess === true;
+
+                  return (
+                    <tr key={b.Name}>
+                      <td style={{ fontWeight: 600, color: '#0073bb', fontFamily: 'monospace' }}>
+                        {b.Name}
+                      </td>
+                      <td>{b.Region || 'us-east-1'}</td>
+                      <td>
+                        {isEncrypted ? (
+                          <span className="aws-badge aws-badge-success">
+                            ✓ AES-256 (SSE-S3)
+                          </span>
+                        ) : (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span className="aws-badge aws-badge-danger">
+                              ⚠️ Unencrypted
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleFixEncryption(b.Name)}
+                              className="aws-btn-primary"
+                              style={{
+                                backgroundColor: '#ec7211',
+                                borderColor: '#ec7211',
+                                padding: '2px 8px',
+                                fontSize: '11px',
+                                fontWeight: 700,
+                                cursor: 'pointer',
+                              }}
+                            >
+                              Auto-Fix
+                            </button>
+                          </div>
+                        )}
+                      </td>
+                      <td>
+                        {!isPublic ? (
+                          <span className="aws-badge aws-badge-info">
+                            ✓ Blocked
+                          </span>
+                        ) : (
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span className="aws-badge aws-badge-danger">
+                              ⚠️ Public Access
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleFixPublicAccess(b.Name)}
+                              className="aws-btn-primary"
+                              style={{
+                                backgroundColor: '#ec7211',
+                                borderColor: '#ec7211',
+                                padding: '2px 8px',
+                                fontSize: '11px',
+                                fontWeight: 700,
+                                cursor: 'pointer',
+                              }}
+                            >
+                              Auto-Fix
+                            </button>
+                          </div>
+                        )}
+                      </td>
+                      <td style={{ color: '#545b64', fontSize: '12px' }}>
+                        {formatDateString(b.CreationDate)}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
         )}
       </div>
+
+      <RemediationModal
+        isOpen={!!activeRec}
+        recommendation={activeRec}
+        onClose={() => setActiveRec(null)}
+        onRemediated={() => {
+          if (onRefresh) onRefresh();
+        }}
+      />
     </div>
   );
 }
+

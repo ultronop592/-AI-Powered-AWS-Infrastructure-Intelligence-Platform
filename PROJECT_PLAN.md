@@ -1,4 +1,4 @@
-﻿# 🎓 CloudOps AI — 4th Year Project Enhancement Plan
+# 🎓 CloudOps AI — 4th Year Project Enhancement Plan
 
 > **Project**: AI-Powered AWS Infrastructure Intelligence Platform  
 > **Stack**: Next.js + FastAPI + Amazon Bedrock + Boto3  
@@ -172,11 +172,11 @@ frontend/src/
 ```
 
 #### Implementation Steps
-- [ ] Create `RemediationService` with one method per finding ID
-- [ ] POST `/remediation/apply` body: `{finding_id, resource_id, session_token}`
-- [ ] Add confirmation modal: *"This will modify sg-0abc123 in your live AWS account. Proceed?"*
-- [ ] On success: flash green "✅ Fixed!" badge + refresh dashboard data
-- [ ] Log every remediation: timestamp, session, resource_id, action_taken
+- [x] Create `RemediationService` with one method per finding ID
+- [x] POST `/remediation/apply` body: `{finding_id, resource_id, session_token}`
+- [x] Add confirmation modal: *"This will modify sg-0abc123 in your live AWS account. Proceed?"*
+- [x] On success: flash green "✅ Fixed!" badge + refresh dashboard data
+- [x] Log every remediation: timestamp, session, resource_id, action_taken
 
 **Estimated Time**: 5–6 days  
 **Demo Talking Point**: *"The platform detected SSH Port 22 exposed globally. I clicked Auto-Fix — it revoked the rule and applied a restricted CIDR in under 2 seconds."*

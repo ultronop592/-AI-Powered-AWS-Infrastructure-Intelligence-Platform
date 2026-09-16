@@ -138,13 +138,13 @@ export default function SecurityPage() {
 
           {/* Security Table Component */}
           <div style={{ marginBottom: '24px' }}>
-            <SecurityTable securityGroups={securityGroups} />
+            <SecurityTable securityGroups={securityGroups} onRefresh={loadData} />
           </div>
 
           {/* Security Recommendations List */}
           {securityRecs.length > 0 && (
             <div style={{ marginBottom: '24px' }}>
-              <RecommendationsList recommendations={securityRecs} />
+              <RecommendationsList recommendations={securityRecs} onRefresh={loadData} />
             </div>
           )}
         </main>

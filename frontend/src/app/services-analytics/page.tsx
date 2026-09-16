@@ -132,7 +132,7 @@ export default function ServicesAnalyticsPage() {
           {/* Deep Service Tables */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '24px' }}>
             {(activeTab === 'all' || activeTab === 'ebs') && (
-              <EBSTable volumes={volumes} />
+              <EBSTable volumes={volumes} onRefresh={loadData} />
             )}
 
             {(activeTab === 'all' || activeTab === 'rds') && (
@@ -147,7 +147,7 @@ export default function ServicesAnalyticsPage() {
           {/* Recommendations List */}
           {deepRecs.length > 0 && (
             <div style={{ marginBottom: '24px' }}>
-              <RecommendationsList recommendations={deepRecs} />
+              <RecommendationsList recommendations={deepRecs} onRefresh={loadData} />
             </div>
           )}
         </main>

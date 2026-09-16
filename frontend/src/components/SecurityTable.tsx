@@ -1,13 +1,30 @@
 'use client';
 
-import React from 'react';
-import { SecurityGroup } from '../lib/api';
+import React, { useState } from 'react';
+import { SecurityGroup, Recommendation } from '../lib/api';
+import RemediationModal from './RemediationModal';
 
 interface SecurityTableProps {
   securityGroups: SecurityGroup[];
+  onRefresh?: () => void;
 }
 
-export default function SecurityTable({ securityGroups }: SecurityTableProps) {
+export default function SecurityTable({ securityGroups, onRefresh }: SecurityTableProps) {
+  const [activeRec, setActiveRec] = useState<Recommendation | null>(null);
+
+  const handleFixSecurityGroup = (sg: SecurityGroup) => {
+    setActiveRec({
+      id: 'SEC-001',
+      severity: 'HIGH',
+      category: 'Security Guardrails',
+      title: `Restrict Management Ports on ${sg.GroupId}`,
+      description: `Security Group ${sg.GroupId} (${sg.GroupName}) exposes inbound access from 0.0.0.0/0 on ${sg.OpenPorts.join(', ')}. Auto-fix will revoke the unrestricted rule and apply a restricted CIDR.`,
+      resource_id: sg.GroupId,
+      affected_resources: [sg.GroupId],
+      remediation_available: true,
+      remediation_action: 'RESTRICT_INGRESS_MANAGEMENT',
+    });
+  };
   return (
     <div className="aws-card">
       <div className="aws-card-header">
@@ -71,24 +88,44 @@ export default function SecurityTable({ securityGroups }: SecurityTableProps) {
                             ✓ No Open 0.0.0.0/0 Ports
                           </span>
                         ) : (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                            {sg.OpenPorts.map((portStr, idx) => (
-                              <span
-                                key={idx}
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                              {sg.OpenPorts.map((portStr, idx) => (
+                                <span
+                                  key={idx}
+                                  style={{
+                                    backgroundColor: '#fce8e6',
+                                    color: '#c5221f',
+                                    border: '1px solid rgba(197,34,31,0.2)',
+                                    padding: '2px 6px',
+                                    borderRadius: '2px',
+                                    fontSize: '11px',
+                                    fontWeight: 600,
+                                    fontFamily: 'monospace'
+                                  }}
+                                >
+                                  ⚠️ {portStr}
+                                </span>
+                              ))}
+                            </div>
+                            {sg.OpenPorts.some((p) => p.includes('22') || p.includes('3389') || p.includes('SSH') || p.includes('RDP')) && (
+                              <button
+                                type="button"
+                                onClick={() => handleFixSecurityGroup(sg)}
+                                className="aws-btn-primary"
                                 style={{
-                                  backgroundColor: '#fce8e6',
-                                  color: '#c5221f',
-                                  border: '1px solid rgba(197,34,31,0.2)',
-                                  padding: '2px 6px',
-                                  borderRadius: '2px',
+                                  backgroundColor: '#ec7211',
+                                  borderColor: '#ec7211',
+                                  padding: '3px 8px',
                                   fontSize: '11px',
-                                  fontWeight: 600,
-                                  fontFamily: 'monospace'
+                                  fontWeight: 700,
+                                  cursor: 'pointer',
+                                  alignSelf: 'flex-start',
                                 }}
                               >
-                                ⚠️ {portStr}
-                              </span>
-                            ))}
+                                ⚡ Auto-Fix
+                              </button>
+                            )}
                           </div>
                         )}
                       </td>
@@ -120,6 +157,15 @@ export default function SecurityTable({ securityGroups }: SecurityTableProps) {
           </div>
         )}
       </div>
+
+      <RemediationModal
+        isOpen={!!activeRec}
+        recommendation={activeRec}
+        onClose={() => setActiveRec(null)}
+        onRemediated={() => {
+          if (onRefresh) onRefresh();
+        }}
+      />
     </div>
   );
 }
