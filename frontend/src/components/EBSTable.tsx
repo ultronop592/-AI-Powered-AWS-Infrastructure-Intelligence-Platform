@@ -76,11 +76,12 @@ export default function EBSTable({ volumes, onRefresh }: EBSTableProps) {
 
                       <td>
                         <span style={{
-                          backgroundColor: vol.VolumeType === 'gp2' ? '#fef7e0' : '#e6f4ea',
-                          color: vol.VolumeType === 'gp2' ? '#b06000' : '#137333',
-                          padding: '2px 6px',
-                          borderRadius: '2px',
-                          fontSize: '12px',
+                          backgroundColor: vol.VolumeType === 'gp2' ? '#fffbeb' : '#ecfdf5',
+                          color: vol.VolumeType === 'gp2' ? '#d97706' : '#059669',
+                          border: vol.VolumeType === 'gp2' ? '1px solid #fde68a' : '1px solid #a7f3d0',
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          fontSize: '11px',
                           fontFamily: 'monospace',
                           fontWeight: 600
                         }}>
@@ -100,7 +101,7 @@ export default function EBSTable({ volumes, onRefresh }: EBSTableProps) {
                         )}
                       </td>
 
-                      <td style={{ fontFamily: 'monospace', color: isUnattached ? '#c5221f' : '#16191f' }}>
+                      <td style={{ fontFamily: 'monospace', color: isUnattached ? '#dc2626' : '#0f172a' }}>
                         {vol.AttachedInstance}
                       </td>
 
@@ -117,9 +118,10 @@ export default function EBSTable({ volumes, onRefresh }: EBSTableProps) {
                               style={{
                                 backgroundColor: '#ec7211',
                                 borderColor: '#ec7211',
-                                padding: '2px 8px',
+                                padding: '3px 10px',
                                 fontSize: '11px',
                                 fontWeight: 700,
+                                borderRadius: '4px',
                                 cursor: 'pointer',
                               }}
                             >

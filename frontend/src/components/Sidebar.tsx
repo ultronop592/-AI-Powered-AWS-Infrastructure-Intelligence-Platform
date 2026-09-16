@@ -151,7 +151,7 @@ export default function Sidebar() {
     <aside style={{
       width: '240px',
       backgroundColor: '#ffffff',
-      borderRight: '1px solid #eaeded',
+      borderRight: '1px solid #e2e8f0',
       minHeight: 'calc(100vh - 56px)',
       display: 'flex',
       flexDirection: 'column',
@@ -159,17 +159,17 @@ export default function Sidebar() {
     }}>
       <div>
         <div style={{
-          padding: '16px 20px 10px 20px',
+          padding: '18px 20px 10px 20px',
           fontSize: '11px',
           fontWeight: 700,
-          color: '#545b64',
+          color: '#94a3b8',
           textTransform: 'uppercase',
-          letterSpacing: '0.5px'
+          letterSpacing: '0.06em'
         }}>
           CloudOps Services
         </div>
 
-        <nav>
+        <nav style={{ padding: '0 8px' }}>
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -180,28 +180,30 @@ export default function Sidebar() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '10px 20px',
-                  fontSize: '14px',
-                  fontWeight: isActive ? 600 : 400,
-                  color: isActive ? '#ec7211' : '#16191f',
-                  backgroundColor: isActive ? '#fef8f3' : 'transparent',
-                  borderLeft: isActive ? '4px solid #ec7211' : '4px solid transparent',
+                  padding: '9px 12px',
+                  borderRadius: '6px',
+                  fontSize: '13px',
+                  fontWeight: isActive ? 600 : 500,
+                  color: isActive ? '#ec7211' : '#475569',
+                  backgroundColor: isActive ? '#fff7ed' : 'transparent',
                   textDecoration: 'none',
-                  transition: 'background-color 0.15s ease'
+                  transition: 'all 0.15s ease',
+                  marginBottom: '2px',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                  {item.icon}
+                  <span style={{ color: isActive ? '#ec7211' : '#64748b' }}>{item.icon}</span>
                   <span>{item.label}</span>
                 </div>
                 {item.badge && (
                   <span style={{
                     fontSize: '10px',
-                    backgroundColor: '#16191f',
-                    color: '#ffffff',
-                    padding: '2px 5px',
-                    borderRadius: '2px',
-                    fontWeight: 600
+                    backgroundColor: isActive ? '#ec7211' : '#f1f5f9',
+                    color: isActive ? '#ffffff' : '#64748b',
+                    padding: '2px 6px',
+                    borderRadius: '4px',
+                    fontWeight: 600,
+                    letterSpacing: '0.02em'
                   }}>
                     {item.badge}
                   </span>
@@ -214,16 +216,19 @@ export default function Sidebar() {
 
       {/* Footer Info Box */}
       <div style={{
-        padding: '16px 20px',
-        borderTop: '1px solid #eaeded',
-        backgroundColor: '#fafafa',
+        margin: '12px',
+        padding: '14px',
+        border: '1px solid #e2e8f0',
+        borderRadius: '8px',
+        backgroundColor: '#f8fafc',
         fontSize: '12px',
-        color: '#545b64'
+        color: '#64748b'
       }}>
-        <div style={{ fontWeight: 600, color: '#16191f', marginBottom: '4px' }}>
+        <div style={{ fontWeight: 600, color: '#0f172a', marginBottom: '3px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+          <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#059669' }}></span>
           AWS Bedrock Connected
         </div>
-        <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
+        <div style={{ fontSize: '11px', lineHeight: '1.4', color: '#64748b' }}>
           Engine: Amazon Nova Lite<br />
           Region: us-east-1
         </div>

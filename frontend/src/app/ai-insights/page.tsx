@@ -38,12 +38,12 @@ export default function AIInsightsPage() {
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
 
-        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f2f3f3' }}>
-          <div style={{ marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #eaeded' }}>
-            <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#16191f' }}>
+        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f8fafc' }}>
+          <div style={{ marginBottom: '24px', paddingBottom: '18px', borderBottom: '1px solid #e2e8f0' }}>
+            <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em' }}>
               Amazon Bedrock AI Infrastructure Insights
             </h1>
-            <p style={{ fontSize: '13px', color: '#545b64', marginTop: '2px' }}>
+            <p style={{ fontSize: '13px', color: '#64748b', marginTop: '3px' }}>
               Generative AI infrastructure health evaluation powered by Amazon Nova Lite.
             </p>
           </div>

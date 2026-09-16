@@ -42,12 +42,12 @@ export default function SecurityPage() {
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
 
-        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f2f3f3' }}>
-          <div style={{ marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #eaeded' }}>
-            <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#16191f' }}>
+        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f8fafc' }}>
+          <div style={{ marginBottom: '24px', paddingBottom: '18px', borderBottom: '1px solid #e2e8f0' }}>
+            <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em' }}>
               AWS Security & Open Port Guardrail Analyzer
             </h1>
-            <p style={{ fontSize: '13px', color: '#545b64', marginTop: '2px' }}>
+            <p style={{ fontSize: '13px', color: '#64748b', marginTop: '3px' }}>
               Real-time audit of AWS Security Group ingress rules, internet-exposed ports (0.0.0.0/0), and IAM security posture.
             </p>
           </div>
@@ -97,38 +97,38 @@ export default function SecurityPage() {
             </div>
             <div className="aws-card-body">
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
-                <div style={{ padding: '12px 16px', border: '1px solid #eaeded', borderRadius: '4px', backgroundColor: '#fafafa' }}>
-                  <div style={{ fontSize: '11px', color: '#545b64', fontWeight: 600, textTransform: 'uppercase' }}>
+                <div style={{ padding: '14px 18px', border: '1px solid #e2e8f0', borderRadius: '8px', backgroundColor: '#f8fafc' }}>
+                  <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     Root Account MFA
                   </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.root_account_mfa ? '#137333' : '#c5221f', marginTop: '4px' }}>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.root_account_mfa ? '#059669' : '#dc2626', marginTop: '4px' }}>
                     {iamGuardrails.root_account_mfa ? '✓ ENABLED' : '✗ NOT ENABLED'}
                   </div>
                 </div>
 
-                <div style={{ padding: '12px 16px', border: '1px solid #eaeded', borderRadius: '4px', backgroundColor: '#fafafa' }}>
-                  <div style={{ fontSize: '11px', color: '#545b64', fontWeight: 600, textTransform: 'uppercase' }}>
+                <div style={{ padding: '14px 18px', border: '1px solid #e2e8f0', borderRadius: '8px', backgroundColor: '#f8fafc' }}>
+                  <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     Root Account API Keys
                   </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.root_api_keys ? '#c5221f' : '#137333', marginTop: '4px' }}>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.root_api_keys ? '#dc2626' : '#059669', marginTop: '4px' }}>
                     {iamGuardrails.root_api_keys ? '✗ API KEYS PRESENT' : '✓ NONE (Compliant)'}
                   </div>
                 </div>
 
-                <div style={{ padding: '12px 16px', border: '1px solid #eaeded', borderRadius: '4px', backgroundColor: '#fafafa' }}>
-                  <div style={{ fontSize: '11px', color: '#545b64', fontWeight: 600, textTransform: 'uppercase' }}>
+                <div style={{ padding: '14px 18px', border: '1px solid #e2e8f0', borderRadius: '8px', backgroundColor: '#f8fafc' }}>
+                  <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     Unused IAM Roles
                   </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.unused_roles_count > 0 ? '#b06000' : '#137333', marginTop: '4px' }}>
-                    {iamGuardrails.unused_roles_count > 0 ? `${iamGuardrails.unused_roles_count} Role(s) Unused >90d` : '\u2713 None Detected'}
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.unused_roles_count > 0 ? '#d97706' : '#059669', marginTop: '4px' }}>
+                    {iamGuardrails.unused_roles_count > 0 ? `${iamGuardrails.unused_roles_count} Role(s) Unused >90d` : '✓ None Detected'}
                   </div>
                 </div>
 
-                <div style={{ padding: '12px 16px', border: '1px solid #eaeded', borderRadius: '4px', backgroundColor: '#fafafa' }}>
-                  <div style={{ fontSize: '11px', color: '#545b64', fontWeight: 600, textTransform: 'uppercase' }}>
+                <div style={{ padding: '14px 18px', border: '1px solid #e2e8f0', borderRadius: '8px', backgroundColor: '#f8fafc' }}>
+                  <div style={{ fontSize: '11px', color: '#64748b', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>
                     Over-Privileged Inline Policies
                   </div>
-                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.overprivileged_policies > 0 ? '#c5221f' : '#137333', marginTop: '4px' }}>
+                  <div style={{ fontSize: '14px', fontWeight: 700, color: iamGuardrails.overprivileged_policies > 0 ? '#dc2626' : '#059669', marginTop: '4px' }}>
                     {iamGuardrails.overprivileged_policies > 0 ? `${iamGuardrails.overprivileged_policies} Policy (*:*)` : '✓ None Detected'}
                   </div>
                 </div>

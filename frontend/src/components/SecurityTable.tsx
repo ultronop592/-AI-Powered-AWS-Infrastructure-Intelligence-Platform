@@ -94,11 +94,11 @@ export default function SecurityTable({ securityGroups, onRefresh }: SecurityTab
                                 <span
                                   key={idx}
                                   style={{
-                                    backgroundColor: '#fce8e6',
-                                    color: '#c5221f',
-                                    border: '1px solid rgba(197,34,31,0.2)',
-                                    padding: '2px 6px',
-                                    borderRadius: '2px',
+                                    backgroundColor: '#fef2f2',
+                                    color: '#dc2626',
+                                    border: '1px solid #fecaca',
+                                    padding: '2px 8px',
+                                    borderRadius: '4px',
                                     fontSize: '11px',
                                     fontWeight: 600,
                                     fontFamily: 'monospace'
@@ -116,9 +116,10 @@ export default function SecurityTable({ securityGroups, onRefresh }: SecurityTab
                                 style={{
                                   backgroundColor: '#ec7211',
                                   borderColor: '#ec7211',
-                                  padding: '3px 8px',
+                                  padding: '3px 10px',
                                   fontSize: '11px',
                                   fontWeight: 700,
+                                  borderRadius: '4px',
                                   cursor: 'pointer',
                                   alignSelf: 'flex-start',
                                 }}

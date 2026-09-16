@@ -68,14 +68,14 @@ export default function CloudWatchMetricsPage() {
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
 
-        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f2f3f3' }}>
+        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f8fafc' }}>
           {/* Top Banner */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #eaeded' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', paddingBottom: '18px', borderBottom: '1px solid #e2e8f0' }}>
             <div>
-              <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#16191f' }}>
+              <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em' }}>
                 Amazon CloudWatch Performance & Telemetry Metrics
               </h1>
-              <p style={{ fontSize: '13px', color: '#545b64', marginTop: '2px' }}>
+              <p style={{ fontSize: '13px', color: '#64748b', marginTop: '3px' }}>
                 Live CPU, Memory, Network I/O, and Storage throughput time-series graphs.
               </p>
             </div>

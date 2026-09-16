@@ -53,14 +53,14 @@ export default function SettingsPage() {
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
 
-        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f2f3f3' }}>
+        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f8fafc' }}>
           {/* Header */}
-          <div style={{ marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #eaeded', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <div style={{ marginBottom: '24px', paddingBottom: '18px', borderBottom: '1px solid #e2e8f0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <div>
-              <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#16191f' }}>
+              <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em' }}>
                 AWS Account Connection &amp; Platform Settings
               </h1>
-              <p style={{ fontSize: '13px', color: '#545b64', marginTop: '2px' }}>
+              <p style={{ fontSize: '13px', color: '#64748b', marginTop: '3px' }}>
                 Manage live AWS IAM credentials, region targets, and platform configuration.
               </p>
             </div>

@@ -9,8 +9,9 @@ interface AIReportCardProps {
 
 function ScoreBadge({ label, score, maxScore = 100 }: { label: string; score: number; maxScore?: number }) {
   const pct = Math.round((score / maxScore) * 100);
-  const color = pct >= 80 ? '#137333' : pct >= 60 ? '#b06000' : '#c5221f';
-  const bg = pct >= 80 ? '#e6f4ea' : pct >= 60 ? '#fff8e6' : '#fce8e6';
+  const color = pct >= 80 ? '#059669' : pct >= 60 ? '#d97706' : '#dc2626';
+  const bg = pct >= 80 ? '#ecfdf5' : pct >= 60 ? '#fffbeb' : '#fef2f2';
+  const border = pct >= 80 ? '#a7f3d0' : pct >= 60 ? '#fde68a' : '#fecaca';
 
   return (
     <div style={{
@@ -20,13 +21,13 @@ function ScoreBadge({ label, score, maxScore = 100 }: { label: string; score: nu
       gap: '4px',
       padding: '14px 20px',
       backgroundColor: bg,
-      border: `1px solid ${color}`,
-      borderRadius: '4px',
-      minWidth: '120px',
+      border: `1px solid ${border}`,
+      borderRadius: '8px',
+      minWidth: '130px',
     }}>
-      <div style={{ fontSize: '11px', fontWeight: 700, color, textTransform: 'uppercase', letterSpacing: '0.5px' }}>{label}</div>
-      <div style={{ fontSize: '28px', fontWeight: 800, color }}>{score}<span style={{ fontSize: '14px', fontWeight: 500 }}>/{maxScore}</span></div>
-      <div style={{ width: '100%', height: '4px', backgroundColor: '#eaeded', borderRadius: '2px', overflow: 'hidden' }}>
+      <div style={{ fontSize: '11px', fontWeight: 700, color, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
+      <div style={{ fontSize: '26px', fontWeight: 800, color }}>{score}<span style={{ fontSize: '14px', fontWeight: 500, color }}>/{maxScore}</span></div>
+      <div style={{ width: '100%', height: '4px', backgroundColor: 'rgba(0,0,0,0.06)', borderRadius: '2px', overflow: 'hidden' }}>
         <div style={{ width: `${pct}%`, height: '100%', backgroundColor: color, borderRadius: '2px' }} />
       </div>
     </div>
@@ -36,16 +37,17 @@ function ScoreBadge({ label, score, maxScore = 100 }: { label: string; score: nu
 export default function AIReportCard({ report }: AIReportCardProps) {
   if (!report) {
     return (
-      <div className="aws-card" style={{ border: '1px solid #d5dbdb' }}>
-        <div className="aws-card-header" style={{ backgroundColor: '#16191f', color: '#ffffff' }}>
+      <div className="aws-card">
+        <div className="aws-card-header" style={{ backgroundColor: '#0f172a', color: '#ffffff', borderBottom: '1px solid #1e293b' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
             <div style={{
               backgroundColor: '#ec7211',
               color: '#ffffff',
-              padding: '3px 6px',
-              borderRadius: '2px',
+              padding: '3px 7px',
+              borderRadius: '4px',
               fontWeight: 700,
-              fontSize: '11px'
+              fontSize: '11px',
+              letterSpacing: '0.04em',
             }}>
               BEDROCK AI
             </div>
@@ -55,7 +57,7 @@ export default function AIReportCard({ report }: AIReportCardProps) {
           </div>
         </div>
         <div className="aws-card-body" style={{ backgroundColor: '#ffffff', padding: '36px', textAlign: 'center' }}>
-          <p style={{ color: '#545b64', fontSize: '14px', margin: 0 }}>
+          <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
             No AI intelligence report generated yet for this account. Click Refresh or connect credentials to run an analysis.
           </p>
         </div>
@@ -67,16 +69,17 @@ export default function AIReportCard({ report }: AIReportCardProps) {
   const reportObj = !isStringReport ? (report as AIReport) : null;
 
   return (
-    <div className="aws-card" style={{ border: '1px solid #d5dbdb' }}>
-      <div className="aws-card-header" style={{ backgroundColor: '#16191f', color: '#ffffff' }}>
+    <div className="aws-card">
+      <div className="aws-card-header" style={{ backgroundColor: '#0f172a', color: '#ffffff', borderBottom: '1px solid #1e293b' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
             backgroundColor: '#ec7211',
             color: '#ffffff',
-            padding: '3px 6px',
-            borderRadius: '2px',
+            padding: '3px 7px',
+            borderRadius: '4px',
             fontWeight: 700,
-            fontSize: '11px'
+            fontSize: '11px',
+            letterSpacing: '0.04em',
           }}>
             BEDROCK AI
           </div>
@@ -84,8 +87,8 @@ export default function AIReportCard({ report }: AIReportCardProps) {
             Amazon Bedrock Infrastructure Intelligence Report
           </span>
         </div>
-        <span style={{ fontSize: '12px', color: '#d5dbdb', fontWeight: 400 }}>
-          Model: Amazon Nova Lite (v1.0) — Structured JSON Output
+        <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 400 }}>
+          Model: Amazon Nova Lite (v1.0) • Structured JSON Output
         </span>
       </div>
 
@@ -94,7 +97,7 @@ export default function AIReportCard({ report }: AIReportCardProps) {
           <div style={{
             fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
             fontSize: '14px',
-            color: '#16191f',
+            color: '#0f172a',
             lineHeight: '1.6',
             whiteSpace: 'pre-wrap'
           }}>
@@ -115,25 +118,25 @@ export default function AIReportCard({ report }: AIReportCardProps) {
               </div>
             )}
 
-            {/* Executive Summary */}
+            {/* Executive Summary Box */}
             {reportObj?.executive_summary && (
               <div>
-                <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#16191f', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  📋 Executive Summary
+                <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Executive Summary
                 </h4>
-                <p style={{ fontSize: '14px', color: '#545b64', lineHeight: '1.6', backgroundColor: '#fafafa', padding: '12px 16px', borderRadius: '4px', border: '1px solid #eaeded' }}>
+                <div style={{ fontSize: '13px', color: '#334155', lineHeight: '1.6', backgroundColor: '#f8fafc', padding: '14px 18px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                   {reportObj.executive_summary}
-                </p>
+                </div>
               </div>
             )}
 
             {/* Estimated Savings banner */}
             {reportObj?.estimated_savings && (
               <div style={{
-                backgroundColor: '#e6f4ea',
-                border: '1px solid #137333',
-                padding: '14px 20px',
-                borderRadius: '4px',
+                backgroundColor: '#ecfdf5',
+                border: '1px solid #a7f3d0',
+                padding: '16px 20px',
+                borderRadius: '8px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -141,14 +144,14 @@ export default function AIReportCard({ report }: AIReportCardProps) {
                 gap: '12px',
               }}>
                 <div>
-                  <span style={{ fontSize: '12px', fontWeight: 700, color: '#137333', textTransform: 'uppercase' }}>
+                  <span style={{ fontSize: '11px', fontWeight: 700, color: '#059669', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                     Estimated Potential Monthly Savings
                   </span>
-                  <div style={{ fontSize: '20px', fontWeight: 800, color: '#137333', marginTop: '2px' }}>
+                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#065f46', marginTop: '2px' }}>
                     {reportObj.estimated_savings}
                   </div>
                 </div>
-                <button className="aws-btn-primary" style={{ backgroundColor: '#137333', borderColor: '#137333' }}>
+                <button className="aws-btn-primary" style={{ backgroundColor: '#059669', borderColor: '#059669' }}>
                   Apply AI Recommendations
                 </button>
               </div>
@@ -157,8 +160,8 @@ export default function AIReportCard({ report }: AIReportCardProps) {
             {/* Priority Actions */}
             {reportObj?.priority_actions && reportObj.priority_actions.length > 0 && (
               <div>
-                <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#16191f', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  ⚡ Priority Action Items
+                <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Priority Action Items
                 </h4>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {reportObj.priority_actions.map((action, idx) => (
@@ -166,19 +169,20 @@ export default function AIReportCard({ report }: AIReportCardProps) {
                       display: 'flex',
                       alignItems: 'flex-start',
                       gap: '12px',
-                      padding: '10px 14px',
-                      border: '1px solid #eaeded',
-                      borderRadius: '4px',
+                      padding: '12px 16px',
+                      border: '1px solid #e2e8f0',
+                      borderRadius: '8px',
+                      backgroundColor: '#ffffff',
                       fontSize: '13px',
                       fontWeight: 500,
-                      color: '#16191f'
+                      color: '#1e293b'
                     }}>
                       <span style={{
-                        backgroundColor: '#16191f',
+                        backgroundColor: '#0f172a',
                         color: '#ffffff',
                         width: '20px',
                         height: '20px',
-                        borderRadius: '50%',
+                        borderRadius: '6px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -189,7 +193,7 @@ export default function AIReportCard({ report }: AIReportCardProps) {
                       }}>
                         {idx + 1}
                       </span>
-                      <span>{action}</span>
+                      <span style={{ lineHeight: '1.5' }}>{action}</span>
                     </div>
                   ))}
                 </div>
@@ -199,20 +203,20 @@ export default function AIReportCard({ report }: AIReportCardProps) {
             {/* Terraform Remediation */}
             {reportObj?.terraform_remediation && (
               <div>
-                <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#16191f', marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  🔧 AI-Generated Terraform Remediation
+                <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  AI-Generated Terraform Remediation
                 </h4>
-                <div style={{ backgroundColor: '#0d1117', borderRadius: '4px', padding: '16px', overflow: 'auto', border: '1px solid #30363d' }}>
-                  <pre style={{ margin: 0, fontSize: '13px', color: '#e6edf3', fontFamily: '"JetBrains Mono", "Fira Code", "Cascadia Code", monospace', lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>
+                <div style={{ backgroundColor: '#0f172a', borderRadius: '8px', padding: '16px', overflow: 'auto', border: '1px solid #1e293b' }}>
+                  <pre style={{ margin: 0, fontSize: '12px', color: '#38bdf8', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>
                     {reportObj.terraform_remediation
                       .replace(/^```hcl\n?/, '')
                       .replace(/\n?```$/, '')}
                   </pre>
                 </div>
-                <div style={{ marginTop: '8px', fontSize: '12px', color: '#545b64', display: 'flex', gap: '16px' }}>
-                  <span>1. Save as <code style={{ backgroundColor: '#f4f4f4', padding: '1px 4px', borderRadius: '2px' }}>main.tf</code></span>
-                  <span>2. Run <code style={{ backgroundColor: '#f4f4f4', padding: '1px 4px', borderRadius: '2px' }}>terraform plan</code></span>
-                  <span>3. Run <code style={{ backgroundColor: '#f4f4f4', padding: '1px 4px', borderRadius: '2px' }}>terraform apply</code></span>
+                <div style={{ marginTop: '8px', fontSize: '11px', color: '#64748b', display: 'flex', gap: '16px' }}>
+                  <span>1. Save as <code style={{ backgroundColor: '#f1f5f9', padding: '2px 5px', borderRadius: '4px', color: '#0f172a' }}>main.tf</code></span>
+                  <span>2. Run <code style={{ backgroundColor: '#f1f5f9', padding: '2px 5px', borderRadius: '4px', color: '#0f172a' }}>terraform plan</code></span>
+                  <span>3. Run <code style={{ backgroundColor: '#f1f5f9', padding: '2px 5px', borderRadius: '4px', color: '#0f172a' }}>terraform apply</code></span>
                 </div>
               </div>
             )}
@@ -220,10 +224,10 @@ export default function AIReportCard({ report }: AIReportCardProps) {
             {/* Legacy cost_optimization field */}
             {reportObj?.cost_optimization && !reportObj?.terraform_remediation && (
               <div>
-                <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#16191f', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  💰 Cost Optimization Strategy
+                <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                  Cost Optimization Strategy
                 </h4>
-                <p style={{ fontSize: '14px', color: '#545b64', lineHeight: '1.6', backgroundColor: '#fafafa', padding: '12px 16px', borderRadius: '4px', border: '1px solid #eaeded' }}>
+                <p style={{ fontSize: '13px', color: '#334155', lineHeight: '1.6', backgroundColor: '#f8fafc', padding: '12px 16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
                   {reportObj.cost_optimization}
                 </p>
               </div>

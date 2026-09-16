@@ -33,7 +33,7 @@ export default function GraphPage() {
   const summary = isDemo ? (graphData.summary || MOCK_RESOURCE_GRAPH.summary) : (graphData.summary || { total_nodes: 0, total_edges: 0, by_service: {} });
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f2f3f3' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f8fafc' }}>
       <Navbar
         isBackendOnline={isBackendOnline}
         isMockData={graphData.is_demo}
@@ -44,19 +44,19 @@ export default function GraphPage() {
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
 
-        <main style={{ flex: 1, padding: '20px 24px', display: 'flex', flexDirection: 'column' }}>
+        <main style={{ flex: 1, padding: '24px 32px', display: 'flex', flexDirection: 'column' }}>
           {/* Header Bar */}
-          <div style={{ marginBottom: '14px', paddingBottom: '12px', borderBottom: '1px solid #eaeded' }}>
-            <div style={{ fontSize: '11px', color: '#545b64', marginBottom: '2px' }}>
+          <div style={{ marginBottom: '24px', paddingBottom: '18px', borderBottom: '1px solid #e2e8f0' }}>
+            <div style={{ fontSize: '11px', color: '#64748b', marginBottom: '2px' }}>
               AWS Management Console &gt; Architecture Visualizer &gt; <strong>Resource Dependency Graph</strong>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
               <div>
-                <h1 style={{ fontSize: '20px', fontWeight: 700, color: '#16191f', margin: 0 }}>
+                <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', margin: 0 }}>
                   AWS Resource Dependency Graph
                 </h1>
-                <p style={{ fontSize: '12px', color: '#545b64', margin: '2px 0 0 0' }}>
+                <p style={{ fontSize: '13px', color: '#64748b', margin: '3px 0 0 0' }}>
                   Interactive topological network displaying cloud resources, network perimeters, security group firewalls, and data storage attachments.
                 </p>
               </div>

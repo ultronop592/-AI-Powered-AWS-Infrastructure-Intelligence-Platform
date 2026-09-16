@@ -57,21 +57,21 @@ export default function DashboardOverview() {
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
 
-        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f2f3f3', overflowY: 'auto' }}>
+        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f8fafc', overflowY: 'auto' }}>
           {/* Top Banner */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: '20px',
-            paddingBottom: '16px',
-            borderBottom: '1px solid #eaeded'
+            marginBottom: '24px',
+            paddingBottom: '18px',
+            borderBottom: '1px solid #e2e8f0'
           }}>
             <div>
-              <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#16191f' }}>
+              <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em' }}>
                 AWS CloudOps AI Dashboard
               </h1>
-              <p style={{ fontSize: '13px', color: '#545b64', marginTop: '2px' }}>
+              <p style={{ fontSize: '13px', color: '#64748b', marginTop: '3px' }}>
                 Real-time AWS infrastructure cost, compute state, storage inventory &amp; Bedrock AI optimization analysis.
               </p>
             </div>

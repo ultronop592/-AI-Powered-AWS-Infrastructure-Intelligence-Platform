@@ -37,7 +37,7 @@ export default function CostPage() {
     : '0.0';
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f2f3f3' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f8fafc' }}>
       <Navbar isBackendOnline={isBackendOnline} isMockData={isDemo} onRefresh={loadData} isLoading={loading} />
 
       <div style={{ display: 'flex', flex: 1 }}>
@@ -45,23 +45,23 @@ export default function CostPage() {
 
         <main style={{ flex: 1, padding: '24px 32px' }}>
           {/* Header */}
-          <div style={{ marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #eaeded' }}>
-            <div style={{ fontSize: '11px', color: '#545b64', marginBottom: '4px' }}>
+          <div style={{ marginBottom: '24px', paddingBottom: '18px', borderBottom: '1px solid #e2e8f0' }}>
+            <div style={{ fontSize: '11px', color: '#64748b', marginBottom: '4px' }}>
               AWS Management Console &gt; Cost Management &gt; <strong>Cost Explorer &amp; FinOps</strong>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div>
-                <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#16191f', margin: 0 }}>
+                <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', margin: 0 }}>
                   AWS Cost Explorer &amp; FinOps Intelligence
                 </h1>
-                <p style={{ fontSize: '13px', color: '#545b64', margin: '4px 0 0 0' }}>
+                <p style={{ fontSize: '13px', color: '#64748b', margin: '4px 0 0 0' }}>
                   Analyze cloud spending trends, detect idle resource waste, and optimize cost efficiency across AWS services.
                 </p>
               </div>
 
               {/* View Mode Toggle Buttons */}
-              <div style={{ display: 'flex', gap: '4px', backgroundColor: '#ffffff', padding: '3px', borderRadius: '2px', border: '1px solid #d5dbdb' }}>
+              <div style={{ display: 'flex', gap: '4px', backgroundColor: '#ffffff', padding: '3px', borderRadius: '6px', border: '1px solid #e2e8f0' }}>
                 <button
                   onClick={() => setActiveTab('heatmap')}
                   style={{

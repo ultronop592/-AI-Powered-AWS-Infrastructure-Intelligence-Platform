@@ -36,7 +36,7 @@ export default function CompliancePage() {
   const compliance = isDemo ? (data.compliance || MOCK_DASHBOARD.compliance!) : (data.compliance || null);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f2f3f3' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f8fafc' }}>
       <Navbar
         isBackendOnline={isBackendOnline}
         isMockData={isDemo}
@@ -49,17 +49,17 @@ export default function CompliancePage() {
 
         <main style={{ flex: 1, padding: '24px 32px' }}>
           {/* Breadcrumb & Title */}
-          <div style={{ marginBottom: '20px', paddingBottom: '16px', borderBottom: '1px solid #eaeded' }}>
-            <div style={{ fontSize: '12px', color: '#545b64', marginBottom: '4px' }}>
+          <div style={{ marginBottom: '24px', paddingBottom: '18px', borderBottom: '1px solid #e2e8f0' }}>
+            <div style={{ fontSize: '12px', color: '#64748b', marginBottom: '4px' }}>
               AWS Management Console &gt; Well-Architected Tool &gt; <strong>Compliance Scorecard</strong>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
               <div>
-                <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#16191f', margin: 0 }}>
+                <h1 style={{ fontSize: '22px', fontWeight: 700, color: '#0f172a', letterSpacing: '-0.02em', margin: 0 }}>
                   AWS Well-Architected Compliance Scorecard
                 </h1>
-                <p style={{ fontSize: '13px', color: '#545b64', margin: '4px 0 0 0' }}>
+                <p style={{ fontSize: '13px', color: '#64748b', margin: '4px 0 0 0' }}>
                   Automated architectural assessment evaluating connected infrastructure against the 5 official AWS Well-Architected Framework pillars.
                 </p>
               </div>

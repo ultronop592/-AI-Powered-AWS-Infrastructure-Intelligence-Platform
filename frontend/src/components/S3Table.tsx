@@ -96,9 +96,10 @@ export default function S3Table({ buckets, onRefresh }: S3TableProps) {
                               style={{
                                 backgroundColor: '#ec7211',
                                 borderColor: '#ec7211',
-                                padding: '2px 8px',
+                                padding: '3px 10px',
                                 fontSize: '11px',
                                 fontWeight: 700,
+                                borderRadius: '4px',
                                 cursor: 'pointer',
                               }}
                             >
@@ -124,9 +125,10 @@ export default function S3Table({ buckets, onRefresh }: S3TableProps) {
                               style={{
                                 backgroundColor: '#ec7211',
                                 borderColor: '#ec7211',
-                                padding: '2px 8px',
+                                padding: '3px 10px',
                                 fontSize: '11px',
                                 fontWeight: 700,
+                                borderRadius: '4px',
                                 cursor: 'pointer',
                               }}
                             >
