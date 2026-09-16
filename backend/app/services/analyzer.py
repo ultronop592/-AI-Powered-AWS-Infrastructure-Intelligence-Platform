@@ -60,6 +60,7 @@ class Analyzer:
 
             if gp2_vols:
                 total_savings = sum(v.get("MonthlySavingsUSD", 0.0) for v in gp2_vols)
+                vol_ids = [v.get("VolumeId", "") for v in gp2_vols if v.get("VolumeId")]
                 recommendations.append({
                     "id": "EBS-001",
                     "severity": "MEDIUM",
@@ -70,9 +71,14 @@ class Analyzer:
                         "Migrating to gp3 provides 20% lower cost per GB with baseline 3000 IOPS."
                     ),
                     "action": f"Convert volume type from gp2 to gp3 to save estimated ~${total_savings:.2f}/month instantly.",
+                    "resource_id": vol_ids[0] if vol_ids else "",
+                    "affected_resources": vol_ids,
+                    "remediation_available": True,
+                    "remediation_action": "UPGRADE_EBS_GP3",
                 })
 
             if unattached_ebs:
+                unattached_ids = [v.get("VolumeId", "") for v in unattached_ebs if v.get("VolumeId")]
                 recommendations.append({
                     "id": "EBS-002",
                     "severity": "HIGH",
@@ -83,6 +89,9 @@ class Analyzer:
                         "state generating storage charges."
                     ),
                     "action": "Delete unattached EBS volumes or create a snapshot backup before deletion.",
+                    "resource_id": unattached_ids[0] if unattached_ids else "",
+                    "affected_resources": unattached_ids,
+                    "remediation_available": False,
                 })
 
             if overprovisioned_lambdas:
@@ -97,6 +106,7 @@ class Analyzer:
                         "with <35% average utilization efficiency."
                     ),
                     "action": "Rightsize Lambda memory allocation to 256MB or 512MB to reduce execution cost.",
+                    "remediation_available": False,
                 })
 
         # ---------------------------------------------------------------- #
@@ -107,7 +117,8 @@ class Analyzer:
             high_sgs = [sg for sg in security_groups if sg.get("RiskLevel") == "HIGH"]
 
             if critical_sgs:
-                sg_ids = ", ".join([sg.get("GroupId", "") for sg in critical_sgs])
+                sg_ids_list = [sg.get("GroupId", "") for sg in critical_sgs if sg.get("GroupId")]
+                sg_ids = ", ".join(sg_ids_list)
                 recommendations.append({
                     "id": "SEC-001",
                     "severity": "HIGH",
@@ -121,10 +132,15 @@ class Analyzer:
                         "Restrict inbound SSH/RDP access to specific trusted IP CIDRs "
                         "or AWS Systems Manager Session Manager."
                     ),
+                    "resource_id": sg_ids_list[0] if sg_ids_list else "",
+                    "affected_resources": sg_ids_list,
+                    "remediation_available": True,
+                    "remediation_action": "RESTRICT_INGRESS_MANAGEMENT",
                 })
 
             if high_sgs:
-                sg_ids = ", ".join([sg.get("GroupId", "") for sg in high_sgs])
+                sg_ids_list = [sg.get("GroupId", "") for sg in high_sgs if sg.get("GroupId")]
+                sg_ids = ", ".join(sg_ids_list)
                 recommendations.append({
                     "id": "SEC-002",
                     "severity": "HIGH",
@@ -135,6 +151,9 @@ class Analyzer:
                         "(MySQL/PostgreSQL/MongoDB) to 0.0.0.0/0."
                     ),
                     "action": "Restrict database ingress rules to internal application subnet CIDRs (e.g. 172.31.0.0/16).",
+                    "resource_id": sg_ids_list[0] if sg_ids_list else "",
+                    "affected_resources": sg_ids_list,
+                    "remediation_available": False,
                 })
 
         # ---------------------------------------------------------------- #
@@ -146,7 +165,7 @@ class Analyzer:
             violations = s3_security.get("s3_violations", [])
 
             if unencrypted > 0:
-                bucket_names = [v["bucket"] for v in violations if v.get("finding", "").startswith("No default")]
+                bucket_names = [v["bucket"] for v in violations if v.get("finding", "").startswith("No default") and v.get("bucket")]
                 recommendations.append({
                     "id": "S3-001",
                     "severity": "HIGH",
@@ -157,9 +176,14 @@ class Analyzer:
                         "have no default encryption configured."
                     ),
                     "action": "Enable S3 Default Encryption (SSE-S3 or SSE-KMS) on all buckets.",
+                    "resource_id": bucket_names[0] if bucket_names else "",
+                    "affected_resources": bucket_names,
+                    "remediation_available": True,
+                    "remediation_action": "ENABLE_S3_ENCRYPTION",
                 })
 
             if public > 0:
+                public_bucket_names = [v["bucket"] for v in violations if "public" in v.get("finding", "").lower() and v.get("bucket")]
                 recommendations.append({
                     "id": "S3-002",
                     "severity": "HIGH",
@@ -167,6 +191,10 @@ class Analyzer:
                     "title": "Public S3 Bucket Access Detected",
                     "description": f"{public} S3 bucket(s) do not have all public access block settings enabled.",
                     "action": "Enable all four Public Access Block settings on every S3 bucket unless intentionally public.",
+                    "resource_id": public_bucket_names[0] if public_bucket_names else (s3_buckets[0].get("Name") if s3_buckets else ""),
+                    "affected_resources": public_bucket_names,
+                    "remediation_available": True,
+                    "remediation_action": "ENABLE_S3_PUBLIC_ACCESS_BLOCK",
                 })
 
         # ---------------------------------------------------------------- #

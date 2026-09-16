@@ -21,6 +21,7 @@ from app.api.dashboard import router as dashboard_router
 from app.api.copilot import router as copilot_router
 from app.api.auth_aws import router as auth_aws_router
 from app.api.graph import router as graph_router
+from app.api.remediation import router as remediation_router
 from app.sessions.session_store import session_store
 
 
@@ -104,6 +105,7 @@ app.include_router(dashboard_router)
 app.include_router(copilot_router)
 app.include_router(auth_aws_router)
 app.include_router(graph_router)
+app.include_router(remediation_router)
 
 
 @app.get("/", tags=["Health"])

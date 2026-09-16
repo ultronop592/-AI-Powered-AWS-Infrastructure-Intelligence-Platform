@@ -63,8 +63,23 @@ class _ResponseCache:
         with self._lock:
             self._cache.pop(key, None)
 
+    def invalidate_all(self, pattern: Optional[str] = None) -> None:
+        with self._lock:
+            if pattern:
+                keys_to_del = [k for k in self._cache if pattern in k]
+                for k in keys_to_del:
+                    del self._cache[k]
+            else:
+                self._cache.clear()
+
 
 _cache = _ResponseCache(ttl_seconds=settings.CACHE_TTL_SECONDS)
+
+
+def invalidate_dashboard_cache(pattern: Optional[str] = None) -> None:
+    """Invalidate cached dashboard responses globally or matching a pattern."""
+    _cache.invalidate_all(pattern)
+
 
 
 # ---------------------------------------------------------------------------
