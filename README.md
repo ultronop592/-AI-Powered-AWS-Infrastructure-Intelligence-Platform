@@ -1,108 +1,173 @@
 # CloudOps AI
 
-## AWS Infrastructure Intelligence, Security Governance, and Autonomous Operations Platform
+## Enterprise AWS Infrastructure Intelligence, Security Governance, and Autonomous Remediation Platform
 
-CloudOps AI is an enterprise cloud operations, compliance governance, and infrastructure visualization platform designed to unify cloud observability, multi-pillar architectural evaluation, FinOps waste analysis, and AI-assisted DevOps remediation into a unified operational console.
+CloudOps AI is an enterprise cloud operations, compliance governance, and autonomous remediation platform designed to unify multi-account cloud observability, Well-Architected Framework evaluation, FinOps waste analysis, and one-click operational remediation into a unified, high-performance console.
 
-The platform transforms raw cloud configuration telemetry into actionable intelligence, scoring connected accounts against official cloud engineering standards, generating topological relationship networks, and diagnosing infrastructure inefficiencies.
-
----
-
-## 1. Executive Summary and Problem Statement
-
-Modern cloud architectures span dozens of distributed AWS services, creating visibility silos, unmonitored configuration drift, security vulnerabilities, and runaway financial waste. Engineering teams routinely manage disparate consoles for compute inventories, storage configurations, security group ingress rules, database backups, and cost allocation.
-
-CloudOps AI addresses these operational challenges through:
-
-1. Unified Architecture Observability: Consolidating compute, serverless, storage, network, and security guardrail telemetry into a cohesive console interface.
-2. Automated Architectural Compliance: Evaluating workloads against the five pillars of the AWS Well-Architected Framework using deterministic rule evaluation.
-3. Topological Infrastructure Graphing: Visualizing resource dependencies, network perimeters, firewall attachments, and event triggers through a multi-tiered directed graph.
-4. FinOps Cost Efficiency Analysis: Translating raw billing data into an interactive proportional treemap heatmap that correlates dollar spend with resource utilization efficiency.
-5. In-Context AI DevOps Copilot: Ingesting live cloud telemetry into high-speed language models to answer infrastructure inquiries and formulate production-ready Terraform Infrastructure-as-Code remediation modules.
+The platform continuously evaluates cloud configuration telemetry against official industry standards, maps topological dependency networks, identifies financial waste, and allows cloud engineers to safely execute autonomous Boto3 remediation actions directly from the browser with permanent audit receipts.
 
 ---
 
-## 2. System Architecture and Component Design
+## 1. System Architecture and Component Design
 
-The platform uses a decoupled, stateless service-oriented architecture designed for low-latency telemetry collection, non-blocking data aggregation, and zero persistence of customer credentials.
+CloudOps AI uses a decoupled, stateless service-oriented architecture designed for low-latency telemetry collection, non-blocking data aggregation, zero credential persistence, and deterministic remediation execution.
 
 ```text
-+-----------------------------------------------------------------------------------+
-|                                PRESENTATION TIER                                  |
-|                            Next.js 16 + React 19 Engine                           |
-|                                                                                   |
-|  +---------------------+  +----------------------+  +--------------------------+  |
-|  | Overview Dashboard  |  | Well-Architected WAF |  | Resource Dependency      |  |
-|  | Compute & Storage   |  | Compliance Scorecard |  | Topology Graph           |  |
-|  +---------------------+  +----------------------+  +--------------------------+  |
-|  +---------------------+  +----------------------+  +--------------------------+  |
-|  | FinOps Treemap      |  | CloudWatch Telemetry |  | AI DevOps Copilot        |  |
-|  | Waste Heatmap       |  | Metrics Visualizer   |  | Interactive Workspace    |  |
-|  +---------------------+  +----------------------+  +--------------------------+  |
-+------------------------------------------+----------------------------------------+
-                                           |
-                                           | HTTPS REST Requests
-                                           | X-Session-Token Identification
-                                           v
-+-----------------------------------------------------------------------------------+
-|                               APPLICATION API TIER                                |
-|                               FastAPI Core Engine                                 |
-|                                                                                   |
-|  +-----------------------------------------------------------------------------+  |
-|  | Session Store & Authentication Manager                                      |  |
-|  | In-memory TTL session management, STS identity verification, token issuance  |  |
-|  +-----------------------------------------------------------------------------+  |
-|  | Router Endpoints: /dashboard | /graph | /copilot | /aws/verify              |  |
-|  +-----------------------------------------------------------------------------+  |
-+------------------------------------------+----------------------------------------+
-                                           |
-                   +-----------------------+-----------------------+
-                   |                                               |
-                   v                                               v
-+--------------------------------------+       +------------------------------------+
-|       INTELLIGENCE & ANALYSIS        |       |        PLATFORM AI COPILOT         |
-|                                      |       |                                    |
-| +----------------------------------+ |       | +--------------------------------+ |
-| | Well-Architected Evaluator       | |       | | Groq LLM Inference Engine      | |
-| | 5-Pillar Rule Evaluation         | |       | | Platform-owned API credentials | |
-| +----------------------------------+ |       | +--------------------------------+ |
-| | FinOps Waste Scoring Engine      | |       | | Live Infrastructure Context    | |
-| | Spend vs. Utility Correlation    | |       | | Real-time state injection      | |
-| +----------------------------------+ |       | +--------------------------------+ |
-| | Topological Graph Builder        | |       | | Terraform HCL Generator        | |
-| | Resource Dependency Mapping      | |       | | Autonomous remediation modules | |
-| +----------------------------------+ |       | +--------------------------------+ |
-+------------------+-------------------+       +------------------------------------+
-                   |
-                   v
-+-----------------------------------------------------------------------------------+
-|                           AWS TELEMETRY & INGESTION TIER                          |
-|                       Concurrent Boto3 Client Orchestrator                        |
-|                                                                                   |
-|  +------------------+ +------------------+ +-----------------+ +----------------+ |
-|  | Amazon EC2       | | Amazon S3        | | AWS Security    | | AWS Cost       | |
-|  | Virtual Compute  | | Object Storage   | | Security Groups | | Explorer API   | |
-|  +------------------+ +------------------+ +-----------------+ +----------------+ |
-|  +------------------+ +------------------+ +-----------------+ +----------------+ |
-|  | Amazon RDS       | | AWS Lambda       | | Amazon EBS      | | CloudWatch     | |
-|  | Databases        | | Serverless FaaS  | | Block Volumes   | | Metric Streams | |
-|  +------------------+ +------------------+ +-----------------+ +----------------+ |
-+------------------------------------------+----------------------------------------+
-                                           |
-                                           v
-+-----------------------------------------------------------------------------------+
-|                               TARGET CLOUD ACCOUNTS                               |
-|              Live AWS Account (STS Authenticated) OR Built-in Demo Engine         |
-+-----------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------+
+|                                         PRESENTATION TIER                                         |
+|                                Next.js 16 + React 19 App Router                                   |
+|                                                                                                   |
+|  +------------------------+  +--------------------------+  +-----------------------------------+  |
+|  | Overview Dashboard     |  | Well-Architected Tool    |  | Resource Dependency               |  |
+|  | Real-Time Cloud Health |  | 5-Pillar Scorecard (WAF) |  | Topological Network Graph         |  |
+|  +------------------------+  +--------------------------+  +-----------------------------------+  |
+|  +------------------------+  +--------------------------+  +-----------------------------------+  |
+|  | FinOps Cost Explorer   |  | CloudWatch Telemetry     |  | Deep Service Analytics            |  |
+|  | Spend Waste Treemap    |  | Time-Series Visualizer   |  | RDS, Lambda, EBS gp3, ECS         |  |
+|  +------------------------+  +--------------------------+  +-----------------------------------+  |
+|  +------------------------+  +--------------------------+  +-----------------------------------+  |
+|  | In-Context AI Copilot  |  | One-Click Remediation    |  | Credential Manager                |  |
+|  | Terraform Generator    |  | Boto3 Modal & Audit Card |  | Multi-Account STS Auth            |  |
+|  +------------------------+  +--------------------------+  +-----------------------------------+  |
++-------------------------------------------------+-------------------------------------------------+
+                                                  |
+                                                  | HTTPS REST Calls
+                                                  | Headers: X-Session-Token, Content-Type
+                                                  v
++---------------------------------------------------------------------------------------------------+
+|                                       APPLICATION API TIER                                        |
+|                                     FastAPI Python 3.11 Engine                                    |
+|                                                                                                   |
+|  +---------------------------------------------------------------------------------------------+  |
+|  | Session Store & Credential Manager                                                          |  |
+|  | Ephemeral in-memory session manager, STS identity verification, zero persistent secrets     |  |
+|  +---------------------------------------------------------------------------------------------+  |
+|  | Router Endpoints:                                                                           |  |
+|  | /dashboard | /remediation/* | /graph | /copilot | /aws/verify | /aws/session | /health       |  |
+|  +---------------------------------------------------------------------------------------------+  |
++------------------------+--------------------------------------------------+-----------------------+
+                         |                                                  |
+                         v                                                  v
++--------------------------------------------------+  +---------------------------------------------+
+|          ANALYSIS & COMPLIANCE ENGINES           |  |       AUTONOMOUS AIOPS REMEDIATION          |
+|                                                  |  |                                             |
+| +----------------------------------------------+ |  | +-----------------------------------------+ |
+| | Well-Architected 5-Pillar Evaluator          | |  | | Remediation Engine (remediation_service)| |
+| | 26 Deterministic Rule Checks                 | |  | | Boto3 EC2, S3, and EBS API Executions    | |
+| +----------------------------------------------+ |  | +-----------------------------------------+ |
+| | FinOps Waste Scoring Engine                  | |  | | Audit Receipt Generator                 | |
+| | Idle Compute & Storage Allocation Analysis   | |  | | Thread-safe UUID receipts with timing   | |
+| +----------------------------------------------+ |  | +-----------------------------------------+ |
+| | Topological Graph Builder                    | |  | | CloudOps Cache Invalidation             | |
+| | Multi-tiered Dependency & Blast Radius Model | |  | | Instant state refresh on live account   | |
+| +----------------------------------------------+ |  | +-----------------------------------------+ |
++------------------------+-------------------------+  +---------------------+-----------------------+
+                         |                                                  |
+                         +------------------------+-------------------------+
+                                                  |
+                                                  v
++---------------------------------------------------------------------------------------------------+
+|                                   AWS TELEMETRY & INGESTION TIER                                  |
+|                                Concurrent Boto3 Client Orchestrator                               |
+|                                                                                                   |
+|  +--------------------+  +--------------------+  +--------------------+  +---------------------+  |
+|  | Amazon EC2 Compute |  | Amazon S3 Storage  |  | AWS Security Groups|  | AWS Cost Explorer   |  |
+|  | State, Types, IPs  |  | Encrypt, ACLs, Ver |  | Inbound Ports, SG  |  | MTD, Service Totals |  |
+|  +--------------------+  +--------------------+  +--------------------+  +---------------------+  |
+|  +--------------------+  +--------------------+  +--------------------+  +---------------------+  |
+|  | Amazon RDS DBs     |  | AWS Lambda FaaS    |  | Amazon EBS Disks   |  | CloudWatch Metrics  |  |
+|  | Multi-AZ, Engines  |  | Runtimes, Memory   |  | gp2, gp3, Attached |  | CPU, Net, Disk, Mem |  |
+|  +--------------------+  +--------------------+  +--------------------+  +---------------------+  |
++-------------------------------------------------+-------------------------------------------------+
+                                                  |
+                                                  v
++---------------------------------------------------------------------------------------------------+
+|                                      CONNECTED TARGET CLOUDS                                      |
+|                       Live AWS Cloud Account (STS Identity Verification)                          |
+|                                               OR                                                  |
+|                        Deterministic Air-Gapped Simulation Engine (Demo)                          |
++---------------------------------------------------------------------------------------------------+
 ```
 
 ---
 
-## 3. Core Functional Pillars and Engineering Concepts
+## 2. Autonomous One-Click Remediation Workflow
 
-### 3.1. AWS Well-Architected Framework Compliance Engine
+The platform features an AIOps remediation engine that translates security and configuration findings into verified cloud operations. Users review the proposed modification, customize target parameters, inspect the exact Boto3 API call signature, and apply the change in real-time or via safe demo simulation.
 
-The compliance engine performs non-invasive audits of cloud environments mapped across the five foundational pillars defined by AWS:
+```text
++---------------------------------------------------------------------------------------------------+
+|                                ONE-CLICK REMEDIATION STATE MACHINE                                |
++---------------------------------------------------------------------------------------------------+
+
+ [Finding Detected]
+         |
+         | Example: SEC-001 (0.0.0.0/0 on Port 22/3389) or EBS-001 (gp2 volume)
+         v
+ [User Action: Click Auto-Fix]
+         |
+         v
+ [RemediationModal Opened]
+         |-- Environment Validation: Live AWS Account vs. Demo Simulation Mode
+         |-- Parameter Customization: Target CIDR selection (VPC Subnet vs. Office LAN)
+         |-- Boto3 Call Signature Preview:
+         |      ec2.revoke_security_group_ingress(...)
+         |      ec2.authorize_security_group_ingress(...)
+         |-- Execution Confirmation
+         v
+ [POST /remediation/apply]
+         |
+         +----------------------------+----------------------------+
+         | Live Mode (Boto3)                                       | Demo Mode (Simulation)
+         v                                                         v
+ [Boto3 Client Execution]                                  [Mock State Mutation]
+   - ec2.revoke_security_group_ingress                       - Verify finding applicability
+   - ec2.authorize_security_group_ingress                     - Emulate realistic API latency (~250ms)
+   - ec2.modify_volume(VolumeType='gp3')                     - Generate synthetic resource mutation
+   - s3.put_bucket_encryption
+   - s3.put_public_access_block
+         |                                                         |
+         +----------------------------+----------------------------+
+                                      |
+                                      v
+ [Audit Receipt Generation]
+   - Unique Audit Receipt ID: AUDIT-SEC-001-XXXX-XXXX
+   - Exact millisecond execution duration
+   - Modified resource identification
+   - AWS Account ID and Region metadata
+   - Thread-safe storage in in-memory audit log
+                                      |
+                                      v
+ [Cache Invalidation]
+   - Invalidate server-side telemetry cache
+   - Signal client-side dashboard state refresh
+                                      |
+                                      v
+ [RemediationResult Modal Presented]
+   - Verified checkmark and parameters summary
+   - Copyable Audit Receipt ID
+   - "Done & Refresh Live Dashboard" CTA
+                                      |
+                                      v
+ [Dashboard Live State Updated]
+   - Target recommendation marked as "Fixed & Verified"
+   - Resource tables show updated configuration (e.g., gp3, encrypted, restricted)
+```
+
+### Supported Autonomous Remediation Actions
+
+| Finding ID | Vulnerability / Inefficiency | Boto3 Remediation Action | Technical Impact |
+|---|---|---|---|
+| SEC-001 | Public ingress from 0.0.0.0/0 on Port 22 (SSH) or Port 3389 (RDP) | `ec2.revoke_security_group_ingress` + `ec2.authorize_security_group_ingress` | Revokes public access; authorizes trusted VPC or administrator CIDR block. |
+| EBS-001 | Legacy gp2 storage incurring 20 percent higher cost | `ec2.modify_volume(VolumeType='gp3')` | Converts volume online with zero downtime; guarantees 3,000 IOPS and 125 MB/s baseline. |
+| S3-001 | Unencrypted S3 bucket missing default encryption | `s3.put_bucket_encryption` | Applies AES-256 (SSE-S3) encryption with S3 Bucket Keys enabled. |
+| S3-002 | S3 bucket without public access blocking | `s3.put_public_access_block` | Enables all 4 Public Access Block configuration flags immediately. |
+
+---
+
+## 3. Well-Architected Framework Compliance Architecture
+
+The compliance engine evaluates infrastructure against the five official AWS Well-Architected Framework (WAF) pillars using 26 deterministic check definitions:
 
 ```text
                                AWS WELL-ARCHITECTED PILLARS
@@ -112,11 +177,12 @@ The compliance engine performs non-invasive audits of cloud environments mapped 
       v               v             v               v               v
   [Security]       [Cost]     [Reliability]   [Performance]    [Operations]
    Pillar          Pillar        Pillar          Pillar           Pillar
+   (30% Weight)    (25% Weight)  (20% Weight)    (15% Weight)     (10% Weight)
       |               |             |               |               |
       |-- SSH/RDP     |-- Stopped   |-- Multi-AZ    |-- Graviton/   |-- S3 Lifecycle
-      |   Ingress     |   EC2 Disks |   RDS HA      |   Nitro Arch  |   Archival
+      |   Ingress     |   Compute   |   RDS HA      |   Nitro Arch  |   Archival
       |-- Database    |-- gp2->gp3  |-- S3 Version- |-- Dedicated   |-- Runtime
-      |   Isolation   |   Savings   |   ing DR      |   gp3 IOPS    |   Currency
+      |   Isolation   |   Savings   |   ing Backup  |   gp3 IOPS    |   Currency
       |-- S3 Default  |-- Orphaned  |-- Compute     |-- Lambda Cold |-- Tagging
       |   Encryption  |   Volumes   |   Redundancy  |   Starts      |   Standards
       |-- Public S3   |-- Memory    |-- ECS Task    |-- RDS Engine  |-- Centralized
@@ -126,23 +192,18 @@ The compliance engine performs non-invasive audits of cloud environments mapped 
       |-- Root MFA    |             |               |               |
 ```
 
-The system computes an overall weighted architectural score between 0 and 100 based on standard industry risk priorities:
-- Security Posture: 30 percent weight
-- Cost Optimization: 25 percent weight
-- Reliability and Fault Tolerance: 20 percent weight
-- Performance Efficiency: 15 percent weight
-- Operational Excellence: 10 percent weight
-
-Each individual check yields one of three deterministic states:
-- Passed: The resource satisfies official AWS security and engineering baselines.
-- Warning: Non-critical inefficiency, sub-optimal configuration, or elevated spend threshold.
-- Failed: High or critical exposure, including unencrypted data, publicly reachable management ports, or orphaned billing artifacts.
+### Pillar Scoring Methodology
+- Overall Score: Weighted average across all 5 pillars yielding a value between 0 and 100.
+- Check Statuses:
+  - Passed: Resource complies with AWS Well-Architected best practices.
+  - Warning: Sub-optimal configuration, moderate over-provisioning, or non-critical inefficiency.
+  - Failed: Critical exposure, public management port, unencrypted storage, or high financial waste.
 
 ---
 
-### 3.2. Resource Dependency and Topological Network Graph
+## 4. Resource Dependency Topology and Blast Radius Modeling
 
-CloudOps AI maps infrastructure components as a directed graph where nodes represent discrete AWS entities and edges represent relationships, dependencies, and network boundaries.
+The platform constructs an interactive directed acyclic graph (DAG) representing topological relationships across network, compute, database, and storage boundaries:
 
 ```text
 TOPOLOGICAL DEPENDENCY HIERARCHY
@@ -170,26 +231,23 @@ TOPOLOGICAL DEPENDENCY HIERARCHY
                           +-------------------+
 ```
 
-#### Graph Modeling Taxonomy
-- Nodes: Encapsulate resource identification, AWS service category, operational runtime status, risk classification, and configuration properties.
-- Edges: Explicit directional connections modeling architectural dependencies:
-  - Ingress Protection (secured_by): Associating compute instances and database engines with their respective firewall groups.
-  - Storage Attachment (attached_disk): Linking virtual machines to mounted block volumes.
-  - Network Encapsulation (in_vpc): Mapping security groups and subnets into parent Virtual Private Clouds.
-  - Serverless Invocation (s3_trigger): Documenting event source mappings between object storage buckets and execution runtimes.
+### Relationship Edge Taxonomy
+- secured_by: Maps compute and database resources to their governing security groups.
+- attached_disk: Links virtual compute instances to mounted EBS block volumes.
+- in_vpc: Maps security groups, subnets, and instances to their parent VPC.
+- s3_trigger: Documents event source triggers between object storage buckets and Lambda runtimes.
 
 ---
 
-### 3.3. FinOps Resource Waste and Cost Efficiency Heatmap
+## 5. FinOps Cost Efficiency Analysis and Spend Treemap
 
-Traditional cost tools present billing data as isolated bar charts or line items. CloudOps AI employs a multi-dimensional proportional treemap visualization to correlate monetary expenditure with resource utility.
+The FinOps module translates raw AWS Cost Explorer billing data into a proportional treemap that correlates financial spend with resource utilization efficiency.
 
 ```text
-PROPORTIONAL SPEND & EFFICIENCY TREEMAP CONCEPT
-===============================================
-Total Area = Total Month-to-Date Cloud Spend
-Box Geometry = Proportional Service Expenditure
-Color Spectrum = Cost Efficiency Rating
+PROPORTIONAL SPEND AND EFFICIENCY TREEMAP
+=========================================
+Area = Proportional Service Expenditure (USD)
+Efficiency Rating = Resource Utilization / Cost Ratio
 
 +---------------------------------------------+------------------------------------+
 |                                             | Amazon Elastic Block Store         |
@@ -207,59 +265,20 @@ Color Spectrum = Cost Efficiency Rating
 +---------------------------------------------+------------------+-----------------+
 ```
 
-#### Efficiency Scoring Framework
-The FinOps analyzer classifies each billed AWS service across three operational bands:
-- Cost-Efficient (Score greater than 70): Workloads utilizing modern instance types, automated storage tiering, active KMS customer keys, and consolidated logging streams.
-- Needs Optimization (Score 30 to 70): Environments with non-critical idle capacity, stopped compute retaining storage attachments, or legacy configuration baselines.
-- Wasteful (Score less than 30): Immediate recoverable losses, including unattached block storage volumes, unmigrated legacy storage tiers, and abandoned database instances.
+### Efficiency Classification Bands
+- Efficient (Score >= 70): Workloads utilizing modern instance families, S3 intelligent tiering, active KMS keys, and right-sized compute.
+- Needs Attention (Score 30 to 69): Non-critical idle capacity, stopped compute retaining storage attachments, or legacy configurations.
+- Wasteful (Score < 30): Immediate recoverable losses, unattached EBS volumes, unmigrated gp2 tiers, and abandoned resources.
 
 ---
 
-### 3.4. Platform AI Copilot with Context-Injected Inference
+## 6. Security Architecture and Credential Isolation Boundary
 
-The platform incorporates an integrated AI DevOps Copilot powered by a dedicated inference gateway. Rather than requiring users to configure proprietary model access or pay per-token charges, the platform provides managed inference out-of-the-box.
-
-```text
-IN-CONTEXT REASONING WORKFLOW
-=============================
-
-1. User Inquiry Input
-   ("Why is my EBS spend high and how do I fix it?")
-            |
-            v
-2. Context Ingestion Layer
-   Extracts current environment snapshot:
-   - Month-to-Date spend per service
-   - Compute inventory and stopped instance counts
-   - Unattached and gp2 block volume counts
-   - Security Group open port exposure listings
-   - Active Well-Architected compliance deficiencies
-            |
-            v
-3. System Prompt Synthesis
-   Combines AWS DevOps Engineering persona, structured markdown
-   formatting rules, and the extracted live environment snapshot
-            |
-            v
-4. High-Speed Model Inference
-   Deep-reasoning language model evaluates user prompt
-   against actual infrastructure telemetry
-            |
-            v
-5. Production-Ready Remediation Output
-   - Plain-language diagnostic summary referencing real resource IDs
-   - Validated, region-aware Terraform (HCL) remediation code blocks
-```
-
----
-
-## 4. Security, Governance, and Credential Isolation
-
-CloudOps AI is architected with a strict zero-retention credential model:
+CloudOps AI implements a zero-retention security model where cloud credentials are never persisted to disk, databases, or logs:
 
 ```text
-SECURITY & CREDENTIAL ISOLATION BOUNDARY
-========================================
+SECURITY AND CREDENTIAL ISOLATION BOUNDARY
+==========================================
 
 User Browser                     CloudOps API Server                 AWS Security Token Service
     |                                     |                                      |
@@ -268,11 +287,11 @@ User Browser                     CloudOps API Server                 AWS Securit
     |                                     | 2. sts:GetCallerIdentity Verification|
     |                                     |------------------------------------->|
     |                                     |                                      |
-    |                                     | 3. Returns Account ID & User ARN     |
+    |                                     | 3. Return Account ID, ARN, Region    |
     |                                     |<-------------------------------------|
     |                                     |                                      |
     | 4. Ephemeral UUID Session Issued    | [In-Memory Session Store Only]       |
-    |<------------------------------------| Raw AWS Secret Keys DISCARDED        |
+    |<------------------------------------| Raw AWS Secret Keys Discarded        |
     |                                     | Session TTL: 3600 seconds            |
     |                                     |                                      |
     | 5. Subsequent Requests (X-Session)  |                                      |
@@ -280,34 +299,51 @@ User Browser                     CloudOps API Server                 AWS Securit
     |                                     |------------------------------------->|
 ```
 
-### Governance Safeguards
-1. No Persistent Database for Secrets: AWS access credentials are held exclusively in short-lived server memory structures tied to an expiring session token.
-2. Read-Only Telemetry Ingestion: The system relies on read-level AWS APIs (describe, list, get) to analyze state without modifying running configurations.
-3. Air-Gapped Demonstration Mode: An embedded deterministic mock generator enables complete platform evaluation, UI exploration, and compliance reviews without active cloud credentials.
+### Governance Principles
+1. Ephemeral In-Memory Storage: AWS credentials exist exclusively in volatile memory structures protected by a 3600-second time-to-live (TTL).
+2. Principle of Least Privilege: Telemetry collection requires only read-level IAM permissions (`ec2:Describe*`, `s3:Get*`, `ce:Get*`, `rds:Describe*`, `cloudwatch:Get*`). Remediation requires scoped mutation permissions (`ec2:RevokeSecurityGroupIngress`, `ec2:ModifyVolume`, `s3:PutBucketEncryption`, `s3:PutAccountPublicAccessBlock`).
+3. Air-Gapped Simulation Engine: Complete platform capability verification is supported without AWS credentials using the built-in deterministic simulation engine.
 
 ---
 
-## 5. Repository Structure and System Organization
+## 7. User Interface Design System and Structured Box Layout
+
+The user interface follows a modern, minimal, high-contrast engineering layout designed for operational clarity and fast information scanning:
+
+- Background Canvas: Slate-50 background (`#f8fafc`) providing soft contrast against pure white cards.
+- Structured Cards: Modular white containers (`#ffffff`) with clean structural borders (`#e2e8f0`), rounded corners (`8px`), and subtle micro-shadows (`0 1px 3px rgba(0,0,0,0.03)`).
+- Typography: System font stack with tight letter-spacing (`-0.02em` on titles), high-contrast headings (`#0f172a`), and neutral secondary text (`#64748b`).
+- Minimal Status Badges: Soft pastel status pills with matching borders:
+  - Success / Compliant: Background `#ecfdf5`, Text `#059669`, Border `#a7f3d0`
+  - Warning / Attention: Background `#fffbeb`, Text `#d97706`, Border `#fde68a`
+  - Critical / Risk: Background `#fef2f2`, Text `#dc2626`, Border `#fecaca`
+  - Informational: Background `#f0f9ff`, Text `#0284c7`, Border `#bae6fd`
+- Structured Action Callouts: Inset recommendation boxes with Boto3 SDK indicator chips, syntax-highlighted code blocks, and prominent action buttons.
+
+---
+
+## 8. Repository Structure and System Organization
 
 ```text
 CloudOps AI Platform Hierarchy
 |
-+-- backend/                             FastAPI Python Application
++-- backend/                             FastAPI Python Application Engine
 |   +-- app/
-|   |   +-- ai/                          Intelligence & Copilot Integrations
-|   |   |   +-- bedrock.py               Amazon Bedrock client and fallback engine
-|   |   |   +-- groq_client.py           Platform-managed AI Copilot with context injection
-|   |   |   +-- prompts.py               Structured evaluation and remediation prompt templates
+|   |   +-- ai/                          Intelligence & Copilot Modules
+|   |   |   +-- bedrock.py               Amazon Bedrock Nova Lite inference client
+|   |   |   +-- groq_client.py           High-speed LLM client with live telemetry context
+|   |   |   +-- prompts.py               Structured prompt templates for diagnosis and IaC
 |   |   |
 |   |   +-- api/                         REST API Route Handlers
 |   |   |   +-- auth_aws.py              AWS STS identity verification and session creation
 |   |   |   +-- copilot.py               AI Copilot chat and Terraform generation endpoint
 |   |   |   +-- dashboard.py             Aggregated dashboard telemetry endpoint
 |   |   |   +-- graph.py                 Topological dependency graph endpoint
+|   |   |   +-- remediation.py           One-click auto-remediation API routes
 |   |   |
-|   |   +-- aws/                         AWS Boto3 Service Collectors
+|   |   +-- aws/                         Concurrent Boto3 Service Collectors
 |   |   |   +-- client.py                Boto3 session manager and client factory
-|   |   |   +-- cloudwatch.py            Time-series metric aggregator
+|   |   |   +-- cloudwatch.py            Time-series metric stream aggregator
 |   |   |   +-- cost_explorer.py         Month-to-date and service cost collector
 |   |   |   +-- deep_services.py         RDS, Lambda, EBS, and ECS analytics
 |   |   |   +-- ec2.py                   Virtual compute and IP management
@@ -322,21 +358,23 @@ CloudOps AI Platform Hierarchy
 |   |   |   +-- analyzer.py              Rule-based infrastructure finding generator
 |   |   |   +-- compliance_service.py    Well-Architected Framework 5-pillar scoring engine
 |   |   |   +-- dashboard_service.py     Orchestration engine and FinOps waste calculator
+|   |   |   +-- remediation_service.py   Autonomous Boto3 remediation and audit engine
 |   |   |
 |   |   +-- sessions/                    Session Lifecycle Management
 |   |   |   +-- session_store.py         Thread-safe in-memory session manager with TTL
 |   |   |
 |   |   +-- config.py                    Application configuration and environment settings
-|   |   +-- main.py                      FastAPI application entrypoint, CORS, and lifespan
+|   |   +-- main.py                      FastAPI application entrypoint, CORS, and routers
 |   |
+|   +-- test_remediation.py              Automated test suite for remediation operations
 |   +-- Dockerfile                       Container specification for backend deployment
 |   +-- requirements.txt                 Python package dependencies
 |
 +-- frontend/                            Next.js 16 App Router Application
 |   +-- src/
-|   |   +-- app/                         Page Routes and Navigation
+|   |   +-- app/                         Page Routes and Views
 |   |   |   +-- page.tsx                 Primary Overview Dashboard
-|   |   |   +-- ai-insights/page.tsx     Executive AI Advisory Report View
+|   |   |   +-- ai-insights/page.tsx     Executive AI Bedrock Intelligence Report View
 |   |   |   +-- compliance/page.tsx      Well-Architected 5-Pillar Compliance Scorecard
 |   |   |   +-- copilot/page.tsx         Interactive AI DevOps Copilot Workspace
 |   |   |   +-- cost/page.tsx            Cost Explorer and FinOps Waste Treemap
@@ -347,18 +385,28 @@ CloudOps AI Platform Hierarchy
 |   |   |   +-- security/page.tsx        Security Group Ingress Guardrails Analyzer
 |   |   |   +-- services-analytics/      Deep Analytics for RDS, Lambda, EBS, and ECS
 |   |   |   +-- settings/page.tsx        AWS Account Credential Manager
-|   |   |   +-- globals.css              AWS Management Console Light Theme stylesheet
+|   |   |   +-- globals.css              Modern minimalist stylesheet and token definitions
 |   |   |   +-- layout.tsx               Root document layout and metadata
 |   |   |
 |   |   +-- components/                  Reusable UI Components
+|   |   |   +-- AICopilotDrawer.tsx      Quick-access sliding AI copilot drawer
+|   |   |   +-- AIReportCard.tsx         Amazon Bedrock intelligence score and report card
+|   |   |   +-- AWSConnectModal.tsx      Modal dialog for live AWS credential input
 |   |   |   +-- ComplianceScoreCard.tsx  Radar/Spider chart and pillar summary widgets
 |   |   |   +-- CostChart.tsx            Service spend distribution bar charts
-|   |   |   +-- MetricCard.tsx           Summary KPI stat widget
+|   |   |   +-- EBSTable.tsx             EBS volume table with inline gp3 upgrade triggers
+|   |   |   +-- EC2Table.tsx             EC2 compute instance inventory table
+|   |   |   +-- MetricCard.tsx           Summary KPI stat widget with left-accent border
 |   |   |   +-- Navbar.tsx               Header bar with backend status and account badges
 |   |   |   +-- PillarDetails.tsx        Filterable Well-Architected check findings table
+|   |   |   +-- RecommendationsList.tsx  Actionable recommendations with Auto-Fix triggers
+|   |   |   +-- RemediationModal.tsx     Confirmation dialog with Boto3 code preview
+|   |   |   +-- RemediationResult.tsx    Audit receipt card with duration and technical details
 |   |   |   +-- ResourceGraph.tsx        React Flow topological network canvas
 |   |   |   +-- ResourceNode.tsx         Custom React Flow node with AWS badges and status
-|   |   |   +-- Sidebar.tsx              AWS Console navigation drawer
+|   |   |   +-- S3Table.tsx              S3 storage bucket table with inline fix triggers
+|   |   |   +-- SecurityTable.tsx        Security group table with port exposure warnings
+|   |   |   +-- Sidebar.tsx              Navigation sidebar with active states
 |   |   |   +-- WasteHeatmap.tsx         FinOps proportional spend treemap visualizer
 |   |   |
 |   |   +-- lib/                         Client-Side State and API Wrappers
@@ -370,31 +418,98 @@ CloudOps AI Platform Hierarchy
 +-- docker-compose.yml                   Multi-container local deployment orchestrator
 +-- render.yaml                          Render cloud deployment blueprint
 +-- PROJECT_PLAN.md                      Architecture roadmap and feature milestones
-+-- README.md                            Enterprise documentation and architecture guide
++-- README.md                            Comprehensive system documentation and architecture guide
 ```
 
 ---
 
-## 6. Functional Capabilities Summary
+## 9. REST API Specification and Endpoint Catalog
 
-| Capability | Engineering Purpose | Architectural Mechanism |
-|---|---|---|
-| Well-Architected Compliance | Quantifies cloud maturity against AWS certification standards | 26 automated rule checks scoring Security, Cost, Reliability, Performance, and Operations |
-| Resource Dependency Graph | Exposes blast radius, network perimeters, and resource connections | Multi-column directed topological graph built with React Flow |
-| FinOps Waste Treemap | Uncovers idle compute and unattached disks proportional to spend | 2D squarified treemap bounding boxes with three-tier efficiency scoring |
-| Platform AI Copilot | Delivers contextual DevOps diagnostics and Terraform IaC fixes | High-speed LLM inference gateway with real-time cloud state injection |
-| Security Group Guardrails | Audits internet-exposed management ports and database listeners | Ingress rule analyzer detecting unrestricted 0.0.0.0/0 exposure |
-| CloudWatch Telemetry | Monitors real-time virtual compute resource consumption | Interactive SVG time-series visualizer tracking CPU, Memory, Disk, and Network |
-| Multi-Account Connect | Evaluates any AWS account on-demand without server restarts | STS caller identity verification paired with ephemeral session keys |
-| Demonstration Mode | Provides full feature testing in credential-less environments | Deterministic mock state engine mirroring production response schemas |
+All protected endpoints accept the `X-Session-Token` HTTP header to identify the active AWS caller session. If omitted, the platform defaults to the deterministic demonstration engine.
+
+| Endpoint | Method | Purpose | Request Body / Parameters | Key Response Properties |
+|---|---|---|---|---|
+| `/health` | GET | Platform Health Check | None | `status`, `version`, `live_aws_ready` |
+| `/dashboard` | GET | Aggregated Dashboard Telemetry | `refresh` (query, boolean) | `summary`, `ec2`, `s3`, `cost_by_service`, `recommendations`, `ai_report`, `compliance`, `deep_services` |
+| `/remediation/apply` | POST | Execute One-Click Auto-Fix | `{"finding_id": "SEC-001", "resource_id": "sg-123", "parameters": {}}` | `success`, `audit_id`, `action_taken`, `execution_time_ms`, `details`, `timestamp` |
+| `/remediation/audit-log` | GET | Retrieve Remediation Audit Trail | `limit` (query, integer) | `audit_entries` (array of immutable audit receipts) |
+| `/remediation/supported` | GET | Catalog of Remediable Findings | None | `supported_remediations` (array of supported finding IDs, descriptions, and boto3 signatures) |
+| `/graph` | GET | Topological Dependency Network | None | `nodes`, `edges`, `summary` |
+| `/copilot` | POST | AI Copilot Chat & IaC Synthesis | `{"message": "...", "mode": "chat\|terraform"}` | `response`, `model`, `mode`, `suggested_actions` |
+| `/aws/verify` | POST | STS Credential Validation | `{"access_key_id": "...", "secret_access_key": "...", "region": "..."}` | `success`, `account_id`, `arn`, `session_token`, `expires_in` |
+| `/aws/session` | GET | Current Session State | Header: `X-Session-Token` | `is_authenticated`, `account_id`, `region`, `is_demo` |
+| `/aws/disconnect` | POST | Invalidate Session | Header: `X-Session-Token` | `disconnected: true` |
 
 ---
 
-## 7. Operational Standards and User Interface Philosophy
+## 10. Installation and Local Setup
 
-The user interface implements an authentic AWS Management Console Light Theme aesthetic:
-- Neutral Foundation: Light grey background surfaces combined with pure white card containers.
-- AWS Design System Accents: Official AWS orange and Amazon blue primary highlights.
-- Clear Visual Hierarchy: High-contrast typography, discrete border separators, and zero intrusive glow effects.
-- Purposeful State Indicators: Standardized operational badges indicating active, stopped, warning, and critical risk conditions.
-- Information-Dense Layouts: Data-rich tables, inline progress metrics, and responsive vector visualizers optimized for cloud engineers and architecture review boards.
+### Prerequisites
+- Python 3.11 or higher
+- Node.js 18.17 or higher
+- Git
+
+### Backend Setup
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
+   ```
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   # On Windows:
+   .\venv\Scripts\activate
+   # On Linux/macOS:
+   source venv/bin/activate
+   ```
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+4. Configure environment variables in `backend/.env` (optional for local demo mode):
+   ```env
+   PORT=8000
+   GROQ_API_KEY=your_groq_api_key_here
+   DEFAULT_REGION=us-east-1
+   ```
+5. Start the backend server:
+   ```bash
+   uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+   ```
+
+### Frontend Setup
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   ```
+2. Install Node.js dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure environment variables in `frontend/.env.local`:
+   ```env
+   NEXT_PUBLIC_API_URL=http://localhost:8000
+   ```
+4. Start the Next.js development server:
+   ```bash
+   npm run dev
+   ```
+5. Open `http://localhost:3000` in a modern web browser.
+
+### Running Automated Test Suite
+To verify the remediation engine and API routes:
+```bash
+cd backend
+python test_remediation.py
+```
+
+---
+
+## 11. Technology Stack Summary
+
+- Frontend Engine: Next.js 16, React 19, TypeScript, Vanilla CSS
+- Topological Network Canvas: React Flow (@xyflow/react)
+- Backend Engine: FastAPI, Python 3.11, Pydantic v2, Uvicorn
+- Cloud SDK: Amazon Web Services Boto3
+- AI & Language Models: Amazon Bedrock (Nova Lite), Groq LLaMA Inference Engine
+- Packaging: Docker, Docker Compose, Render Blueprint
