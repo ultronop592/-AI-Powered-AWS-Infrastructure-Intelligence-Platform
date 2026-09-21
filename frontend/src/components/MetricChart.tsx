@@ -16,8 +16,8 @@ export default function MetricChart({
   title,
   timestamps,
   series,
-  lineColor = '#0073bb',
-  fillColor = 'rgba(0, 115, 187, 0.08)',
+  lineColor = '#0284c7',
+  fillColor = 'rgba(2, 132, 199, 0.08)',
   maxValue,
 }: MetricChartProps) {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
@@ -54,14 +54,21 @@ export default function MetricChart({
 
   return (
     <div className="aws-card" style={{ flex: '1 1 450px' }}>
-      <div className="aws-card-header">
+      <div className="aws-card-header" style={{ backgroundColor: '#f1f5f9' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: lineColor }}></span>
+          <span style={{ width: '8px', height: '8px', border: '1px solid #0f172a', backgroundColor: lineColor, display: 'inline-block' }}></span>
           <span>{title} ({series.unit})</span>
         </div>
-        <span style={{ fontSize: '13px', color: '#16191f', fontWeight: 700 }}>
-          Latest: {latestVal} {series.unit}
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '11px', color: '#0f172a', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+            LATEST: {latestVal} {series.unit}
+          </span>
+          <div className="retro-controls">
+            <span>_</span>
+            <span>□</span>
+            <span>✕</span>
+          </div>
+        </div>
       </div>
 
       <div className="aws-card-body" style={{ padding: '16px' }}>
@@ -78,17 +85,18 @@ export default function MetricChart({
                     y1={y}
                     x2={width - padding.right}
                     y2={y}
-                    stroke="#eaeded"
+                    stroke="#cbd5e1"
                     strokeWidth="1"
                     strokeDasharray={ratio === 0 ? 'none' : '3 3'}
                   />
                   <text
                     x={padding.left - 6}
                     y={y + 4}
-                    fill="#879596"
+                    fill="#64748b"
                     fontSize="9"
                     textAnchor="end"
-                    fontFamily="monospace"
+                    fontFamily="var(--font-mono)"
+                    fontWeight="700"
                   >
                     {gridVal}
                   </text>
@@ -105,9 +113,9 @@ export default function MetricChart({
                 d={pathD}
                 fill="none"
                 stroke={lineColor}
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+                strokeWidth="2.5"
+                strokeLinecap="square"
+                strokeLinejoin="miter"
               />
             )}
 
@@ -119,9 +127,9 @@ export default function MetricChart({
                 cy={p.y}
                 r={hoverIndex === idx ? 5 : 3}
                 fill={hoverIndex === idx ? '#ffffff' : lineColor}
-                stroke={lineColor}
-                strokeWidth={hoverIndex === idx ? 3 : 1}
-                style={{ cursor: 'pointer', transition: 'r 0.15s ease' }}
+                stroke="#0f172a"
+                strokeWidth={1.5}
+                style={{ cursor: 'pointer', transition: 'r 0.1s ease' }}
                 onMouseEnter={() => setHoverIndex(idx)}
                 onMouseLeave={() => setHoverIndex(null)}
               />
@@ -136,10 +144,11 @@ export default function MetricChart({
                   key={idx}
                   x={x}
                   y={height - 8}
-                  fill="#879596"
+                  fill="#64748b"
                   fontSize="9"
                   textAnchor="middle"
-                  fontFamily="monospace"
+                  fontFamily="var(--font-mono)"
+                  fontWeight="600"
                 >
                   {t}
                 </text>
@@ -155,18 +164,20 @@ export default function MetricChart({
                 left: `${(points[hoverIndex].x / width) * 100}%`,
                 top: `${(points[hoverIndex].y / height) * 100 - 45}%`,
                 transform: 'translateX(-50%)',
-                backgroundColor: '#16191f',
-                color: '#ffffff',
-                padding: '4px 8px',
-                borderRadius: '3px',
+                backgroundColor: '#ffffff',
+                color: '#0f172a',
+                border: '1.5px solid #0f172a',
+                boxShadow: '2px 2px 0px #0f172a',
+                padding: '3px 8px',
                 fontSize: '11px',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 700,
                 pointerEvents: 'none',
                 whiteSpace: 'nowrap',
-                boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
                 zIndex: 10
               }}
             >
-              <strong>{points[hoverIndex].time}</strong>: {points[hoverIndex].val} {series.unit}
+              {points[hoverIndex].time}: {points[hoverIndex].val} {series.unit}
             </div>
           )}
         </div>

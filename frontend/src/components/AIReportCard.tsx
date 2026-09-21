@@ -11,24 +11,50 @@ function ScoreBadge({ label, score, maxScore = 100 }: { label: string; score: nu
   const pct = Math.round((score / maxScore) * 100);
   const color = pct >= 80 ? '#059669' : pct >= 60 ? '#d97706' : '#dc2626';
   const bg = pct >= 80 ? '#ecfdf5' : pct >= 60 ? '#fffbeb' : '#fef2f2';
-  const border = pct >= 80 ? '#a7f3d0' : pct >= 60 ? '#fde68a' : '#fecaca';
 
   return (
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
-      gap: '4px',
-      padding: '14px 20px',
+      gap: '6px',
+      padding: '12px 16px',
       backgroundColor: bg,
-      border: `1px solid ${border}`,
-      borderRadius: '8px',
-      minWidth: '130px',
+      border: '2px solid #0f172a',
+      boxShadow: '3px 3px 0px #0f172a',
+      minWidth: '140px',
+      flex: '1 1 140px'
     }}>
-      <div style={{ fontSize: '11px', fontWeight: 700, color, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{label}</div>
-      <div style={{ fontSize: '26px', fontWeight: 800, color }}>{score}<span style={{ fontSize: '14px', fontWeight: 500, color }}>/{maxScore}</span></div>
-      <div style={{ width: '100%', height: '4px', backgroundColor: 'rgba(0,0,0,0.06)', borderRadius: '2px', overflow: 'hidden' }}>
-        <div style={{ width: `${pct}%`, height: '100%', backgroundColor: color, borderRadius: '2px' }} />
+      <div style={{
+        fontSize: '10px',
+        fontWeight: 700,
+        fontFamily: 'var(--font-mono)',
+        color: '#0f172a',
+        textTransform: 'uppercase',
+        letterSpacing: '0.04em'
+      }}>
+        [{label}]
+      </div>
+      <div style={{
+        fontSize: '24px',
+        fontWeight: 700,
+        fontFamily: 'var(--font-mono)',
+        color
+      }}>
+        {score}<span style={{ fontSize: '12px', fontWeight: 600, color: '#64748b' }}>/{maxScore}</span>
+      </div>
+      <div style={{
+        width: '100%',
+        height: '8px',
+        backgroundColor: '#ffffff',
+        border: '1px solid #0f172a',
+        overflow: 'hidden'
+      }}>
+        <div style={{
+          width: `${pct}%`,
+          height: '100%',
+          backgroundColor: color,
+          transition: 'width 0.3s ease'
+        }} />
       </div>
     </div>
   );
@@ -38,27 +64,28 @@ export default function AIReportCard({ report }: AIReportCardProps) {
   if (!report) {
     return (
       <div className="aws-card">
-        <div className="aws-card-header" style={{ backgroundColor: '#0f172a', color: '#ffffff', borderBottom: '1px solid #1e293b' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{
+        <div className="aws-card-header" style={{ backgroundColor: '#f1f5f9' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{
               backgroundColor: '#ec7211',
               color: '#ffffff',
-              padding: '3px 7px',
-              borderRadius: '4px',
+              padding: '1px 5px',
               fontWeight: 700,
-              fontSize: '11px',
-              letterSpacing: '0.04em',
+              fontSize: '10px',
             }}>
-              BEDROCK AI
-            </div>
-            <span style={{ fontWeight: 600, fontSize: '15px' }}>
-              Amazon Bedrock Infrastructure Intelligence Report
+              BEDROCK_AI
             </span>
+            <span>Amazon Bedrock Infrastructure Intelligence Report</span>
+          </div>
+          <div className="retro-controls">
+            <span>_</span>
+            <span>□</span>
+            <span>✕</span>
           </div>
         </div>
-        <div className="aws-card-body" style={{ backgroundColor: '#ffffff', padding: '36px', textAlign: 'center' }}>
-          <p style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
-            No AI intelligence report generated yet for this account. Click Refresh or connect credentials to run an analysis.
+        <div className="aws-card-body" style={{ padding: '28px', textAlign: 'center' }}>
+          <p style={{ color: '#64748b', fontSize: '13px', fontFamily: 'var(--font-mono)', margin: 0 }}>
+            NO AI REPORT GENERATED YET. CLICK [SYNC] OR CONNECT CREDENTIALS TO RUN BEDROCK INFERENCE.
           </p>
         </div>
       </div>
@@ -70,166 +97,197 @@ export default function AIReportCard({ report }: AIReportCardProps) {
 
   return (
     <div className="aws-card">
-      <div className="aws-card-header" style={{ backgroundColor: '#0f172a', color: '#ffffff', borderBottom: '1px solid #1e293b' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{
+      {/* Retro OS Window Titlebar */}
+      <div className="aws-card-header" style={{ backgroundColor: '#f1f5f9' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{
             backgroundColor: '#ec7211',
             color: '#ffffff',
-            padding: '3px 7px',
-            borderRadius: '4px',
+            padding: '1px 5px',
             fontWeight: 700,
-            fontSize: '11px',
-            letterSpacing: '0.04em',
+            fontSize: '10px',
+            fontFamily: 'var(--font-mono)'
           }}>
-            BEDROCK AI
-          </div>
-          <span style={{ fontWeight: 600, fontSize: '15px' }}>
-            Amazon Bedrock Infrastructure Intelligence Report
+            AI_NOVA.EXE
           </span>
+          <span style={{ fontWeight: 700 }}>Amazon Bedrock Intelligence &amp; Autonomous Audit</span>
         </div>
-        <span style={{ fontSize: '12px', color: '#94a3b8', fontWeight: 400 }}>
-          Model: Amazon Nova Lite (v1.0) • Structured JSON Output
-        </span>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '11px', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+            MODEL: NOVA_LITE_1.0
+          </span>
+          <div className="retro-controls">
+            <span>_</span>
+            <span>□</span>
+            <span>✕</span>
+          </div>
+        </div>
       </div>
 
-      <div className="aws-card-body" style={{ backgroundColor: '#ffffff' }}>
+      <div className="aws-card-body" style={{ padding: '18px' }}>
         {isStringReport ? (
           <div style={{
-            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-            fontSize: '14px',
+            fontFamily: 'var(--font-mono)',
+            fontSize: '13px',
             color: '#0f172a',
             lineHeight: '1.6',
-            whiteSpace: 'pre-wrap'
+            whiteSpace: 'pre-wrap',
+            backgroundColor: '#f8fafc',
+            padding: '14px',
+            border: '1.5px solid #0f172a'
           }}>
             {report as string}
           </div>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
 
-            {/* Score badges row */}
-            {(reportObj?.health_score !== undefined || reportObj?.security_score !== undefined) && (
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                {reportObj?.health_score !== undefined && (
-                  <ScoreBadge label="Cloud Health Score" score={reportObj.health_score} />
-                )}
-                {reportObj?.security_score !== undefined && (
-                  <ScoreBadge label="Security Score" score={reportObj.security_score} />
-                )}
-              </div>
-            )}
+            {/* Score Badges Row (Colorful Neo-Brutalist Cards) */}
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              {reportObj?.health_score !== undefined && (
+                <ScoreBadge label="CLOUD HEALTH SCORE" score={reportObj.health_score} />
+              )}
+              {reportObj?.security_score !== undefined && (
+                <ScoreBadge label="SECURITY POSTURE" score={reportObj.security_score} />
+              )}
+              {reportObj?.estimated_savings && (
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '4px',
+                  padding: '12px 16px',
+                  backgroundColor: '#ecfdf5',
+                  border: '2px solid #0f172a',
+                  boxShadow: '3px 3px 0px #0f172a',
+                  minWidth: '150px',
+                  flex: '1 1 150px'
+                }}>
+                  <span style={{ fontSize: '10px', fontWeight: 700, fontFamily: 'var(--font-mono)', color: '#047857' }}>
+                    [POTENTIAL SAVINGS]
+                  </span>
+                  <div style={{ fontSize: '24px', fontWeight: 700, fontFamily: 'var(--font-mono)', color: '#065f46' }}>
+                    {reportObj.estimated_savings}
+                  </div>
+                  <span style={{ fontSize: '10px', color: '#047857', fontFamily: 'var(--font-mono)', fontWeight: 600 }}>
+                    RECOVERABLE / MO
+                  </span>
+                </div>
+              )}
+            </div>
 
             {/* Executive Summary Box */}
             {reportObj?.executive_summary && (
-              <div>
-                <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Executive Summary
-                </h4>
-                <div style={{ fontSize: '13px', color: '#334155', lineHeight: '1.6', backgroundColor: '#f8fafc', padding: '14px 18px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+              <div style={{
+                backgroundColor: '#ffffff',
+                border: '1.5px solid #0f172a',
+                boxShadow: '2px 2px 0px #0f172a',
+                padding: '12px 16px',
+              }}>
+                <div style={{
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  fontFamily: 'var(--font-mono)',
+                  color: '#475569',
+                  marginBottom: '6px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px'
+                }}>
+                  <span style={{ width: '6px', height: '6px', backgroundColor: '#ec7211', display: 'inline-block' }}></span>
+                  EXECUTIVE_DIAGNOSIS
+                </div>
+                <div style={{ fontSize: '13px', color: '#1e293b', lineHeight: '1.6' }}>
                   {reportObj.executive_summary}
                 </div>
               </div>
             )}
 
-            {/* Estimated Savings banner */}
-            {reportObj?.estimated_savings && (
-              <div style={{
-                backgroundColor: '#ecfdf5',
-                border: '1px solid #a7f3d0',
-                padding: '16px 20px',
-                borderRadius: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                flexWrap: 'wrap',
-                gap: '12px',
-              }}>
-                <div>
-                  <span style={{ fontSize: '11px', fontWeight: 700, color: '#059669', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    Estimated Potential Monthly Savings
-                  </span>
-                  <div style={{ fontSize: '22px', fontWeight: 800, color: '#065f46', marginTop: '2px' }}>
-                    {reportObj.estimated_savings}
-                  </div>
-                </div>
-                <button className="aws-btn-primary" style={{ backgroundColor: '#059669', borderColor: '#059669' }}>
-                  Apply AI Recommendations
-                </button>
-              </div>
-            )}
-
-            {/* Priority Actions */}
+            {/* Priority Actions (Visual Action Cards) */}
             {reportObj?.priority_actions && reportObj.priority_actions.length > 0 && (
               <div>
-                <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Priority Action Items
-                </h4>
+                <div style={{
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  fontFamily: 'var(--font-mono)',
+                  color: '#475569',
+                  marginBottom: '8px',
+                }}>
+                  [PRIORITY_ACTION_ITEMS ({reportObj.priority_actions.length})]
+                </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {reportObj.priority_actions.map((action, idx) => (
                     <div key={idx} style={{
                       display: 'flex',
-                      alignItems: 'flex-start',
+                      alignItems: 'center',
                       gap: '12px',
-                      padding: '12px 16px',
-                      border: '1px solid #e2e8f0',
-                      borderRadius: '8px',
+                      padding: '10px 14px',
+                      border: '1.5px solid #0f172a',
+                      boxShadow: '2px 2px 0px #0f172a',
                       backgroundColor: '#ffffff',
-                      fontSize: '13px',
-                      fontWeight: 500,
-                      color: '#1e293b'
+                      fontSize: '12px',
+                      color: '#0f172a'
                     }}>
                       <span style={{
                         backgroundColor: '#0f172a',
                         color: '#ffffff',
                         width: '20px',
                         height: '20px',
-                        borderRadius: '6px',
+                        border: '1px solid #0f172a',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontSize: '11px',
                         fontWeight: 700,
+                        fontFamily: 'var(--font-mono)',
                         flexShrink: 0,
-                        marginTop: '1px',
                       }}>
                         {idx + 1}
                       </span>
-                      <span style={{ lineHeight: '1.5' }}>{action}</span>
+                      <span style={{ lineHeight: '1.4', fontWeight: 500 }}>{action}</span>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            {/* Terraform Remediation */}
+            {/* Terraform Remediation Terminal */}
             {reportObj?.terraform_remediation && (
               <div>
-                <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  AI-Generated Terraform Remediation
-                </h4>
-                <div style={{ backgroundColor: '#0f172a', borderRadius: '8px', padding: '16px', overflow: 'auto', border: '1px solid #1e293b' }}>
-                  <pre style={{ margin: 0, fontSize: '12px', color: '#38bdf8', fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace', lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  padding: '6px 10px',
+                  backgroundColor: '#f1f5f9',
+                  border: '1.5px solid #0f172a',
+                  borderBottom: 'none',
+                  fontSize: '11px',
+                  fontFamily: 'var(--font-mono)',
+                  fontWeight: 700
+                }}>
+                  <span>[TERRAFORM_REMEDIATION.TF]</span>
+                  <span style={{ color: '#0284c7' }}>HCL READY</span>
+                </div>
+                <div style={{
+                  backgroundColor: '#0f172a',
+                  padding: '14px',
+                  overflow: 'auto',
+                  border: '1.5px solid #0f172a',
+                  boxShadow: '3px 3px 0px #0f172a'
+                }}>
+                  <pre style={{
+                    margin: 0,
+                    fontSize: '12px',
+                    color: '#38bdf8',
+                    fontFamily: 'var(--font-mono)',
+                    lineHeight: '1.5',
+                    whiteSpace: 'pre-wrap'
+                  }}>
                     {reportObj.terraform_remediation
                       .replace(/^```hcl\n?/, '')
                       .replace(/\n?```$/, '')}
                   </pre>
                 </div>
-                <div style={{ marginTop: '8px', fontSize: '11px', color: '#64748b', display: 'flex', gap: '16px' }}>
-                  <span>1. Save as <code style={{ backgroundColor: '#f1f5f9', padding: '2px 5px', borderRadius: '4px', color: '#0f172a' }}>main.tf</code></span>
-                  <span>2. Run <code style={{ backgroundColor: '#f1f5f9', padding: '2px 5px', borderRadius: '4px', color: '#0f172a' }}>terraform plan</code></span>
-                  <span>3. Run <code style={{ backgroundColor: '#f1f5f9', padding: '2px 5px', borderRadius: '4px', color: '#0f172a' }}>terraform apply</code></span>
-                </div>
-              </div>
-            )}
-
-            {/* Legacy cost_optimization field */}
-            {reportObj?.cost_optimization && !reportObj?.terraform_remediation && (
-              <div>
-                <h4 style={{ fontSize: '12px', fontWeight: 700, color: '#475569', marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                  Cost Optimization Strategy
-                </h4>
-                <p style={{ fontSize: '13px', color: '#334155', lineHeight: '1.6', backgroundColor: '#f8fafc', padding: '12px 16px', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                  {reportObj.cost_optimization}
-                </p>
               </div>
             )}
           </div>
