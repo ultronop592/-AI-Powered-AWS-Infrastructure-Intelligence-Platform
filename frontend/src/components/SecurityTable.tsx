@@ -25,33 +25,46 @@ export default function SecurityTable({ securityGroups, onRefresh }: SecurityTab
       remediation_action: 'RESTRICT_INGRESS_MANAGEMENT',
     });
   };
+
   return (
     <div className="aws-card">
-      <div className="aws-card-header">
+      <div className="aws-card-header" style={{ backgroundColor: '#f1f5f9' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#c5221f" strokeWidth="2">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-          </svg>
+          <span style={{
+            backgroundColor: '#7c3aed',
+            color: '#ffffff',
+            padding: '1px 5px',
+            fontSize: '10px',
+            fontWeight: 700
+          }}>
+            SEC_GROUP.SYS
+          </span>
           <span>AWS Security Groups Guardrail Audit ({securityGroups.length})</span>
+        </div>
+
+        <div className="retro-controls">
+          <span>_</span>
+          <span>□</span>
+          <span>✕</span>
         </div>
       </div>
 
       <div className="aws-card-body" style={{ padding: 0 }}>
         {securityGroups.length === 0 ? (
-          <div style={{ padding: '24px', textAlign: 'center', color: '#545b64' }}>
-            No Security Groups found in account/VPC.
+          <div style={{ padding: '24px', textAlign: 'center', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+            NO SECURITY GROUPS FOUND IN ACCOUNT / VPC.
           </div>
         ) : (
-          <div className="aws-table-container" style={{ border: 'none' }}>
+          <div className="aws-table-container" style={{ border: 'none', boxShadow: 'none' }}>
             <table className="aws-table">
               <thead>
                 <tr>
-                  <th>Group ID & Name</th>
-                  <th>Risk Level</th>
-                  <th>VPC ID</th>
-                  <th>Exposed Open Ports</th>
-                  <th>Inbound Ingress Rules</th>
-                  <th>Description</th>
+                  <th>GROUP_ID &amp; NAME</th>
+                  <th>RISK_LEVEL</th>
+                  <th>VPC_ID</th>
+                  <th>EXPOSED_PORTS</th>
+                  <th>INGRESS_RULES</th>
+                  <th>DESCRIPTION</th>
                 </tr>
               </thead>
               <tbody>
@@ -64,44 +77,43 @@ export default function SecurityTable({ securityGroups, onRefresh }: SecurityTab
                   return (
                     <tr key={sg.GroupId}>
                       <td>
-                        <div style={{ fontWeight: 600, fontFamily: 'monospace', color: '#0073bb' }}>
+                        <div style={{ fontWeight: 700, color: '#0284c7' }}>
                           {sg.GroupId}
                         </div>
-                        <div style={{ fontSize: '12px', color: '#16191f', fontWeight: 500 }}>
+                        <div style={{ fontSize: '11px', color: '#0f172a', fontWeight: 600 }}>
                           {sg.GroupName}
                         </div>
                       </td>
 
                       <td>
                         <span className={`aws-badge ${badgeClass}`}>
-                          {riskLevel} RISK
+                          {riskLevel}
                         </span>
                       </td>
 
-                      <td style={{ fontFamily: 'monospace', fontSize: '12px', color: '#545b64' }}>
+                      <td style={{ fontSize: '11px', color: '#475569' }}>
                         {sg.VpcId}
                       </td>
 
                       <td>
                         {sg.OpenPorts.length === 0 ? (
                           <span className="aws-badge aws-badge-success">
-                            ✓ No Open 0.0.0.0/0 Ports
+                            ✓ SECURED
                           </span>
                         ) : (
                           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
                               {sg.OpenPorts.map((portStr, idx) => (
                                 <span
                                   key={idx}
                                   style={{
                                     backgroundColor: '#fef2f2',
                                     color: '#dc2626',
-                                    border: '1px solid #fecaca',
-                                    padding: '2px 8px',
-                                    borderRadius: '4px',
-                                    fontSize: '11px',
-                                    fontWeight: 600,
-                                    fontFamily: 'monospace'
+                                    border: '1px solid #0f172a',
+                                    padding: '1px 6px',
+                                    fontSize: '10px',
+                                    fontWeight: 700,
+                                    fontFamily: 'var(--font-mono)'
                                   }}
                                 >
                                   ⚠️ {portStr}
@@ -114,17 +126,12 @@ export default function SecurityTable({ securityGroups, onRefresh }: SecurityTab
                                 onClick={() => handleFixSecurityGroup(sg)}
                                 className="aws-btn-primary"
                                 style={{
-                                  backgroundColor: '#ec7211',
-                                  borderColor: '#ec7211',
-                                  padding: '3px 10px',
-                                  fontSize: '11px',
-                                  fontWeight: 700,
-                                  borderRadius: '4px',
-                                  cursor: 'pointer',
+                                  padding: '2px 8px',
+                                  fontSize: '10px',
                                   alignSelf: 'flex-start',
                                 }}
                               >
-                                ⚡ Auto-Fix
+                                ⚡ AUTO-FIX
                               </button>
                             )}
                           </div>
@@ -132,14 +139,14 @@ export default function SecurityTable({ securityGroups, onRefresh }: SecurityTab
                       </td>
 
                       <td>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
                           {sg.Rules.map((rule, idx) => (
-                            <div key={idx} style={{ fontSize: '11px', fontFamily: 'monospace', color: '#16191f' }}>
-                              <strong style={{ color: rule.is_open_to_world ? '#c5221f' : '#137333' }}>
+                            <div key={idx} style={{ fontSize: '10px', color: '#0f172a' }}>
+                              <strong style={{ color: rule.is_open_to_world ? '#dc2626' : '#059669' }}>
                                 {rule.protocol.toUpperCase()}/{rule.port}
                               </strong>
                               {' ← '}
-                              <span style={{ color: rule.is_open_to_world ? '#c5221f' : '#545b64' }}>
+                              <span style={{ color: rule.is_open_to_world ? '#dc2626' : '#475569' }}>
                                 {rule.cidrs.join(', ') || 'Self'}
                               </span>
                             </div>
@@ -147,7 +154,7 @@ export default function SecurityTable({ securityGroups, onRefresh }: SecurityTab
                         </div>
                       </td>
 
-                      <td style={{ color: '#545b64', fontSize: '12px' }}>
+                      <td style={{ color: '#64748b', fontSize: '11px' }}>
                         {sg.Description || 'N/A'}
                       </td>
                     </tr>

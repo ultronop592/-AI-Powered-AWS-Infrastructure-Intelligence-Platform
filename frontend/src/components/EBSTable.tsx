@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { EBSVolume, Recommendation, RemediationResult } from '../lib/api';
+import { EBSVolume, Recommendation } from '../lib/api';
 import RemediationModal from './RemediationModal';
 
 interface EBSTableProps {
@@ -29,35 +29,49 @@ export default function EBSTable({ volumes, onRefresh }: EBSTableProps) {
 
   return (
     <div className="aws-card">
-      <div className="aws-card-header">
+      <div className="aws-card-header" style={{ backgroundColor: '#f1f5f9' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#137333" strokeWidth="2">
-            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-          </svg>
-          <span>Amazon EBS Storage Volume Optimizer & gp2 → gp3 Advisor ({volumes.length})</span>
+          <span style={{
+            backgroundColor: '#d97706',
+            color: '#ffffff',
+            padding: '1px 5px',
+            fontSize: '10px',
+            fontWeight: 700
+          }}>
+            EBS.SYS
+          </span>
+          <span>Amazon EBS Storage Volume Optimizer ({volumes.length})</span>
         </div>
-        <span style={{ fontSize: '13px', color: '#137333', fontWeight: 600 }}>
-          Potential gp3 Savings: <strong>${totalSavings.toFixed(2)}/mo</strong>
-        </span>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span style={{ fontSize: '11px', color: '#059669', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
+            GP3_SAVINGS: +${totalSavings.toFixed(2)}/MO
+          </span>
+          <div className="retro-controls">
+            <span>_</span>
+            <span>□</span>
+            <span>✕</span>
+          </div>
+        </div>
       </div>
 
       <div className="aws-card-body" style={{ padding: 0 }}>
         {volumes.length === 0 ? (
-          <div style={{ padding: '24px', textAlign: 'center', color: '#545b64' }}>
-            No EBS volumes found in account.
+          <div style={{ padding: '24px', textAlign: 'center', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+            NO EBS BLOCK VOLUMES RECORDED IN CURRENT REGION.
           </div>
         ) : (
-          <div className="aws-table-container" style={{ border: 'none' }}>
+          <div className="aws-table-container" style={{ border: 'none', boxShadow: 'none' }}>
             <table className="aws-table">
               <thead>
                 <tr>
-                  <th>Volume ID</th>
-                  <th>Size</th>
-                  <th>Current Volume Type</th>
-                  <th>State</th>
-                  <th>Attached Instance</th>
-                  <th>gp2 → gp3 Advisor</th>
-                  <th>Est. Monthly Savings</th>
+                  <th>VOLUME_ID</th>
+                  <th>SIZE</th>
+                  <th>VOLUME_TYPE</th>
+                  <th>STATE</th>
+                  <th>ATTACHED_INSTANCE</th>
+                  <th>GP3_ADVISOR</th>
+                  <th>EST_SAVINGS</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,11 +80,11 @@ export default function EBSTable({ volumes, onRefresh }: EBSTableProps) {
 
                   return (
                     <tr key={vol.VolumeId}>
-                      <td style={{ fontWeight: 600, color: '#0073bb', fontFamily: 'monospace' }}>
+                      <td style={{ fontWeight: 700, color: '#0284c7' }}>
                         {vol.VolumeId}
                       </td>
 
-                      <td style={{ fontFamily: 'monospace', fontWeight: 600 }}>
+                      <td style={{ fontWeight: 700 }}>
                         {vol.SizeGB} GB
                       </td>
 
@@ -78,12 +92,10 @@ export default function EBSTable({ volumes, onRefresh }: EBSTableProps) {
                         <span style={{
                           backgroundColor: vol.VolumeType === 'gp2' ? '#fffbeb' : '#ecfdf5',
                           color: vol.VolumeType === 'gp2' ? '#d97706' : '#059669',
-                          border: vol.VolumeType === 'gp2' ? '1px solid #fde68a' : '1px solid #a7f3d0',
-                          padding: '2px 8px',
-                          borderRadius: '4px',
-                          fontSize: '11px',
-                          fontFamily: 'monospace',
-                          fontWeight: 600
+                          border: '1px solid #0f172a',
+                          padding: '1px 6px',
+                          fontSize: '10px',
+                          fontWeight: 700
                         }}>
                           {vol.VolumeType.toUpperCase()}
                         </span>
@@ -101,41 +113,36 @@ export default function EBSTable({ volumes, onRefresh }: EBSTableProps) {
                         )}
                       </td>
 
-                      <td style={{ fontFamily: 'monospace', color: isUnattached ? '#dc2626' : '#0f172a' }}>
+                      <td style={{ color: isUnattached ? '#dc2626' : '#0f172a', fontWeight: isUnattached ? 700 : 500 }}>
                         {vol.AttachedInstance}
                       </td>
 
                       <td>
                         {vol.GP3Eligible ? (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                             <span className="aws-badge aws-badge-warning">
-                              ⚡ gp2 (Upgrade)
+                              GP2 (LEGACY)
                             </span>
                             <button
                               type="button"
                               onClick={() => handleFixVolume(vol)}
                               className="aws-btn-primary"
                               style={{
-                                backgroundColor: '#ec7211',
-                                borderColor: '#ec7211',
-                                padding: '3px 10px',
-                                fontSize: '11px',
-                                fontWeight: 700,
-                                borderRadius: '4px',
-                                cursor: 'pointer',
+                                padding: '2px 8px',
+                                fontSize: '10px',
                               }}
                             >
-                              Auto-Fix
+                              ⚡ CONVERT
                             </button>
                           </div>
                         ) : (
                           <span className="aws-badge aws-badge-success">
-                            ✓ Optimized (gp3)
+                            ✓ GP3 OPTIMAL
                           </span>
                         )}
                       </td>
 
-                      <td style={{ fontFamily: 'monospace', fontWeight: 700, color: vol.MonthlySavingsUSD > 0 ? '#137333' : '#879596' }}>
+                      <td style={{ fontWeight: 700, color: vol.MonthlySavingsUSD > 0 ? '#059669' : '#64748b' }}>
                         {vol.MonthlySavingsUSD > 0 ? `+$${vol.MonthlySavingsUSD.toFixed(2)}/mo` : '$0.00'}
                       </td>
                     </tr>

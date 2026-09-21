@@ -101,115 +101,230 @@ export default function AWSConnectModal({ isOpen, onClose, onConnected }: AWSCon
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(22, 25, 31, 0.75)',
+        backgroundColor: 'rgba(15, 23, 42, 0.6)',
         zIndex: 2000,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: '16px',
+        fontFamily: 'var(--font-sans, sans-serif)',
       }}
     >
       <div
         className="aws-card"
         style={{
-          width: '520px',
-          maxWidth: '90%',
+          width: '540px',
+          maxWidth: '100%',
           backgroundColor: '#ffffff',
-          borderRadius: '4px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.25)',
+          border: '2px solid #0f172a',
+          boxShadow: '8px 8px 0px #0f172a',
           overflow: 'hidden',
         }}
       >
-        {/* Modal Header */}
+        {/* Modal Window Titlebar */}
         <div
           style={{
-            padding: '16px 20px',
-            backgroundColor: '#16191f',
-            color: '#ffffff',
+            padding: '12px 18px',
+            backgroundColor: '#ffffff',
+            color: '#0f172a',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            borderBottom: '2px solid #ec7211',
+            borderBottom: '2px solid #0f172a',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <div
               style={{
                 backgroundColor: '#ec7211',
                 color: '#ffffff',
                 fontWeight: 800,
-                fontSize: '13px',
-                padding: '2px 8px',
-                borderRadius: '2px',
+                fontSize: '11px',
+                padding: '2px 6px',
+                fontFamily: 'var(--font-mono, monospace)',
+                border: '1.5px solid #0f172a',
+                letterSpacing: '0.05em',
               }}
             >
-              AWS
+              AWS_STS
             </div>
-            <span style={{ fontWeight: 700, fontSize: '16px' }}>Connect Your AWS Account</span>
+            <span
+              style={{
+                fontWeight: 800,
+                fontSize: '14px',
+                letterSpacing: '-0.02em',
+                fontFamily: 'var(--font-mono, monospace)',
+                color: '#0f172a',
+              }}
+            >
+              [AUTH_MANAGER.EXE]
+            </span>
           </div>
-          <button
-            onClick={onClose}
-            style={{
-              backgroundColor: 'transparent',
-              border: 'none',
-              color: '#ffffff',
-              fontSize: '18px',
-              cursor: 'pointer',
-            }}
-          >
-            ✕
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <span
+              style={{
+                fontFamily: 'var(--font-mono, monospace)',
+                fontSize: '11px',
+                color: '#64748b',
+                fontWeight: 700,
+                marginRight: '6px',
+              }}
+            >
+              [_] [□]
+            </span>
+            <button
+              onClick={onClose}
+              aria-label="Close Modal"
+              style={{
+                backgroundColor: '#ffffff',
+                border: '1.5px solid #0f172a',
+                color: '#0f172a',
+                fontSize: '12px',
+                fontWeight: 900,
+                width: '24px',
+                height: '24px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                boxShadow: '1px 1px 0px #0f172a',
+              }}
+            >
+              ✕
+            </button>
+          </div>
         </div>
 
         {/* Modal Body */}
-        <div style={{ padding: '24px' }}>
+        <div style={{ padding: '20px 24px', backgroundColor: '#ffffff' }}>
 
           {/* Connected State */}
           {activeSession ? (
-            <div style={{ marginBottom: '20px', padding: '16px', backgroundColor: '#f1f8f5', border: '1px solid #137333', borderRadius: '4px' }}>
-              <div style={{ fontWeight: 700, color: '#137333', fontSize: '14px', marginBottom: '6px' }}>
-                ✓ AWS Account Connected (Secure Session Active)
+            <div
+              style={{
+                marginBottom: '20px',
+                padding: '16px',
+                backgroundColor: '#ecfdf5',
+                border: '2px solid #059669',
+                boxShadow: '3px 3px 0px #059669',
+              }}
+            >
+              <div
+                style={{
+                  fontWeight: 800,
+                  color: '#059669',
+                  fontSize: '13px',
+                  marginBottom: '8px',
+                  fontFamily: 'var(--font-mono, monospace)',
+                }}
+              >
+                ✓ AWS_ACCOUNT_CONNECTED :: ACTIVE_SESSION
               </div>
-              <div style={{ fontSize: '13px', color: '#16191f', lineHeight: '1.8' }}>
-                <strong>Account ID:</strong> {activeSession.account_id || 'Verified'} <br />
-                <strong>ARN:</strong> {activeSession.arn || 'IAM Identity Active'} <br />
-                <strong>Region:</strong> {activeSession.region} <br />
-                <strong>Connected:</strong> {new Date(activeSession.connected_at).toLocaleString()}
+              <div
+                style={{
+                  fontSize: '12px',
+                  color: '#0f172a',
+                  lineHeight: '1.8',
+                  fontFamily: 'var(--font-mono, monospace)',
+                }}
+              >
+                <div><strong>ACCOUNT_ID:</strong> {activeSession.account_id || 'Verified'}</div>
+                <div><strong>ARN:</strong> {activeSession.arn || 'IAM Identity Active'}</div>
+                <div><strong>REGION:</strong> {activeSession.region}</div>
+                <div><strong>CONNECTED_AT:</strong> {new Date(activeSession.connected_at).toLocaleString()}</div>
               </div>
-              <div style={{ marginTop: '10px', padding: '8px 12px', backgroundColor: '#e8f5e9', border: '1px solid #4caf50', borderRadius: '3px', fontSize: '12px', color: '#2e7d32' }}>
-                🔒 <strong>Secure:</strong> Your AWS credentials were validated via STS and are not stored locally. Only a temporary session token is kept.
+              <div
+                style={{
+                  marginTop: '12px',
+                  padding: '8px 12px',
+                  backgroundColor: '#ffffff',
+                  border: '1.5px solid #059669',
+                  fontSize: '11px',
+                  color: '#047857',
+                  fontFamily: 'var(--font-mono, monospace)',
+                }}
+              >
+                🔒 <strong>SECURITY_ENFORCED:</strong> Raw keys validated via STS GetCallerIdentity &amp; discarded. Only temporary STS session token retained in memory.
               </div>
               <button
                 onClick={handleDisconnect}
                 disabled={loading}
                 className="aws-btn-secondary"
-                style={{ marginTop: '12px', borderColor: '#c5221f', color: '#c5221f', fontSize: '12px' }}
+                style={{
+                  marginTop: '14px',
+                  borderColor: '#dc2626',
+                  color: '#dc2626',
+                  fontSize: '11px',
+                }}
               >
-                {loading ? 'Disconnecting...' : 'Disconnect & Switch to Demo Mode'}
+                {loading ? 'DISCONNECTING...' : 'DISCONNECT & REVERT TO DEMO MODE'}
               </button>
             </div>
           ) : (
-            <p style={{ fontSize: '13px', color: '#545b64', marginBottom: '20px', lineHeight: '1.5' }}>
+            <div
+              style={{
+                fontSize: '12px',
+                color: '#475569',
+                marginBottom: '18px',
+                lineHeight: '1.6',
+                padding: '10px 12px',
+                backgroundColor: '#f8fafc',
+                border: '1.5px solid #0f172a',
+              }}
+            >
               Paste your IAM Access Key credentials below. They are validated via <strong>AWS STS</strong> and then
-              discarded — only a secure session token is stored in your browser.
-            </p>
+              discarded — only an ephemeral session token is stored in your client.
+            </div>
           )}
 
           {error && (
-            <div style={{ padding: '10px 14px', backgroundColor: '#fce8e6', border: '1px solid #c5221f', color: '#c5221f', borderRadius: '2px', fontSize: '13px', marginBottom: '16px' }}>
+            <div
+              style={{
+                padding: '10px 14px',
+                backgroundColor: '#fef2f2',
+                border: '2px solid #dc2626',
+                color: '#dc2626',
+                fontSize: '12px',
+                marginBottom: '16px',
+                fontFamily: 'var(--font-mono, monospace)',
+                fontWeight: 700,
+              }}
+            >
               ⚠️ {error}
             </div>
           )}
 
           {success && (
-            <div style={{ padding: '10px 14px', backgroundColor: '#e6f4ea', border: '1px solid #137333', color: '#137333', borderRadius: '2px', fontSize: '13px', marginBottom: '16px' }}>
+            <div
+              style={{
+                padding: '10px 14px',
+                backgroundColor: '#ecfdf5',
+                border: '2px solid #059669',
+                color: '#059669',
+                fontSize: '12px',
+                marginBottom: '16px',
+                fontFamily: 'var(--font-mono, monospace)',
+                fontWeight: 700,
+              }}
+            >
               {success}
             </div>
           )}
 
           <form onSubmit={handleConnect}>
             <div style={{ marginBottom: '16px' }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#16191f', marginBottom: '6px' }}>
-                AWS Access Key ID:
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  color: '#0f172a',
+                  marginBottom: '6px',
+                  fontFamily: 'var(--font-mono, monospace)',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                AWS_ACCESS_KEY_ID:
               </label>
               <input
                 type="text"
@@ -220,18 +335,28 @@ export default function AWSConnectModal({ isOpen, onClose, onConnected }: AWSCon
                 style={{
                   width: '100%',
                   padding: '8px 12px',
-                  border: '1px solid #d5dbdb',
-                  borderRadius: '2px',
-                  fontSize: '13px',
+                  border: '2px solid #0f172a',
+                  fontSize: '12px',
                   outline: 'none',
-                  fontFamily: 'monospace',
+                  fontFamily: 'var(--font-mono, monospace)',
+                  backgroundColor: '#f8fafc',
                 }}
               />
             </div>
 
             <div style={{ marginBottom: '16px' }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#16191f', marginBottom: '6px' }}>
-                AWS Secret Access Key:
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  color: '#0f172a',
+                  marginBottom: '6px',
+                  fontFamily: 'var(--font-mono, monospace)',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                AWS_SECRET_ACCESS_KEY:
               </label>
               <input
                 type="password"
@@ -242,18 +367,28 @@ export default function AWSConnectModal({ isOpen, onClose, onConnected }: AWSCon
                 style={{
                   width: '100%',
                   padding: '8px 12px',
-                  border: '1px solid #d5dbdb',
-                  borderRadius: '2px',
-                  fontSize: '13px',
+                  border: '2px solid #0f172a',
+                  fontSize: '12px',
                   outline: 'none',
-                  fontFamily: 'monospace',
+                  fontFamily: 'var(--font-mono, monospace)',
+                  backgroundColor: '#f8fafc',
                 }}
               />
             </div>
 
-            <div style={{ marginBottom: '24px' }}>
-              <label style={{ display: 'block', fontSize: '12px', fontWeight: 700, color: '#16191f', marginBottom: '6px' }}>
-                AWS Region:
+            <div style={{ marginBottom: '22px' }}>
+              <label
+                style={{
+                  display: 'block',
+                  fontSize: '11px',
+                  fontWeight: 800,
+                  color: '#0f172a',
+                  marginBottom: '6px',
+                  fontFamily: 'var(--font-mono, monospace)',
+                  letterSpacing: '0.04em',
+                }}
+              >
+                AWS_REGION:
               </label>
               <select
                 value={region}
@@ -261,12 +396,12 @@ export default function AWSConnectModal({ isOpen, onClose, onConnected }: AWSCon
                 style={{
                   width: '100%',
                   padding: '8px 12px',
-                  border: '1px solid #d5dbdb',
-                  borderRadius: '2px',
-                  fontSize: '13px',
-                  backgroundColor: '#ffffff',
+                  border: '2px solid #0f172a',
+                  fontSize: '12px',
+                  backgroundColor: '#f8fafc',
                   outline: 'none',
-                  fontWeight: 600,
+                  fontWeight: 700,
+                  fontFamily: 'var(--font-mono, monospace)',
                 }}
               >
                 <option value="us-east-1">us-east-1 (N. Virginia)</option>
@@ -281,11 +416,21 @@ export default function AWSConnectModal({ isOpen, onClose, onConnected }: AWSCon
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '12px' }}>
-              <button type="button" onClick={onClose} className="aws-btn-secondary">
-                Cancel
+              <button
+                type="button"
+                onClick={onClose}
+                className="aws-btn-secondary"
+                style={{ padding: '8px 14px', fontSize: '11px' }}
+              >
+                CANCEL
               </button>
-              <button type="submit" disabled={loading} className="aws-btn-primary">
-                {loading ? 'Verifying with AWS STS...' : 'Connect Live AWS Account'}
+              <button
+                type="submit"
+                disabled={loading}
+                className="aws-btn-primary"
+                style={{ padding: '8px 16px', fontSize: '11px' }}
+              >
+                {loading ? 'VERIFYING_WITH_STS...' : 'CONNECT_AWS_SESSION'}
               </button>
             </div>
           </form>

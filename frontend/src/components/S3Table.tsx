@@ -41,123 +41,128 @@ export default function S3Table({ buckets, onRefresh }: S3TableProps) {
   };
 
   return (
-    <div className="aws-card">
-      <div className="aws-card-header">
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ec7211" strokeWidth="2">
-            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
-          </svg>
-          <span>Amazon S3 Bucket Inventory ({buckets.length})</span>
+    <>
+      <div className="aws-card">
+        <div className="aws-card-header" style={{ backgroundColor: '#f1f5f9' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{
+              backgroundColor: '#059669',
+              color: '#ffffff',
+              padding: '1px 5px',
+              fontSize: '10px',
+              fontWeight: 700
+            }}>
+              S3.SYS
+            </span>
+            <span>Amazon S3 Bucket Storage ({buckets.length})</span>
+          </div>
+
+          <div className="retro-controls">
+            <span>_</span>
+            <span>□</span>
+            <span>✕</span>
+          </div>
+        </div>
+
+        <div className="aws-card-body" style={{ padding: 0 }}>
+          {buckets.length === 0 ? (
+            <div style={{ padding: '24px', textAlign: 'center', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+              NO S3 BUCKETS DETECTED IN CURRENT ACCOUNT.
+            </div>
+          ) : (
+            <div className="aws-table-container" style={{ border: 'none', boxShadow: 'none' }}>
+              <table className="aws-table">
+                <thead>
+                  <tr>
+                    <th>BUCKET_NAME</th>
+                    <th>REGION</th>
+                    <th>ENCRYPTION</th>
+                    <th>PUBLIC_ACCESS</th>
+                    <th>CREATION_DATE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {buckets.map((b) => {
+                    const isEncrypted = b.Encrypted !== false;
+                    const isPublic = b.PublicAccess === true;
+
+                    return (
+                      <tr key={b.Name}>
+                        <td style={{ fontWeight: 700, color: '#0284c7' }}>
+                          {b.Name}
+                        </td>
+                        <td>{b.Region || 'us-east-1'}</td>
+                        <td>
+                          {isEncrypted ? (
+                            <span className="aws-badge aws-badge-success">
+                              ✓ AES-256
+                            </span>
+                          ) : (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span className="aws-badge aws-badge-danger">
+                                ⚠️ UNENCRYPTED
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => handleFixEncryption(b.Name)}
+                                className="aws-btn-primary"
+                                style={{
+                                  padding: '2px 8px',
+                                  fontSize: '10px',
+                                }}
+                              >
+                                ⚡ AUTO-FIX
+                              </button>
+                            </div>
+                          )}
+                        </td>
+                        <td>
+                          {!isPublic ? (
+                            <span className="aws-badge aws-badge-success">
+                              ✓ BLOCKED
+                            </span>
+                          ) : (
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                              <span className="aws-badge aws-badge-danger">
+                                🚨 PUBLIC ACCESS
+                              </span>
+                              <button
+                                type="button"
+                                onClick={() => handleFixPublicAccess(b.Name)}
+                                className="aws-btn-primary"
+                                style={{
+                                  padding: '2px 8px',
+                                  fontSize: '10px',
+                                }}
+                              >
+                                ⚡ BLOCK
+                              </button>
+                            </div>
+                          )}
+                        </td>
+                        <td style={{ color: '#64748b', fontSize: '11px' }}>
+                          {formatDateString(b.CreationDate)}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="aws-card-body" style={{ padding: 0 }}>
-        {buckets.length === 0 ? (
-          <div style={{ padding: '24px', textAlign: 'center', color: '#545b64' }}>
-            No S3 buckets found in current account.
-          </div>
-        ) : (
-          <div className="aws-table-container" style={{ border: 'none' }}>
-            <table className="aws-table">
-              <thead>
-                <tr>
-                  <th>Bucket Name</th>
-                  <th>Region</th>
-                  <th>Encryption Posture</th>
-                  <th>Public Access Status</th>
-                  <th>Creation Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {buckets.map((b) => {
-                  const isEncrypted = b.Encrypted !== false;
-                  const isPublic = b.PublicAccess === true;
-
-                  return (
-                    <tr key={b.Name}>
-                      <td style={{ fontWeight: 600, color: '#0073bb', fontFamily: 'monospace' }}>
-                        {b.Name}
-                      </td>
-                      <td>{b.Region || 'us-east-1'}</td>
-                      <td>
-                        {isEncrypted ? (
-                          <span className="aws-badge aws-badge-success">
-                            ✓ AES-256 (SSE-S3)
-                          </span>
-                        ) : (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <span className="aws-badge aws-badge-danger">
-                              ⚠️ Unencrypted
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => handleFixEncryption(b.Name)}
-                              className="aws-btn-primary"
-                              style={{
-                                backgroundColor: '#ec7211',
-                                borderColor: '#ec7211',
-                                padding: '3px 10px',
-                                fontSize: '11px',
-                                fontWeight: 700,
-                                borderRadius: '4px',
-                                cursor: 'pointer',
-                              }}
-                            >
-                              Auto-Fix
-                            </button>
-                          </div>
-                        )}
-                      </td>
-                      <td>
-                        {!isPublic ? (
-                          <span className="aws-badge aws-badge-info">
-                            ✓ Blocked
-                          </span>
-                        ) : (
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <span className="aws-badge aws-badge-danger">
-                              ⚠️ Public Access
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => handleFixPublicAccess(b.Name)}
-                              className="aws-btn-primary"
-                              style={{
-                                backgroundColor: '#ec7211',
-                                borderColor: '#ec7211',
-                                padding: '3px 10px',
-                                fontSize: '11px',
-                                fontWeight: 700,
-                                borderRadius: '4px',
-                                cursor: 'pointer',
-                              }}
-                            >
-                              Auto-Fix
-                            </button>
-                          </div>
-                        )}
-                      </td>
-                      <td style={{ color: '#545b64', fontSize: '12px' }}>
-                        {formatDateString(b.CreationDate)}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-
+      {/* Auto-Remediation Confirmation Modal */}
       <RemediationModal
         isOpen={!!activeRec}
         recommendation={activeRec}
         onClose={() => setActiveRec(null)}
         onRemediated={() => {
+          setActiveRec(null);
           if (onRefresh) onRefresh();
         }}
       />
-    </div>
+    </>
   );
 }
-

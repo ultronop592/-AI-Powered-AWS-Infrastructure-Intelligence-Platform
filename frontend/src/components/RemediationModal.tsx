@@ -115,13 +115,12 @@ export default function RemediationModal({
         left: 0,
         right: 0,
         bottom: 0,
-        backgroundColor: 'rgba(15, 23, 42, 0.65)',
+        backgroundColor: 'rgba(15, 23, 42, 0.6)',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: 9999,
         padding: '16px',
-        backdropFilter: 'blur(4px)',
       }}
       onClick={(e) => {
         if (e.target === e.currentTarget && !loading) onClose();
@@ -135,104 +134,110 @@ export default function RemediationModal({
           maxHeight: '90vh',
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
-          borderRadius: '12px',
-          border: '1px solid #e2e8f0',
-          overflow: 'hidden',
+          boxShadow: '8px 8px 0px #0f172a',
+          border: '2px solid #0f172a',
           backgroundColor: '#ffffff',
+          overflow: 'hidden'
         }}
       >
-        {/* Modal Header */}
+        {/* Retro OS Modal Header */}
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            borderBottom: '1px solid #1e293b',
-            backgroundColor: '#0f172a',
-            color: '#ffffff',
-            padding: '16px 22px',
+            borderBottom: '2px solid #0f172a',
+            backgroundColor: '#f1f5f9',
+            padding: '10px 16px',
+            fontFamily: 'var(--font-mono)',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <span style={{ fontSize: '18px' }}>⚡</span>
-            <div>
-              <div style={{ fontWeight: 700, fontSize: '15px', color: '#ffffff' }}>
-                One-Click Auto-Remediation
-              </div>
-              <div style={{ fontSize: '11px', color: '#94a3b8' }}>
-                AIOps Autonomous Operations • Boto3 AWS Execution
-              </div>
-            </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{
+              backgroundColor: '#ec7211',
+              color: '#ffffff',
+              padding: '1px 5px',
+              fontSize: '10px',
+              fontWeight: 700
+            }}>
+              AIOPS.EXE
+            </span>
+            <span style={{ fontWeight: 700, fontSize: '12px', color: '#0f172a' }}>
+              One-Click Autonomous Remediation
+            </span>
           </div>
 
-          <button
-            type="button"
-            onClick={onClose}
-            disabled={loading}
-            style={{
-              background: 'none',
-              border: 'none',
-              color: '#94a3b8',
-              fontSize: '18px',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              lineHeight: 1,
-              padding: '6px',
-              borderRadius: '6px',
-            }}
-          >
-            ✕
-          </button>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontSize: '10px', color: '#64748b' }}>BOTO3_SDK</span>
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={loading}
+              style={{
+                background: '#ffffff',
+                border: '1px solid #0f172a',
+                boxShadow: '1px 1px 0px #0f172a',
+                color: '#0f172a',
+                fontSize: '11px',
+                fontWeight: 700,
+                cursor: loading ? 'not-allowed' : 'pointer',
+                padding: '1px 5px',
+                lineHeight: 1,
+              }}
+            >
+              ✕
+            </button>
+          </div>
         </div>
 
         {/* Modal Body */}
-        <div style={{ padding: '22px', overflowY: 'auto', flex: 1 }}>
+        <div style={{ padding: '18px', overflowY: 'auto', flex: 1, fontFamily: 'var(--font-mono)' }}>
           {result ? (
             /* Result View */
             <RemediationResult result={result} onDone={handleDone} />
           ) : (
             /* Confirmation & Options Form */
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               {/* Account Environment Banner */}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  padding: '10px 14px',
-                  borderRadius: '8px',
+                  padding: '8px 12px',
                   backgroundColor: isLive ? '#ecfdf5' : '#fffbeb',
-                  border: isLive ? '1px solid #a7f3d0' : '1px solid #fde68a',
-                  fontSize: '12px',
+                  border: '1.5px solid #0f172a',
+                  boxShadow: '2px 2px 0px #0f172a',
+                  fontSize: '11px',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <span>{isLive ? '🔒' : '🧪'}</span>
-                  <span style={{ fontWeight: 600, color: isLive ? '#059669' : '#d97706' }}>
+                  <span style={{ fontWeight: 700, color: isLive ? '#059669' : '#d97706' }}>
                     {isLive
-                      ? `Connected to AWS Account ${session?.account_id} (${session?.region})`
-                      : 'Demo Simulation Mode (Safe dry-run preview)'}
+                      ? `LIVE TARGET: AWS ${session?.account_id} (${session?.region})`
+                      : 'DEMO SIMULATION: DRY-RUN EXECUTION'}
                   </span>
                 </div>
                 <span className={`aws-badge ${isLive ? 'aws-badge-success' : 'aws-badge-warning'}`}>
-                  {isLive ? 'LIVE BOTO3' : 'DEMO MODE'}
+                  {isLive ? 'LIVE BOTO3' : 'SIMULATION'}
                 </span>
               </div>
 
               {/* Finding Summary Box */}
               <div
                 style={{
-                  padding: '16px',
-                  border: '1px solid #e2e8f0',
-                  borderRadius: '8px',
-                  backgroundColor: '#f8fafc',
+                  padding: '12px 14px',
+                  border: '1.5px solid #0f172a',
+                  boxShadow: '2px 2px 0px #0f172a',
+                  backgroundColor: '#ffffff',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '8px',
+                  gap: '6px',
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <span
                       className={`aws-badge ${
                         severity === 'HIGH' || severity === 'CRITICAL' ? 'aws-badge-danger' : 'aws-badge-warning'
@@ -240,28 +245,28 @@ export default function RemediationModal({
                     >
                       {severity}
                     </span>
-                    <span style={{ fontSize: '11px', fontFamily: 'monospace', color: '#64748b', fontWeight: 600 }}>
-                      {findingId}
+                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#0284c7' }}>
+                      [{findingId}]
                     </span>
                     {recommendation.category && (
-                      <span style={{ fontSize: '12px', color: '#64748b' }}>• {recommendation.category}</span>
+                      <span style={{ fontSize: '11px', color: '#64748b' }}>• {recommendation.category}</span>
                     )}
                   </div>
                 </div>
 
-                <h4 style={{ fontSize: '14px', fontWeight: 700, color: '#0f172a' }}>
+                <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
                   {recommendation.title}
                 </h4>
 
-                <p style={{ fontSize: '13px', color: '#475569', lineHeight: '1.5' }}>
+                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.4', margin: 0 }}>
                   {recommendation.description}
                 </p>
               </div>
 
               {/* Resource Selection Box */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label style={{ fontSize: '12px', fontWeight: 600, color: '#334155' }}>
-                  Target AWS Resource:
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                <label style={{ fontSize: '11px', fontWeight: 700, color: '#0f172a' }}>
+                  [TARGET_RESOURCE_ID]:
                 </label>
                 {affectedList.length > 1 ? (
                   <select
@@ -270,11 +275,10 @@ export default function RemediationModal({
                     disabled={loading}
                     style={{
                       width: '100%',
-                      padding: '8px 12px',
-                      border: '1px solid #cbd5e1',
-                      borderRadius: '6px',
-                      fontFamily: 'monospace',
-                      fontSize: '13px',
+                      padding: '6px 10px',
+                      border: '1.5px solid #0f172a',
+                      boxShadow: '2px 2px 0px #0f172a',
+                      fontSize: '12px',
                       backgroundColor: '#ffffff',
                       outline: 'none',
                     }}
@@ -288,17 +292,15 @@ export default function RemediationModal({
                 ) : (
                   <div
                     style={{
-                      padding: '8px 12px',
+                      padding: '6px 10px',
                       backgroundColor: '#f8fafc',
-                      borderRadius: '6px',
-                      border: '1px solid #e2e8f0',
-                      fontFamily: 'monospace',
-                      fontSize: '13px',
-                      fontWeight: 600,
+                      border: '1.5px solid #0f172a',
+                      fontSize: '12px',
+                      fontWeight: 700,
                       color: '#0284c7',
                     }}
                   >
-                    {selectedResource || 'Auto-detected'}
+                    {selectedResource || 'AUTO-DETECTED'}
                   </div>
                 )}
               </div>
@@ -307,33 +309,32 @@ export default function RemediationModal({
               {findingId === 'SEC-001' && (
                 <div
                   style={{
-                    padding: '16px',
-                    border: '1px solid #e2e8f0',
-                    borderRadius: '8px',
+                    padding: '12px 14px',
+                    border: '1.5px solid #0f172a',
+                    boxShadow: '2px 2px 0px #0f172a',
                     backgroundColor: '#ffffff',
                     display: 'flex',
                     flexDirection: 'column',
-                    gap: '12px',
+                    gap: '10px',
                   }}
                 >
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#0f172a' }}>
-                    SSH/RDP Ingress Restriction Policy:
+                  <div style={{ fontSize: '11px', fontWeight: 700, color: '#0f172a' }}>
+                    [INGRESS_RESTRICTION_POLICY]:
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                     <label
                       style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '8px',
-                        padding: '10px 12px',
-                        borderRadius: '6px',
-                        border: !revokeOnly ? '1.5px solid #0284c7' : '1px solid #e2e8f0',
-                        backgroundColor: !revokeOnly ? '#f0f9ff' : '#ffffff',
+                        gap: '6px',
+                        padding: '8px 10px',
+                        border: '1px solid #0f172a',
+                        backgroundColor: !revokeOnly ? '#fff7ed' : '#ffffff',
                         cursor: 'pointer',
-                        fontSize: '12px',
-                        fontWeight: !revokeOnly ? 600 : 400,
-                        color: !revokeOnly ? '#0369a1' : '#475569',
+                        fontSize: '11px',
+                        fontWeight: !revokeOnly ? 700 : 500,
+                        color: '#0f172a',
                       }}
                     >
                       <input
@@ -342,22 +343,21 @@ export default function RemediationModal({
                         checked={!revokeOnly}
                         onChange={() => setRevokeOnly(false)}
                       />
-                      <span>Restrict to Trusted CIDR</span>
+                      <span>RESTRICT TO CIDR</span>
                     </label>
 
                     <label
                       style={{
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '8px',
-                        padding: '10px 12px',
-                        borderRadius: '6px',
-                        border: revokeOnly ? '1.5px solid #0284c7' : '1px solid #e2e8f0',
-                        backgroundColor: revokeOnly ? '#f0f9ff' : '#ffffff',
+                        gap: '6px',
+                        padding: '8px 10px',
+                        border: '1px solid #0f172a',
+                        backgroundColor: revokeOnly ? '#fff7ed' : '#ffffff',
                         cursor: 'pointer',
-                        fontSize: '12px',
-                        fontWeight: revokeOnly ? 600 : 400,
-                        color: revokeOnly ? '#0369a1' : '#475569',
+                        fontSize: '11px',
+                        fontWeight: revokeOnly ? 700 : 500,
+                        color: '#0f172a',
                       }}
                     >
                       <input
@@ -366,14 +366,14 @@ export default function RemediationModal({
                         checked={revokeOnly}
                         onChange={() => setRevokeOnly(true)}
                       />
-                      <span>Drop All (Revoke 0.0.0.0/0)</span>
+                      <span>DROP ALL (REVOKE)</span>
                     </label>
                   </div>
 
                   {!revokeOnly && (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                      <div style={{ fontSize: '11px', color: '#64748b' }}>
-                        Allowed Inbound CIDR:
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <div style={{ fontSize: '10px', color: '#64748b' }}>
+                        ALLOWED_INBOUND_CIDR:
                       </div>
                       <input
                         type="text"
@@ -383,44 +383,42 @@ export default function RemediationModal({
                         disabled={loading}
                         style={{
                           width: '100%',
-                          padding: '8px 12px',
-                          border: '1px solid #cbd5e1',
-                          borderRadius: '6px',
-                          fontFamily: 'monospace',
-                          fontSize: '13px',
+                          padding: '6px 10px',
+                          border: '1.5px solid #0f172a',
+                          fontSize: '12px',
                           outline: 'none',
                         }}
                       />
-                      <div style={{ display: 'flex', gap: '8px', marginTop: '4px' }}>
+                      <div style={{ display: 'flex', gap: '6px', marginTop: '3px' }}>
                         <button
                           type="button"
                           onClick={() => setTargetCidr('10.0.0.0/16')}
                           style={{
-                            fontSize: '11px',
-                            padding: '3px 10px',
-                            border: '1px solid #e2e8f0',
-                            borderRadius: '4px',
+                            fontSize: '10px',
+                            padding: '2px 8px',
+                            border: '1px solid #0f172a',
                             backgroundColor: '#f8fafc',
-                            color: '#334155',
+                            color: '#0f172a',
                             cursor: 'pointer',
+                            fontWeight: 700
                           }}
                         >
-                          VPC Subnet (10.0.0.0/16)
+                          VPC (10.0.0.0/16)
                         </button>
                         <button
                           type="button"
                           onClick={() => setTargetCidr('192.168.1.0/24')}
                           style={{
-                            fontSize: '11px',
-                            padding: '3px 10px',
-                            border: '1px solid #e2e8f0',
-                            borderRadius: '4px',
+                            fontSize: '10px',
+                            padding: '2px 8px',
+                            border: '1px solid #0f172a',
                             backgroundColor: '#f8fafc',
-                            color: '#334155',
+                            color: '#0f172a',
                             cursor: 'pointer',
+                            fontWeight: 700
                           }}
                         >
-                          Office LAN (192.168.1.0/24)
+                          LAN (192.168.1.0/24)
                         </button>
                       </div>
                     </div>
@@ -431,45 +429,44 @@ export default function RemediationModal({
               {findingId === 'EBS-001' && (
                 <div
                   style={{
-                    padding: '14px 16px',
-                    border: '1px solid #a7f3d0',
-                    borderRadius: '8px',
+                    padding: '10px 12px',
+                    border: '1.5px solid #059669',
                     backgroundColor: '#ecfdf5',
-                    fontSize: '13px',
+                    fontSize: '11px',
                     color: '#065f46',
-                    lineHeight: '1.5',
+                    lineHeight: '1.4',
                   }}
                 >
-                  ⚡ <strong>Online Migration:</strong> Converting to <strong>gp3</strong> provides an immediate{' '}
-                  <strong>20% storage cost reduction</strong> ($0.08/GB vs $0.10/GB) with guaranteed baseline 3,000 IOPS and 125 MB/s throughput without detaching the volume or restarting instances.
+                  ⚡ <strong>ONLINE MIGRATION:</strong> Converting to <strong>gp3</strong> yields immediate{' '}
+                  <strong>20% storage cost reduction</strong> ($0.08/GB vs $0.10/GB) with guaranteed baseline 3,000 IOPS and 125 MB/s with ZERO downtime.
                 </div>
               )}
 
               {/* Boto3 Preview Box */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                  <span style={{ fontSize: '11px', fontWeight: 600, color: '#64748b' }}>
-                    Boto3 Python SDK Call Preview:
+                  <span style={{ fontSize: '10px', fontWeight: 700, color: '#64748b' }}>
+                    [BOTO3_API_CALL_SIGNATURE]:
                   </span>
-                  <span style={{ fontSize: '10px', color: '#94a3b8', fontFamily: 'monospace' }}>
-                    AWS EC2 / S3 API
+                  <span style={{ fontSize: '10px', color: '#0f172a', fontWeight: 700 }}>
+                    AWS_SDK_EXECUTION
                   </span>
                 </div>
                 <div
                   style={{
                     backgroundColor: '#0f172a',
-                    borderRadius: '8px',
-                    border: '1px solid #1e293b',
+                    border: '1.5px solid #0f172a',
+                    boxShadow: '2px 2px 0px #0f172a',
                     overflow: 'hidden',
                   }}
                 >
                   <pre
                     style={{
                       margin: 0,
-                      padding: '14px',
+                      padding: '12px',
                       color: '#38bdf8',
-                      fontSize: '12px',
-                      fontFamily: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace',
+                      fontSize: '11px',
+                      fontFamily: 'var(--font-mono)',
                       overflowX: 'auto',
                       lineHeight: '1.5',
                     }}
@@ -483,12 +480,12 @@ export default function RemediationModal({
               {error && (
                 <div
                   style={{
-                    padding: '12px 14px',
+                    padding: '10px 12px',
                     backgroundColor: '#fef2f2',
-                    border: '1px solid #fecaca',
-                    borderRadius: '8px',
+                    border: '1.5px solid #dc2626',
                     color: '#b91c1c',
-                    fontSize: '13px',
+                    fontSize: '11px',
+                    fontWeight: 700,
                   }}
                 >
                   ⚠️ {error}
@@ -496,10 +493,10 @@ export default function RemediationModal({
               )}
 
               {/* Safety Notice */}
-              <div style={{ fontSize: '12px', color: '#64748b', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div style={{ fontSize: '11px', color: '#64748b', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <span>🛡️</span>
                 <span>
-                  All remediations create a permanent audit log receipt and trigger CloudOps cache invalidation.
+                  Permanent audit receipt will be issued upon execution.
                 </span>
               </div>
             </div>
@@ -513,10 +510,11 @@ export default function RemediationModal({
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'flex-end',
-              gap: '12px',
-              padding: '14px 22px',
-              borderTop: '1px solid #e2e8f0',
-              backgroundColor: '#f8fafc',
+              gap: '10px',
+              padding: '12px 18px',
+              borderTop: '2px solid #0f172a',
+              backgroundColor: '#f1f5f9',
+              fontFamily: 'var(--font-mono)',
             }}
           >
             <button
@@ -524,8 +522,9 @@ export default function RemediationModal({
               onClick={onClose}
               disabled={loading}
               className="aws-btn-secondary"
+              style={{ padding: '6px 14px' }}
             >
-              Cancel
+              CANCEL
             </button>
 
             <button
@@ -535,44 +534,16 @@ export default function RemediationModal({
               className="aws-btn-primary"
               style={{
                 backgroundColor: '#ec7211',
-                borderColor: '#ec7211',
-                minWidth: '160px',
+                padding: '6px 18px',
+                minWidth: '150px',
                 justifyContent: 'center',
               }}
             >
-              {loading ? (
-                <>
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="3"
-                    style={{ animation: 'spin 1s linear infinite' }}
-                  >
-                    <path d="M21 12a9 9 0 1 1-6.219-8.56"></path>
-                  </svg>
-                  Applying Fix...
-                </>
-              ) : (
-                '⚡ Confirm & Apply Fix'
-              )}
+              {loading ? 'APPLYING...' : '⚡ CONFIRM & APPLY'}
             </button>
           </div>
         )}
       </div>
-
-      <style jsx global>{`
-        @keyframes spin {
-          0% {
-            transform: rotate(0deg);
-          }
-          100% {
-            transform: rotate(360deg);
-          }
-        }
-      `}</style>
     </div>
   );
 }

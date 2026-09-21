@@ -10,33 +10,45 @@ interface LambdaTableProps {
 export default function LambdaTable({ functions }: LambdaTableProps) {
   return (
     <div className="aws-card">
-      <div className="aws-card-header">
+      <div className="aws-card-header" style={{ backgroundColor: '#f1f5f9' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ec7211" strokeWidth="2">
-            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-          </svg>
+          <span style={{
+            backgroundColor: '#dc2626',
+            color: '#ffffff',
+            padding: '1px 5px',
+            fontSize: '10px',
+            fontWeight: 700
+          }}>
+            LAMBDA.FAAS
+          </span>
           <span>AWS Lambda Serverless Functions Analytics ({functions.length})</span>
+        </div>
+
+        <div className="retro-controls">
+          <span>_</span>
+          <span>□</span>
+          <span>✕</span>
         </div>
       </div>
 
       <div className="aws-card-body" style={{ padding: 0 }}>
         {functions.length === 0 ? (
-          <div style={{ padding: '24px', textAlign: 'center', color: '#545b64' }}>
-            No Lambda functions found in current account.
+          <div style={{ padding: '24px', textAlign: 'center', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+            NO LAMBDA FUNCTIONS FOUND IN CURRENT ACCOUNT.
           </div>
         ) : (
-          <div className="aws-table-container" style={{ border: 'none' }}>
+          <div className="aws-table-container" style={{ border: 'none', boxShadow: 'none' }}>
             <table className="aws-table">
               <thead>
                 <tr>
-                  <th>Function Name</th>
-                  <th>Runtime</th>
-                  <th>Allocated Memory</th>
-                  <th>Memory Efficiency</th>
-                  <th>Avg Duration</th>
-                  <th>Cold Start Latency</th>
-                  <th>Error Rate</th>
-                  <th>Code Package</th>
+                  <th>FUNCTION_NAME</th>
+                  <th>RUNTIME</th>
+                  <th>ALLOCATED_MEMORY</th>
+                  <th>EFFICIENCY</th>
+                  <th>AVG_DURATION</th>
+                  <th>COLD_START</th>
+                  <th>ERROR_RATE</th>
+                  <th>CODE_SIZE</th>
                 </tr>
               </thead>
               <tbody>
@@ -45,60 +57,59 @@ export default function LambdaTable({ functions }: LambdaTableProps) {
 
                   return (
                     <tr key={fn.FunctionName}>
-                      <td style={{ fontWeight: 600, color: '#0073bb', fontFamily: 'monospace' }}>
+                      <td style={{ fontWeight: 700, color: '#0284c7' }}>
                         {fn.FunctionName}
                       </td>
 
                       <td>
                         <span style={{
-                          backgroundColor: '#f8f9fa',
-                          border: '1px solid #eaeded',
-                          padding: '2px 6px',
-                          borderRadius: '2px',
-                          fontSize: '12px',
-                          fontFamily: 'monospace'
+                          backgroundColor: '#f8fafc',
+                          border: '1px solid #0f172a',
+                          padding: '1px 6px',
+                          fontSize: '10px',
+                          fontWeight: 700
                         }}>
                           {fn.Runtime}
                         </span>
                       </td>
 
-                      <td style={{ fontFamily: 'monospace' }}>
+                      <td>
                         {fn.MemorySize} MB
                       </td>
 
                       <td>
                         {isOverprovisioned ? (
                           <span className="aws-badge aws-badge-warning">
-                            ⚠️ {fn.MemoryEfficiencyPercent}% (Over-allocated)
+                            ⚠️ {fn.MemoryEfficiencyPercent}% OVER-PROV
                           </span>
                         ) : (
                           <span className="aws-badge aws-badge-success">
-                            {fn.MemoryEfficiencyPercent}% Efficient
+                            {fn.MemoryEfficiencyPercent}% EFF
                           </span>
                         )}
                       </td>
 
-                      <td style={{ fontFamily: 'monospace' }}>
+                      <td>
                         {fn.AvgDurationMs} ms
                       </td>
 
-                      <td style={{ fontFamily: 'monospace', color: '#545b64' }}>
+                      <td>
                         {fn.ColdStartMs} ms
                       </td>
 
                       <td>
                         {fn.ErrorRatePercent === 0 ? (
                           <span className="aws-badge aws-badge-success">
-                            0% Errors
+                            0% ERR
                           </span>
                         ) : (
                           <span className="aws-badge aws-badge-danger">
-                            {fn.ErrorRatePercent}% Errors
+                            {fn.ErrorRatePercent}% ERR
                           </span>
                         )}
                       </td>
 
-                      <td style={{ fontFamily: 'monospace', color: '#545b64', fontSize: '12px' }}>
+                      <td style={{ color: '#64748b' }}>
                         {fn.CodeSize} MB
                       </td>
                     </tr>

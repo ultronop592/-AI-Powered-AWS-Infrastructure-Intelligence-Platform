@@ -21,12 +21,12 @@ export default function PillarDetails({
   const pillars = compliance.pillars;
 
   const tabs: Array<{ key: string; label: string; icon: string; count: number }> = [
-    { key: 'all', label: 'All Pillars', icon: '🏛️', count: compliance.total_checks },
-    { key: 'security', label: 'Security', icon: '🔒', count: pillars.security?.total_checks ?? 0 },
-    { key: 'cost_optimization', label: 'Cost Optimization', icon: '💰', count: pillars.cost_optimization?.total_checks ?? 0 },
-    { key: 'reliability', label: 'Reliability', icon: '🔁', count: pillars.reliability?.total_checks ?? 0 },
-    { key: 'performance_efficiency', label: 'Performance', icon: '⚡', count: pillars.performance_efficiency?.total_checks ?? 0 },
-    { key: 'operational_excellence', label: 'Operational Excellence', icon: '🛠️', count: pillars.operational_excellence?.total_checks ?? 0 },
+    { key: 'all', label: 'ALL_PILLARS', icon: '🏛️', count: compliance.total_checks },
+    { key: 'security', label: 'SECURITY', icon: '🔒', count: pillars.security?.total_checks ?? 0 },
+    { key: 'cost_optimization', label: 'COST_OPT', icon: '💰', count: pillars.cost_optimization?.total_checks ?? 0 },
+    { key: 'reliability', label: 'RELIABILITY', icon: '🔁', count: pillars.reliability?.total_checks ?? 0 },
+    { key: 'performance_efficiency', label: 'PERFORMANCE', icon: '⚡', count: pillars.performance_efficiency?.total_checks ?? 0 },
+    { key: 'operational_excellence', label: 'OPERATIONS', icon: '🛠️', count: pillars.operational_excellence?.total_checks ?? 0 },
   ];
 
   // Collect checks based on active pillar
@@ -74,43 +74,38 @@ export default function PillarDetails({
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'PASS':
-        return { bg: '#e6f4ea', color: '#137333', label: 'PASS' };
+        return { bg: '#ecfdf5', color: '#059669', label: 'PASS' };
       case 'WARNING':
-        return { bg: '#fef7e0', color: '#b06000', label: 'WARNING' };
+        return { bg: '#fffbeb', color: '#d97706', label: 'WARNING' };
       case 'FAIL':
-        return { bg: '#fce8e6', color: '#c5221f', label: 'FAIL' };
+        return { bg: '#fef2f2', color: '#dc2626', label: 'FAIL' };
       default:
-        return { bg: '#f2f3f3', color: '#545b64', label: status };
+        return { bg: '#f8fafc', color: '#64748b', label: status };
     }
   };
 
   const getSeverityBadge = (sev: string) => {
     switch (sev) {
       case 'CRITICAL':
-        return { bg: '#c5221f', color: '#ffffff' };
+        return { bg: '#fef2f2', color: '#dc2626' };
       case 'HIGH':
-        return { bg: '#e8710a', color: '#ffffff' };
+        return { bg: '#fff7ed', color: '#ea580c' };
       case 'MEDIUM':
-        return { bg: '#f9ab00', color: '#202124' };
+        return { bg: '#fffbeb', color: '#d97706' };
       default:
-        return { bg: '#eaeded', color: '#545b64' };
+        return { bg: '#f8fafc', color: '#64748b' };
     }
   };
 
   return (
-    <div style={{
-      backgroundColor: '#ffffff',
-      borderRadius: '2px',
-      border: '1px solid #eaeded',
-      boxShadow: '0 1px 1px 0 rgba(0,28,36,0.05)',
-      overflow: 'hidden',
-    }}>
+    <div className="aws-card">
       {/* Header Tabs */}
       <div style={{
         display: 'flex',
-        borderBottom: '1px solid #eaeded',
-        backgroundColor: '#fafafa',
+        borderBottom: '2px solid #0f172a',
+        backgroundColor: '#f1f5f9',
         overflowX: 'auto',
+        fontFamily: 'var(--font-mono)'
       }}>
         {tabs.map((tab) => {
           const isActive = activePillar === tab.key;
@@ -121,28 +116,28 @@ export default function PillarDetails({
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
-                padding: '12px 20px',
-                fontSize: '13px',
-                fontWeight: isActive ? 700 : 500,
-                color: isActive ? '#ec7211' : '#545b64',
+                gap: '6px',
+                padding: '10px 14px',
+                fontSize: '11px',
+                fontWeight: 700,
+                color: '#0f172a',
                 backgroundColor: isActive ? '#ffffff' : 'transparent',
                 border: 'none',
+                borderRight: '1px solid #cbd5e1',
                 borderBottom: isActive ? '3px solid #ec7211' : '3px solid transparent',
                 cursor: 'pointer',
                 whiteSpace: 'nowrap',
-                transition: 'all 0.15s ease',
               }}
             >
               <span>{tab.icon}</span>
               <span>{tab.label}</span>
               <span style={{
-                fontSize: '11px',
-                backgroundColor: isActive ? '#ec7211' : '#e0e0e0',
-                color: isActive ? '#ffffff' : '#545b64',
-                padding: '1px 6px',
-                borderRadius: '10px',
-                fontWeight: 600,
+                fontSize: '10px',
+                backgroundColor: isActive ? '#0f172a' : '#e2e8f0',
+                color: isActive ? '#ffffff' : '#0f172a',
+                padding: '1px 5px',
+                border: '1px solid #0f172a',
+                fontWeight: 700,
               }}>
                 {tab.count}
               </span>
@@ -153,17 +148,18 @@ export default function PillarDetails({
 
       {/* Filter and Search Bar */}
       <div style={{
-        padding: '16px 20px',
-        borderBottom: '1px solid #eaeded',
+        padding: '12px 16px',
+        borderBottom: '1.5px solid #0f172a',
         display: 'flex',
         flexWrap: 'wrap',
         justifyContent: 'space-between',
         alignItems: 'center',
-        gap: '16px',
+        gap: '12px',
         backgroundColor: '#ffffff',
+        fontFamily: 'var(--font-mono)'
       }}>
         {/* Status Filter Buttons */}
-        <div style={{ display: 'flex', gap: '6px' }}>
+        <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
           {(['ALL', 'FAIL', 'WARNING', 'PASS'] as const).map((st) => {
             const isActive = statusFilter === st;
             return (
@@ -171,165 +167,137 @@ export default function PillarDetails({
                 key={st}
                 onClick={() => setStatusFilter(st)}
                 style={{
-                  padding: '6px 12px',
-                  fontSize: '12px',
-                  fontWeight: 600,
-                  borderRadius: '2px',
-                  border: isActive ? '1px solid #ec7211' : '1px solid #d5dbdb',
-                  backgroundColor: isActive ? '#fef8f3' : '#ffffff',
-                  color: isActive ? '#ec7211' : '#545b64',
+                  padding: '4px 10px',
+                  fontSize: '11px',
+                  fontWeight: 700,
+                  border: '1px solid #0f172a',
+                  boxShadow: isActive ? '1px 1px 0px #0f172a' : 'none',
+                  backgroundColor: isActive ? '#0f172a' : '#ffffff',
+                  color: isActive ? '#ffffff' : '#0f172a',
                   cursor: 'pointer',
                 }}
               >
-                {st === 'ALL' ? 'All Findings' : st === 'FAIL' ? '❌ Failed' : st === 'WARNING' ? '⚠️ Warnings' : '✅ Passed'}
+                {st === 'ALL' ? 'ALL_CHECKS' : st === 'FAIL' ? '❌ FAIL' : st === 'WARNING' ? '⚠️ WARN' : '✅ PASS'}
               </button>
             );
           })}
         </div>
 
         {/* Search Input */}
-        <div style={{ position: 'relative', minWidth: '240px' }}>
+        <div style={{ position: 'relative', minWidth: '220px' }}>
           <input
             type="text"
-            placeholder="Filter by check, ID, or keyword..."
+            placeholder="FILTER CHECK ID / NAME..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             style={{
               width: '100%',
-              padding: '6px 12px',
-              fontSize: '12px',
-              border: '1px solid #aab7b8',
-              borderRadius: '2px',
+              padding: '5px 10px',
+              fontSize: '11px',
+              border: '1px solid #0f172a',
+              boxShadow: '1px 1px 0px #0f172a',
               outline: 'none',
             }}
           />
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              style={{
-                position: 'absolute',
-                right: '8px',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                background: 'none',
-                border: 'none',
-                fontSize: '12px',
-                color: '#879596',
-                cursor: 'pointer',
-              }}
-            >
-              ✕
-            </button>
-          )}
         </div>
       </div>
 
       {/* Checks List */}
-      <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+      <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {checksToDisplay.length === 0 ? (
-          <div style={{ padding: '40px', textAlign: 'center', color: '#545b64' }}>
-            <div style={{ fontSize: '24px', marginBottom: '8px' }}>🔍</div>
-            <div style={{ fontSize: '14px', fontWeight: 600 }}>No compliance checks matched your filter</div>
-            <div style={{ fontSize: '12px', color: '#879596', marginTop: '4px' }}>
-              Try adjusting your search query or status filter.
-            </div>
+          <div style={{ padding: '24px', textAlign: 'center', color: '#64748b', fontFamily: 'var(--font-mono)' }}>
+            NO WELL-ARCHITECTED CHECKS MATCH CURRENT FILTERS.
           </div>
         ) : (
           checksToDisplay.map((check) => {
-            const statusBadge = getStatusBadge(check.status);
-            const sevBadge = getSeverityBadge(check.severity);
+            const statusB = getStatusBadge(check.status);
+            const sevB = getSeverityBadge(check.severity);
 
             return (
               <div
                 key={check.id}
                 style={{
-                  border: '1px solid #eaeded',
-                  borderRadius: '2px',
-                  padding: '16px',
-                  backgroundColor: check.status === 'FAIL' ? '#fffaf9' : '#ffffff',
-                  borderLeft: check.status === 'FAIL' ? '4px solid #c5221f' : check.status === 'WARNING' ? '4px solid #b06000' : '4px solid #137333',
-                  transition: 'background-color 0.15s ease',
+                  border: '1.5px solid #0f172a',
+                  boxShadow: '2px 2px 0px #0f172a',
+                  padding: '12px 14px',
+                  backgroundColor: '#ffffff',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '8px',
+                  fontFamily: 'var(--font-mono)'
                 }}
               >
-                {/* Top Row: ID, Badges, Title */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '8px', marginBottom: '10px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                    <span style={{
-                      fontSize: '11px',
-                      fontWeight: 800,
-                      backgroundColor: statusBadge.bg,
-                      color: statusBadge.color,
-                      padding: '2px 8px',
-                      borderRadius: '2px',
-                    }}>
-                      {statusBadge.label}
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '6px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span
+                      style={{
+                        padding: '1px 6px',
+                        border: '1px solid #0f172a',
+                        backgroundColor: statusB.bg,
+                        color: statusB.color,
+                        fontWeight: 700,
+                        fontSize: '10px',
+                      }}
+                    >
+                      {statusB.label}
                     </span>
 
-                    <span style={{
-                      fontSize: '10px',
-                      fontWeight: 700,
-                      backgroundColor: sevBadge.bg,
-                      color: sevBadge.color,
-                      padding: '2px 6px',
-                      borderRadius: '2px',
-                    }}>
+                    <span
+                      style={{
+                        padding: '1px 6px',
+                        border: '1px solid #0f172a',
+                        backgroundColor: sevB.bg,
+                        color: sevB.color,
+                        fontWeight: 700,
+                        fontSize: '10px',
+                      }}
+                    >
                       {check.severity}
                     </span>
 
-                    <span style={{ fontSize: '12px', fontWeight: 700, color: '#545b64' }}>
-                      {check.id}
-                    </span>
-
-                    <span style={{ fontSize: '12px', color: '#879596' }}>•</span>
-
-                    <span style={{ fontSize: '12px', color: '#545b64' }}>
-                      {check.pillarIcon} {check.pillarName}
+                    <span style={{ fontSize: '11px', fontWeight: 700, color: '#0284c7' }}>
+                      [{check.id}]
                     </span>
                   </div>
 
                   <button
+                    type="button"
                     onClick={() => handleCopy(check)}
                     style={{
-                      background: 'none',
-                      border: '1px solid #d5dbdb',
-                      borderRadius: '2px',
-                      padding: '3px 8px',
-                      fontSize: '11px',
-                      color: '#545b64',
+                      background: '#f8fafc',
+                      border: '1px solid #0f172a',
+                      boxShadow: '1px 1px 0px #0f172a',
+                      padding: '2px 8px',
+                      fontSize: '10px',
                       cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px',
+                      fontWeight: 700,
+                      color: '#0f172a'
                     }}
                   >
-                    {copiedId === check.id ? '✓ Copied' : '📋 Copy Details'}
+                    {copiedId === check.id ? '✓ COPIED' : 'COPY'}
                   </button>
                 </div>
 
-                <h3 style={{ fontSize: '15px', fontWeight: 700, color: '#16191f', margin: '0 0 6px 0' }}>
+                <div style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', fontFamily: 'var(--font-display)' }}>
                   {check.name}
-                </h3>
-
-                <p style={{ fontSize: '13px', color: '#545b64', lineHeight: 1.5, margin: '0 0 12px 0' }}>
-                  {check.description}
-                </p>
-
-                {/* Remediation Box */}
-                <div style={{
-                  backgroundColor: '#f8f9fa',
-                  border: '1px solid #e9ecef',
-                  borderRadius: '2px',
-                  padding: '10px 14px',
-                  fontSize: '12px',
-                  lineHeight: 1.5,
-                }}>
-                  <span style={{ fontWeight: 700, color: '#16191f', marginRight: '6px' }}>
-                    💡 AWS Well-Architected Remediation:
-                  </span>
-                  <span style={{ color: '#202124' }}>
-                    {check.remediation}
-                  </span>
                 </div>
+
+                <div style={{ fontSize: '12px', color: '#475569', lineHeight: 1.4 }}>
+                  {check.description}
+                </div>
+
+                {check.remediation && (
+                  <div style={{
+                    padding: '8px 10px',
+                    backgroundColor: '#fff7ed',
+                    border: '1px solid #0f172a',
+                    fontSize: '11px',
+                    color: '#0f172a'
+                  }}>
+                    <strong style={{ color: '#9a3412' }}>ACTION: </strong>
+                    {check.remediation}
+                  </div>
+                )}
               </div>
             );
           })

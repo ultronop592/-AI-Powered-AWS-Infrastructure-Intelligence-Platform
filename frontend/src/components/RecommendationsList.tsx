@@ -25,31 +25,48 @@ export default function RecommendationsList({ recommendations, onRefresh }: Reco
   return (
     <>
       <div className="aws-card">
-        <div className="aws-card-header">
+        {/* Retro OS Window Titlebar */}
+        <div className="aws-card-header" style={{ backgroundColor: '#f1f5f9' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b06000" strokeWidth="2">
-              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-              <line x1="12" y1="9" x2="12" y2="13"></line>
-              <line x1="12" y1="17" x2="12.01" y2="17"></line>
-            </svg>
-            <span>Infrastructure Recommendations ({recommendations.length})</span>
+            <span style={{
+              backgroundColor: '#ec7211',
+              color: '#ffffff',
+              padding: '1px 5px',
+              fontSize: '10px',
+              fontWeight: 700
+            }}>
+              AUDIT.LOG
+            </span>
+            <span>Infrastructure Findings &amp; Auto-Fix ({recommendations.length})</span>
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px', color: '#545b64' }}>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-              <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: '#ec7211' }}></span>
-              AIOps One-Click Auto-Fix Enabled
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#059669', fontWeight: 700 }}>
+              ● AIOPS READY
             </span>
+            <div className="retro-controls">
+              <span>_</span>
+              <span>□</span>
+              <span>✕</span>
+            </div>
           </div>
         </div>
 
-        <div className="aws-card-body">
+        <div className="aws-card-body" style={{ padding: '16px' }}>
           {recommendations.length === 0 ? (
-            <div style={{ padding: '16px', color: '#137333', backgroundColor: '#e6f4ea', borderRadius: '4px', fontSize: '13px' }}>
-              ✓ No infrastructure optimization warnings found. Your AWS environment is configured cleanly!
+            <div style={{
+              padding: '16px',
+              color: '#059669',
+              backgroundColor: '#ecfdf5',
+              border: '1.5px solid #059669',
+              fontFamily: 'var(--font-mono)',
+              fontSize: '12px',
+              fontWeight: 700
+            }}>
+              ✓ NO CRITICAL FINDINGS RECORDED. AWS POSTURE CONFIGURED COMPLIANTLY.
             </div>
           ) : (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {recommendations.map((rec, index) => {
                 const recId = rec.id || `REC-${index}`;
                 const severity = (rec.severity || 'MEDIUM').toUpperCase();
@@ -64,47 +81,46 @@ export default function RecommendationsList({ recommendations, onRefresh }: Reco
                   <div
                     key={rec.id || index}
                     style={{
-                      border: isFixed ? '1px solid #a7f3d0' : '1px solid #e2e8f0',
-                      borderRadius: '8px',
-                      padding: '18px 20px',
+                      border: isFixed ? '2px solid #059669' : '2px solid #0f172a',
+                      boxShadow: isFixed ? '3px 3px 0px #059669' : '3px 3px 0px #0f172a',
+                      padding: '14px 16px',
                       backgroundColor: isFixed ? '#f0fdf4' : '#ffffff',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '12px',
-                      transition: 'all 0.2s ease',
-                      boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.02)',
+                      gap: '10px',
+                      transition: 'all 0.12s ease',
                     }}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '6px', flexWrap: 'wrap' }}>
                         <span className={`aws-badge ${badgeClass}`}>
                           {severity}
                         </span>
                         {rec.category && (
                           <span
                             style={{
-                              fontSize: '11px',
-                              fontWeight: 500,
-                              color: '#64748b',
+                              fontSize: '10px',
+                              fontFamily: 'var(--font-mono)',
+                              fontWeight: 700,
+                              color: '#475569',
                               backgroundColor: '#f1f5f9',
-                              padding: '2px 8px',
-                              borderRadius: '4px',
+                              border: '1px solid #0f172a',
+                              padding: '1px 6px',
                             }}
                           >
-                            {rec.category}
+                            {rec.category.toUpperCase()}
                           </span>
                         )}
                         {rec.resource_id && (
                           <span
                             style={{
                               fontSize: '11px',
-                              fontFamily: 'monospace',
+                              fontFamily: 'var(--font-mono)',
                               backgroundColor: '#f8fafc',
-                              border: '1px solid #e2e8f0',
-                              padding: '2px 7px',
-                              borderRadius: '4px',
+                              border: '1px solid #0f172a',
+                              padding: '1px 6px',
                               color: '#0284c7',
-                              fontWeight: 600,
+                              fontWeight: 700,
                             }}
                           >
                             {rec.resource_id}
@@ -112,10 +128,10 @@ export default function RecommendationsList({ recommendations, onRefresh }: Reco
                         )}
                       </div>
 
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         {rec.id && (
-                          <span style={{ fontSize: '11px', color: '#94a3b8', fontFamily: 'monospace', fontWeight: 600 }}>
-                            {rec.id}
+                          <span style={{ fontSize: '11px', color: '#64748b', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
+                            [{rec.id}]
                           </span>
                         )}
 
@@ -126,17 +142,13 @@ export default function RecommendationsList({ recommendations, onRefresh }: Reco
                             style={{
                               display: 'inline-flex',
                               alignItems: 'center',
-                              gap: '5px',
-                              padding: '4px 10px',
-                              fontSize: '11px',
+                              gap: '4px',
+                              padding: '3px 8px',
+                              fontSize: '10px',
                               fontWeight: 700,
-                              borderRadius: '6px',
                             }}
                           >
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
-                              <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            Fixed &amp; Verified
+                            ✓ FIXED &amp; VERIFIED
                           </span>
                         ) : isAutoFixable ? (
                           <button
@@ -144,25 +156,22 @@ export default function RecommendationsList({ recommendations, onRefresh }: Reco
                             onClick={() => setSelectedRec(rec)}
                             className="aws-btn-primary"
                             style={{
-                              padding: '4px 12px',
-                              fontSize: '12px',
-                              fontWeight: 600,
-                              cursor: 'pointer',
-                              borderRadius: '5px',
+                              padding: '3px 10px',
+                              fontSize: '11px',
                             }}
                           >
-                            ⚡ Auto-Fix
+                            ⚡ AUTO-FIX
                           </button>
                         ) : null}
                       </div>
                     </div>
 
                     <div>
-                      <h4 style={{ fontSize: '14px', fontWeight: 600, color: '#0f172a', marginBottom: '4px' }}>
+                      <h4 style={{ fontSize: '13px', fontWeight: 800, color: '#0f172a', marginBottom: '3px' }}>
                         {rec.title || rec.type || 'Infrastructure Optimization'}
                       </h4>
 
-                      <p style={{ fontSize: '13px', color: '#475569', lineHeight: '1.5' }}>
+                      <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.4', margin: 0 }}>
                         {rec.description}
                       </p>
                     </div>
@@ -170,23 +179,22 @@ export default function RecommendationsList({ recommendations, onRefresh }: Reco
                     {rec.action && (
                       <div
                         style={{
-                          padding: '10px 14px',
-                          backgroundColor: '#fffaf5',
-                          borderLeft: '3px solid #ec7211',
-                          border: '1px solid #fed7aa',
-                          borderLeftWidth: '3px',
-                          borderRadius: '6px',
-                          fontSize: '12px',
+                          padding: '8px 12px',
+                          backgroundColor: '#fff7ed',
+                          border: '1.5px solid #0f172a',
+                          boxShadow: '1.5px 1.5px 0px #0f172a',
+                          fontSize: '11px',
+                          fontFamily: 'var(--font-mono)',
                           color: '#0f172a',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'space-between',
                           flexWrap: 'wrap',
-                          gap: '8px',
+                          gap: '6px',
                         }}
                       >
                         <div style={{ flex: 1 }}>
-                          <strong style={{ color: '#c2410c', fontWeight: 600 }}>Recommended Action: </strong>
+                          <strong style={{ color: '#9a3412', fontWeight: 700 }}>REMEDIATION: </strong>
                           <span style={{ color: '#334155' }}>{rec.action}</span>
                         </div>
 
@@ -195,17 +203,19 @@ export default function RecommendationsList({ recommendations, onRefresh }: Reco
                             type="button"
                             onClick={() => setSelectedRec(rec)}
                             style={{
-                              background: 'none',
-                              border: 'none',
+                              background: '#ffffff',
+                              border: '1px solid #0f172a',
+                              boxShadow: '1px 1px 0px #0f172a',
                               color: '#ea580c',
-                              fontWeight: 600,
-                              fontSize: '12px',
+                              fontWeight: 700,
+                              fontSize: '11px',
+                              fontFamily: 'var(--font-mono)',
                               cursor: 'pointer',
-                              textDecoration: 'underline',
+                              padding: '2px 6px',
                               whiteSpace: 'nowrap',
                             }}
                           >
-                            Apply Boto3 Fix &rarr;
+                            BOTO3 FIX &rarr;
                           </button>
                         )}
                       </div>
@@ -228,4 +238,3 @@ export default function RecommendationsList({ recommendations, onRefresh }: Reco
     </>
   );
 }
-

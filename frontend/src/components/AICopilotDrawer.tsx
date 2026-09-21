@@ -78,94 +78,151 @@ Click a quick action prompt below or ask me any question!`,
         top: 0,
         right: 0,
         bottom: 0,
-        width: '440px',
+        width: '460px',
+        maxWidth: '100vw',
         backgroundColor: '#ffffff',
-        boxShadow: '-2px 0 12px rgba(0, 0, 0, 0.15)',
+        boxShadow: '-6px 0px 0px #0f172a',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
-        borderLeft: '2px solid #ec7211',
+        borderLeft: '2px solid #0f172a',
+        fontFamily: 'var(--font-sans, sans-serif)',
       }}
     >
-      {/* Drawer Header */}
+      {/* Drawer Window Titlebar */}
       <div
         style={{
-          padding: '14px 20px',
-          backgroundColor: '#16191f',
-          color: '#ffffff',
+          padding: '12px 16px',
+          backgroundColor: '#ffffff',
+          color: '#0f172a',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
+          borderBottom: '2px solid #0f172a',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <div
             style={{
               backgroundColor: '#ec7211',
               color: '#ffffff',
               padding: '2px 6px',
-              borderRadius: '2px',
               fontWeight: 800,
               fontSize: '11px',
+              fontFamily: 'var(--font-mono, monospace)',
+              border: '1.5px solid #0f172a',
+              letterSpacing: '0.05em',
             }}
           >
             BEDROCK
           </div>
-          <span style={{ fontWeight: 700, fontSize: '15px' }}>AWS CloudOps AI Copilot</span>
+          <span
+            style={{
+              fontWeight: 800,
+              fontSize: '14px',
+              letterSpacing: '-0.02em',
+              fontFamily: 'var(--font-mono, monospace)',
+              color: '#0f172a',
+            }}
+          >
+            [AI_COPILOT_SHELL.BAT]
+          </span>
         </div>
-        <button
-          onClick={onClose}
-          style={{
-            backgroundColor: 'transparent',
-            border: 'none',
-            color: '#ffffff',
-            fontSize: '18px',
-            cursor: 'pointer',
-          }}
-        >
-          ✕
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <span
+            style={{
+              fontFamily: 'var(--font-mono, monospace)',
+              fontSize: '11px',
+              color: '#64748b',
+              fontWeight: 700,
+              marginRight: '6px',
+            }}
+          >
+            [_] [□]
+          </span>
+          <button
+            onClick={onClose}
+            aria-label="Close Drawer"
+            style={{
+              backgroundColor: '#ffffff',
+              border: '1.5px solid #0f172a',
+              color: '#0f172a',
+              fontSize: '12px',
+              fontWeight: 900,
+              width: '24px',
+              height: '24px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              boxShadow: '1px 1px 0px #0f172a',
+            }}
+          >
+            ✕
+          </button>
+        </div>
       </div>
 
       {/* Quick Prompts Bar */}
-      <div style={{ padding: '10px 16px', backgroundColor: '#fafafa', borderBottom: '1px solid #eaeded', display: 'flex', gap: '6px', overflowX: 'auto' }}>
+      <div
+        style={{
+          padding: '10px 14px',
+          backgroundColor: '#f8fafc',
+          borderBottom: '2px solid #0f172a',
+          display: 'flex',
+          gap: '8px',
+          overflowX: 'auto',
+        }}
+      >
         <button
           onClick={() => handleSend('Generate Terraform for SEC-001 SSH Port 22 lockdown', 'terraform')}
           style={{
             fontSize: '11px',
-            padding: '4px 8px',
+            padding: '5px 10px',
             backgroundColor: '#ffffff',
-            border: '1px solid #d5dbdb',
-            borderRadius: '12px',
+            border: '2px solid #0f172a',
             cursor: 'pointer',
             whiteSpace: 'nowrap',
-            fontWeight: 600,
-            color: '#0073bb',
+            fontWeight: 700,
+            color: '#0284c7',
+            fontFamily: 'var(--font-mono, monospace)',
+            boxShadow: '2px 2px 0px #0f172a',
           }}
         >
-          🛠️ Terraform: Fix SSH Port 22
+          🛠️ [TF] FIX_SSH_PORT_22
         </button>
 
         <button
           onClick={() => handleSend('Generate Terraform for EBS gp3 migration', 'terraform')}
           style={{
             fontSize: '11px',
-            padding: '4px 8px',
+            padding: '5px 10px',
             backgroundColor: '#ffffff',
-            border: '1px solid #d5dbdb',
-            borderRadius: '12px',
+            border: '2px solid #0f172a',
             cursor: 'pointer',
             whiteSpace: 'nowrap',
-            fontWeight: 600,
-            color: '#137333',
+            fontWeight: 700,
+            color: '#059669',
+            fontFamily: 'var(--font-mono, monospace)',
+            boxShadow: '2px 2px 0px #0f172a',
           }}
         >
-          🛠️ Terraform: gp2 → gp3
+          🛠️ [TF] GP2_TO_GP3
         </button>
       </div>
 
       {/* Chat Messages */}
-      <div style={{ flex: 1, padding: '16px', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '14px', backgroundColor: '#f8f9fa' }}>
+      <div
+        style={{
+          flex: 1,
+          padding: '16px',
+          overflowY: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '14px',
+          backgroundColor: '#f1f5f9',
+        }}
+      >
         {messages.map((msg) => {
           const isUser = msg.sender === 'user';
           return (
@@ -173,22 +230,56 @@ Click a quick action prompt below or ask me any question!`,
               key={msg.id}
               style={{
                 alignSelf: isUser ? 'flex-end' : 'flex-start',
-                maxWidth: '90%',
-                backgroundColor: isUser ? '#232f3e' : '#ffffff',
-                color: isUser ? '#ffffff' : '#16191f',
+                maxWidth: '92%',
+                backgroundColor: isUser ? '#f8fafc' : '#ffffff',
+                color: '#0f172a',
                 padding: '12px 14px',
-                borderRadius: '6px',
-                border: isUser ? '1px solid #232f3e' : '1px solid #eaeded',
-                boxShadow: '0 1px 2px rgba(0,0,0,0.05)',
-                fontSize: '13px',
-                lineHeight: '1.5',
+                border: '2px solid #0f172a',
+                boxShadow: isUser ? '3px 3px 0px #0f172a' : '3px 3px 0px #0f172a',
+                fontSize: '12px',
+                lineHeight: '1.6',
               }}
             >
-              <div style={{ fontSize: '10px', color: isUser ? '#d5dbdb' : '#879596', marginBottom: '4px', fontWeight: 600 }}>
-                {isUser ? 'You' : 'AWS Bedrock Copilot'} • {msg.timestamp}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  gap: '12px',
+                  marginBottom: '8px',
+                  borderBottom: '1px solid #e2e8f0',
+                  paddingBottom: '4px',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '10px',
+                    color: isUser ? '#0284c7' : '#ec7211',
+                    fontWeight: 800,
+                    fontFamily: 'var(--font-mono, monospace)',
+                    letterSpacing: '0.04em',
+                  }}
+                >
+                  {isUser ? '👤 YOU [OPERATOR]' : '⚡ AWS_BEDROCK [NOVA_LITE]'}
+                </span>
+                <span
+                  style={{
+                    fontSize: '10px',
+                    color: '#64748b',
+                    fontFamily: 'var(--font-mono, monospace)',
+                  }}
+                >
+                  {msg.timestamp}
+                </span>
               </div>
 
-              <div style={{ whiteSpace: 'pre-wrap', fontFamily: msg.text.includes('```') ? 'monospace' : 'inherit' }}>
+              <div
+                style={{
+                  whiteSpace: 'pre-wrap',
+                  fontFamily: msg.text.includes('```') ? 'var(--font-mono, monospace)' : 'inherit',
+                  fontWeight: 500,
+                }}
+              >
                 {msg.text}
               </div>
 
@@ -196,9 +287,17 @@ Click a quick action prompt below or ask me any question!`,
                 <button
                   onClick={() => copyCodeToClipboard(msg.text, msg.id)}
                   className="aws-btn-secondary"
-                  style={{ marginTop: '8px', padding: '2px 8px', fontSize: '11px' }}
+                  style={{
+                    marginTop: '10px',
+                    padding: '4px 10px',
+                    fontSize: '11px',
+                    border: '1.5px solid #0f172a',
+                    boxShadow: '2px 2px 0px #0f172a',
+                    backgroundColor: copiedId === msg.id ? '#ecfdf5' : '#ffffff',
+                    color: copiedId === msg.id ? '#059669' : '#0f172a',
+                  }}
                 >
-                  {copiedId === msg.id ? '✓ Copied HCL Code!' : '📋 Copy Terraform Code'}
+                  {copiedId === msg.id ? '✓ COPIED_HCL_CODE' : '📋 COPY_TERRAFORM_HCL'}
                 </button>
               )}
             </div>
@@ -206,45 +305,72 @@ Click a quick action prompt below or ask me any question!`,
         })}
 
         {loading && (
-          <div style={{ alignSelf: 'flex-start', backgroundColor: '#ffffff', padding: '10px 14px', borderRadius: '6px', border: '1px solid #eaeded', fontSize: '13px', color: '#545b64' }}>
-            ⚡ Bedrock Copilot is thinking & generating IaC code...
+          <div
+            style={{
+              alignSelf: 'flex-start',
+              backgroundColor: '#ffffff',
+              padding: '10px 14px',
+              border: '2px solid #0f172a',
+              boxShadow: '3px 3px 0px #0f172a',
+              fontSize: '11px',
+              fontFamily: 'var(--font-mono, monospace)',
+              color: '#0f172a',
+              fontWeight: 700,
+            }}
+          >
+            ⚡ BEDROCK_INFERENCE_IN_PROGRESS :: SYNTHESIZING_IAC...
           </div>
         )}
       </div>
 
       {/* Mode Switcher & Input Footer */}
-      <div style={{ padding: '12px 16px', backgroundColor: '#ffffff', borderTop: '1px solid #eaeded' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+      <div
+        style={{
+          padding: '12px 14px',
+          backgroundColor: '#ffffff',
+          borderTop: '2px solid #0f172a',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: '10px',
+          }}
+        >
           <div style={{ display: 'flex', gap: '6px' }}>
             <button
               onClick={() => setMode('chat')}
               style={{
                 fontSize: '11px',
-                padding: '2px 8px',
-                borderRadius: '2px',
-                border: '1px solid #d5dbdb',
-                backgroundColor: mode === 'chat' ? '#16191f' : '#ffffff',
-                color: mode === 'chat' ? '#ffffff' : '#16191f',
-                fontWeight: 600,
+                padding: '4px 10px',
+                border: '2px solid #0f172a',
+                backgroundColor: mode === 'chat' ? '#0f172a' : '#ffffff',
+                color: mode === 'chat' ? '#ffffff' : '#0f172a',
+                fontWeight: 700,
+                fontFamily: 'var(--font-mono, monospace)',
                 cursor: 'pointer',
+                boxShadow: mode === 'chat' ? 'none' : '2px 2px 0px #0f172a',
               }}
             >
-              💬 General Q&amp;A
+              💬 GENERAL_Q&amp;A
             </button>
             <button
               onClick={() => setMode('terraform')}
               style={{
                 fontSize: '11px',
-                padding: '2px 8px',
-                borderRadius: '2px',
-                border: '1px solid #d5dbdb',
+                padding: '4px 10px',
+                border: '2px solid #0f172a',
                 backgroundColor: mode === 'terraform' ? '#ec7211' : '#ffffff',
-                color: mode === 'terraform' ? '#ffffff' : '#16191f',
-                fontWeight: 600,
+                color: mode === 'terraform' ? '#ffffff' : '#0f172a',
+                fontWeight: 700,
+                fontFamily: 'var(--font-mono, monospace)',
                 cursor: 'pointer',
+                boxShadow: mode === 'terraform' ? 'none' : '2px 2px 0px #0f172a',
               }}
             >
-              🛠️ Terraform Generator
+              🛠️ TERRAFORM_GEN
             </button>
           </div>
         </div>
@@ -252,21 +378,30 @@ Click a quick action prompt below or ask me any question!`,
         <div style={{ display: 'flex', gap: '8px' }}>
           <input
             type="text"
-            placeholder={mode === 'terraform' ? 'Ask to generate Terraform code...' : 'Ask Copilot about your AWS infrastructure...'}
+            placeholder={mode === 'terraform' ? 'PROMPT: Generate Terraform for...' : 'PROMPT: Ask Copilot about infrastructure...'}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             style={{
               flex: 1,
               padding: '8px 12px',
-              border: '1px solid #d5dbdb',
-              borderRadius: '2px',
-              fontSize: '13px',
+              border: '2px solid #0f172a',
+              fontSize: '12px',
               outline: 'none',
+              fontFamily: 'var(--font-mono, monospace)',
+              backgroundColor: '#f8fafc',
             }}
           />
-          <button onClick={() => handleSend()} disabled={loading} className="aws-btn-primary">
-            Send
+          <button
+            onClick={() => handleSend()}
+            disabled={loading}
+            className="aws-btn-primary"
+            style={{
+              padding: '8px 16px',
+              fontSize: '12px',
+            }}
+          >
+            EXEC
           </button>
         </div>
       </div>
