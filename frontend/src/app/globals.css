@@ -1,16 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=VT323&display=swap');
 @import "tailwindcss";
 
 :root {
+  /* Retain all original color tokens — light, crisp, high-contrast */
   --aws-bg: #f8fafc;
   --aws-surface: #ffffff;
-  --aws-header-bg: #0f172a;
+  --aws-header-bg: #ffffff;
   --aws-sidebar-bg: #ffffff;
   --aws-border: #e2e8f0;
-  --aws-border-dark: #cbd5e1;
+  --aws-border-dark: #0f172a;
   
   --aws-text-primary: #0f172a;
   --aws-text-secondary: #475569;
-  --aws-text-muted: #94a3b8;
+  --aws-text-muted: #64748b;
   
   --aws-orange: #ec7211;
   --aws-orange-hover: #d96206;
@@ -27,155 +29,216 @@
   --aws-status-blue-text: #0284c7;
   --aws-status-purple-bg: #faf5ff;
   --aws-status-purple-text: #7c3aed;
+
+  /* Neo-Brutalist & Retro-OS Design System Variables */
+  --retro-border-color: #0f172a;
+  --retro-border: 2px solid var(--retro-border-color);
+  --retro-border-thin: 1px solid var(--retro-border-color);
+  --retro-shadow: 4px 4px 0px var(--retro-border-color);
+  --retro-shadow-sm: 2px 2px 0px var(--retro-border-color);
+  --retro-shadow-lg: 6px 6px 0px var(--retro-border-color);
+  
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Mono', 'VT323', monospace;
 }
 
-* {
+/* Strict Zero Border Radius Across Entire Application */
+*, *::before, *::after {
   box-sizing: border-box;
+  border-radius: 0px !important;
+}
+
+body {
+  font-family: var(--font-display);
+  background-color: var(--aws-bg);
+  color: var(--aws-text-primary);
+  line-height: 1.5;
+  font-size: 13px;
+  -webkit-font-smoothing: antialiased;
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background-color: var(--aws-bg);
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
   color: var(--aws-text-primary);
-  line-height: 1.5;
-  font-size: 14px;
-  -webkit-font-smoothing: antialiased;
+  line-height: 1.2;
 }
 
-/* Crisp, minimal structured card boxes */
+h1 { font-size: 24px; }
+h2 { font-size: 18px; }
+h3 { font-size: 15px; }
+h4 { font-size: 13px; }
+
+/* Monospace UI Elements: Buttons, Badges, Metrics, Metadata, Controls */
+button, input, select, textarea, .mono, .retro-mono, code, pre {
+  font-family: var(--font-mono);
+}
+
+/* Neo-Brutalist / Retro-OS Window Cards */
 .aws-card {
   background: var(--aws-surface);
-  border: 1px solid var(--aws-border);
-  border-radius: 8px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03), 0 1px 2px -1px rgba(0, 0, 0, 0.02);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  border: var(--retro-border);
+  box-shadow: var(--retro-shadow);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
   overflow: hidden;
+  position: relative;
 }
 
 .aws-card:hover {
-  border-color: #cbd5e1;
+  box-shadow: 5px 5px 0px var(--retro-border-color);
 }
 
+/* Retro OS Window Titlebar */
 .aws-card-header {
-  padding: 14px 20px;
-  border-bottom: 1px solid var(--aws-border);
-  font-weight: 600;
-  font-size: 15px;
+  padding: 8px 14px;
+  background-color: #f1f5f9;
+  border-bottom: var(--retro-border);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
   color: var(--aws-text-primary);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: #ffffff;
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.aws-card-header .retro-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.aws-card-header .retro-controls span {
+  display: inline-block;
+  border: 1px solid var(--retro-border-color);
+  background: #ffffff;
+  padding: 1px 5px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--aws-text-primary);
 }
 
 .aws-card-body {
-  padding: 20px;
+  padding: 16px;
 }
 
-/* AWS Buttons */
+/* Neo-Brutalist Tactile Buttons with Zero Glow and Sharp Offset Shadow */
 .aws-btn-primary {
   background-color: var(--aws-orange);
   color: #ffffff;
-  border: 1px solid var(--aws-orange);
+  border: var(--retro-border);
+  box-shadow: var(--retro-shadow-sm);
   padding: 7px 16px;
-  font-size: 13px;
-  font-weight: 600;
-  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-mono);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.15s ease;
-  box-shadow: 0 1px 2px 0 rgba(236, 114, 17, 0.2);
   text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .aws-btn-primary:hover {
-  background-color: var(--aws-orange-hover);
-  border-color: var(--aws-orange-hover);
-  box-shadow: 0 2px 4px 0 rgba(236, 114, 17, 0.25);
-  transform: translateY(-0.5px);
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--retro-border-color);
 }
 
 .aws-btn-primary:active {
-  transform: translateY(0);
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px var(--retro-border-color);
 }
 
 .aws-btn-secondary {
   background-color: #ffffff;
   color: var(--aws-text-primary);
-  border: 1px solid var(--aws-border);
+  border: var(--retro-border);
+  box-shadow: var(--retro-shadow-sm);
   padding: 7px 16px;
-  font-size: 13px;
-  font-weight: 500;
-  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: var(--font-mono);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  transition: all 0.15s ease;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.02);
   text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .aws-btn-secondary:hover {
   background-color: #f8fafc;
-  border-color: #cbd5e1;
-  color: #0f172a;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px var(--retro-border-color);
 }
 
-/* Refined Minimalist Badges */
+.aws-btn-secondary:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px var(--retro-border-color);
+}
+
+/* Rectangular Outlined Badges */
 .aws-badge {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 3px 9px;
+  padding: 2px 7px;
   font-size: 11px;
-  font-weight: 600;
-  border-radius: 5px;
+  font-weight: 700;
+  font-family: var(--font-mono);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   line-height: 1.2;
+  border: 1px solid var(--retro-border-color);
+  box-shadow: 1px 1px 0px var(--retro-border-color);
 }
 
 .aws-badge-success {
   background-color: var(--aws-status-green-bg);
   color: var(--aws-status-green-text);
-  border: 1px solid rgba(5, 150, 105, 0.25);
+  border-color: var(--retro-border-color);
 }
 
 .aws-badge-warning {
   background-color: var(--aws-status-amber-bg);
   color: var(--aws-status-amber-text);
-  border: 1px solid rgba(217, 119, 6, 0.25);
+  border-color: var(--retro-border-color);
 }
 
 .aws-badge-danger {
   background-color: var(--aws-status-red-bg);
   color: var(--aws-status-red-text);
-  border: 1px solid rgba(220, 38, 38, 0.25);
+  border-color: var(--retro-border-color);
 }
 
 .aws-badge-info {
   background-color: var(--aws-status-blue-bg);
   color: var(--aws-status-blue-text);
-  border: 1px solid rgba(2, 132, 199, 0.25);
+  border-color: var(--retro-border-color);
 }
 
 .aws-badge-purple {
   background-color: var(--aws-status-purple-bg);
   color: var(--aws-status-purple-text);
-  border: 1px solid rgba(124, 58, 237, 0.25);
+  border-color: var(--retro-border-color);
 }
 
-/* AWS Table */
+/* Retro OS Tables */
 .aws-table-container {
   width: 100%;
   overflow-x: auto;
-  border: 1px solid var(--aws-border);
-  border-radius: 8px;
+  border: var(--retro-border);
+  box-shadow: var(--retro-shadow);
   background: var(--aws-surface);
 }
 
@@ -183,25 +246,37 @@ body {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .aws-table th {
-  background-color: #f8fafc;
-  color: #64748b;
-  font-weight: 600;
-  padding: 12px 18px;
-  border-bottom: 1px solid var(--aws-border);
+  background-color: #f1f5f9;
+  color: var(--aws-text-primary);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 10px 14px;
+  border-bottom: var(--retro-border);
+  border-right: 1px solid #cbd5e1;
   text-transform: uppercase;
   font-size: 11px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+}
+
+.aws-table th:last-child {
+  border-right: none;
 }
 
 .aws-table td {
-  padding: 14px 18px;
-  border-bottom: 1px solid #f1f5f9;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid #f1f5f9;
   color: var(--aws-text-primary);
   vertical-align: middle;
+  font-family: var(--font-mono);
+}
+
+.aws-table td:last-child {
+  border-right: none;
 }
 
 .aws-table tr:last-child td {
@@ -212,21 +287,63 @@ body {
   background-color: #f8fafc;
 }
 
-/* Scrollbar */
+/* Clean Sharp Inputs */
+input[type="text"], input[type="password"], input[type="search"], select, textarea {
+  border: var(--retro-border);
+  box-shadow: 2px 2px 0px var(--retro-border-color);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  padding: 6px 10px;
+  background-color: #ffffff;
+  color: var(--aws-text-primary);
+  outline: none;
+  transition: all 0.12s ease;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:focus {
+  box-shadow: 3px 3px 0px var(--aws-orange);
+  border-color: var(--retro-border-color);
+}
+
+/* Monospace Dashed Divider */
+.retro-divider {
+  width: 100%;
+  border: none;
+  border-bottom: 2px dashed var(--retro-border-color);
+  margin: 16px 0;
+}
+
+/* Retro Progress Gauge */
+.retro-gauge {
+  width: 100%;
+  height: 10px;
+  background-color: #e2e8f0;
+  border: 1.5px solid var(--retro-border-color);
+  overflow: hidden;
+  position: relative;
+}
+
+.retro-gauge-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* High-Contrast Crisp Square Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f5f9;
+  border-left: 1px solid #cbd5e1;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
-  border-radius: 3px;
+  background: #0f172a;
+  border: 1px solid #ffffff;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #a8a8a8;
+  background: #ec7211;
 }
