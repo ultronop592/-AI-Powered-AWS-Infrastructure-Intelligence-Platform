@@ -9,8 +9,19 @@ export default function Sidebar() {
 
   const navItems = [
     {
-      label: 'Overview',
+      label: 'Home HQ',
       href: '/',
+      icon: (
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+        </svg>
+      ),
+      badge: 'HQ',
+    },
+    {
+      label: 'Live Dashboard',
+      href: '/overview',
       icon: (
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="3" width="7" height="7"></rect>
@@ -19,6 +30,7 @@ export default function Sidebar() {
           <rect x="3" y="14" width="7" height="7"></rect>
         </svg>
       ),
+      badge: 'OPS',
     },
     {
       label: 'Cost Explorer',
