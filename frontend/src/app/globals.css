@@ -319,16 +319,86 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
   height: 10px;
   background-color: #e2e8f0;
   border: 1.5px solid var(--retro-border-color);
+  box-shadow: 1px 1px 0px var(--retro-border-color);
   overflow: hidden;
-  position: relative;
 }
 
 .retro-gauge-fill {
   height: 100%;
+  background-color: var(--aws-orange);
   transition: width 0.3s ease;
 }
 
-/* High-Contrast Crisp Square Scrollbars */
+/* Micro Animations (No Glow, Crisp Neo-Brutalist Mechanical Feel) */
+@keyframes neo-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.94); }
+}
+
+@keyframes neo-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-3px); }
+}
+
+.anim-pulse {
+  animation: neo-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.anim-float {
+  animation: neo-float 3s ease-in-out infinite;
+}
+
+/* Hover Neo-Brutalist Interactive Elevation */
+.hover-neo {
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.12s cubic-bezier(0.2, 0, 0, 1), background-color 0.12s ease;
+}
+
+.hover-neo:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0px #0f172a !important;
+}
+
+/* Vibrant Curated Card Tints (Neo-Brutalist Light Mode) */
+.card-tint-orange {
+  background-color: #fffaf5 !important;
+  border: 2px solid #0f172a !important;
+  border-left: 5px solid #ec7211 !important;
+}
+
+.card-tint-blue {
+  background-color: #f0f9ff !important;
+  border: 2px solid #0f172a !important;
+  border-left: 5px solid #0284c7 !important;
+}
+
+.card-tint-green {
+  background-color: #f0fdf4 !important;
+  border: 2px solid #0f172a !important;
+  border-left: 5px solid #059669 !important;
+}
+
+.card-tint-purple {
+  background-color: #faf5ff !important;
+  border: 2px solid #0f172a !important;
+  border-left: 5px solid #7c3aed !important;
+}
+
+.card-tint-amber {
+  background-color: #fffbeb !important;
+  border: 2px solid #0f172a !important;
+  border-left: 5px solid #d97706 !important;
+}
+
+/* Enhanced Colorful Tables */
+.aws-table tr:nth-child(even) td {
+  background-color: #f8fafc;
+}
+
+.aws-table tr:hover td {
+  background-color: #fff7ed !important;
+}
+
+/* Custom Sharp Scrollbars */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -336,14 +406,14 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
 
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
-  border-left: 1px solid #cbd5e1;
+  border-left: 1px solid var(--retro-border-color);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0f172a;
-  border: 1px solid #ffffff;
+  background: #cbd5e1;
+  border: 1px solid var(--retro-border-color);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ec7211;
+  background: var(--aws-orange);
 }

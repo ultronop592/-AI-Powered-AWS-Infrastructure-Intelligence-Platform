@@ -6,6 +6,30 @@ import { usePathname } from 'next/navigation';
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [isCollapsed, setIsCollapsed] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    try {
+      const saved = localStorage.getItem('cloudops_sidebar_collapsed');
+      if (saved !== null) {
+        setIsCollapsed(saved === 'true');
+      }
+    } catch {
+      // Ignore localStorage read errors in SSR
+    }
+  }, []);
+
+  const toggleCollapse = () => {
+    setIsCollapsed((prev) => {
+      const next = !prev;
+      try {
+        localStorage.setItem('cloudops_sidebar_collapsed', String(next));
+      } catch {
+        // Ignore
+      }
+      return next;
+    });
+  };
 
   const navItems = [
     {
@@ -161,18 +185,22 @@ export default function Sidebar() {
 
   return (
     <aside style={{
-      width: '240px',
+      width: isCollapsed ? '68px' : '240px',
+      transition: 'width 0.18s cubic-bezier(0.2, 0, 0, 1)',
       backgroundColor: '#ffffff',
       borderRight: '2px solid #0f172a',
       minHeight: 'calc(100vh - 56px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      paddingBottom: '12px'
+      paddingBottom: '12px',
+      overflow: 'hidden',
+      flexShrink: 0
     }}>
       <div>
+        {/* Sidebar Header with IN/OUT Toggle Button */}
         <div style={{
-          padding: '14px 16px 8px 16px',
+          padding: isCollapsed ? '12px 6px 8px 6px' : '12px 14px 8px 14px',
           fontSize: '11px',
           fontWeight: 700,
           fontFamily: 'var(--font-mono)',
@@ -180,27 +208,52 @@ export default function Sidebar() {
           letterSpacing: '0.04em',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: isCollapsed ? 'center' : 'space-between',
+          borderBottom: '1px solid #f1f5f9',
+          marginBottom: '6px'
         }}>
-          <span>[SYS_MODULES]</span>
-          <span>::</span>
+          {!isCollapsed && <span>[SYS_MODULES]</span>}
+          <button
+            onClick={toggleCollapse}
+            title={isCollapsed ? 'Expand Sidebar [OUT]' : 'Collapse Sidebar [IN]'}
+            aria-label={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
+            style={{
+              padding: isCollapsed ? '4px 6px' : '3px 8px',
+              backgroundColor: isCollapsed ? '#ffedd5' : '#ffffff',
+              color: isCollapsed ? '#c2410c' : '#0f172a',
+              border: '1.5px solid #0f172a',
+              boxShadow: '1.5px 1.5px 0px #0f172a',
+              fontSize: '10px',
+              fontFamily: 'var(--font-mono)',
+              fontWeight: 800,
+              cursor: 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '4px',
+              transition: 'all 0.1s ease'
+            }}
+          >
+            {isCollapsed ? 'OUT ▶' : '◀ IN'}
+          </button>
         </div>
 
-        <nav style={{ padding: '0 8px' }}>
+        {/* Navigation Items */}
+        <nav style={{ padding: '0 6px' }}>
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
                 key={item.href}
                 href={item.href}
+                title={item.label}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
-                  padding: '7px 10px',
+                  justifyContent: isCollapsed ? 'center' : 'space-between',
+                  padding: isCollapsed ? '8px 4px' : '7px 10px',
                   fontSize: '12px',
                   fontFamily: 'var(--font-mono)',
-                  fontWeight: isActive ? 700 : 500,
+                  fontWeight: isActive ? 800 : 600,
                   color: '#0f172a',
                   backgroundColor: isActive ? '#fff7ed' : 'transparent',
                   border: isActive ? '1.5px solid #0f172a' : '1.5px solid transparent',
@@ -211,10 +264,13 @@ export default function Sidebar() {
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  <span style={{ color: isActive ? '#ec7211' : '#0f172a' }}>{item.icon}</span>
-                  <span>{item.label}</span>
+                  <span style={{ color: isActive ? '#ec7211' : '#0f172a', display: 'flex', alignItems: 'center' }}>
+                    {item.icon}
+                  </span>
+                  {!isCollapsed && <span style={{ whiteSpace: 'nowrap' }}>{item.label}</span>}
                 </div>
-                {item.badge && (
+
+                {!isCollapsed && item.badge && (
                   <span style={{
                     fontSize: '9px',
                     fontFamily: 'var(--font-mono)',
@@ -223,7 +279,8 @@ export default function Sidebar() {
                     padding: '1px 5px',
                     border: '1px solid #0f172a',
                     fontWeight: 700,
-                    letterSpacing: '0.02em'
+                    letterSpacing: '0.02em',
+                    whiteSpace: 'nowrap'
                   }}>
                     {item.badge}
                   </span>
@@ -236,26 +293,36 @@ export default function Sidebar() {
 
       {/* Retro Status Card */}
       <div style={{
-        margin: '12px 10px 0 10px',
-        padding: '10px 12px',
+        margin: isCollapsed ? '8px 4px 0 4px' : '12px 10px 0 10px',
+        padding: isCollapsed ? '6px 4px' : '10px 12px',
         border: '2px solid #0f172a',
-        boxShadow: '3px 3px 0px #0f172a',
+        boxShadow: '2px 2px 0px #0f172a',
         backgroundColor: '#ffffff',
         fontSize: '11px',
         fontFamily: 'var(--font-mono)',
-        color: '#0f172a'
+        color: '#0f172a',
+        textAlign: isCollapsed ? 'center' : 'left'
       }}>
-        <div style={{ fontWeight: 700, marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-            <span style={{ width: '6px', height: '6px', backgroundColor: '#059669', display: 'inline-block' }}></span>
-            BEDROCK_ONLINE
-          </span>
-          <span style={{ fontSize: '9px', color: '#64748b' }}>[OK]</span>
-        </div>
-        <div style={{ fontSize: '10px', lineHeight: '1.4', color: '#475569' }}>
-          MODEL: Nova-Lite-1.0<br />
-          REGION: us-east-1
-        </div>
+        {isCollapsed ? (
+          <div title="Bedrock Model Online: Nova-Lite-1.0 (us-east-1)" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}>
+            <span style={{ width: '8px', height: '8px', backgroundColor: '#059669', display: 'inline-block' }} className="anim-pulse"></span>
+            <span style={{ fontSize: '8px', fontWeight: 800 }}>OK</span>
+          </div>
+        ) : (
+          <>
+            <div style={{ fontWeight: 800, marginBottom: '4px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+                <span style={{ width: '6px', height: '6px', backgroundColor: '#059669', display: 'inline-block' }} className="anim-pulse"></span>
+                BEDROCK_ONLINE
+              </span>
+              <span style={{ fontSize: '9px', color: '#64748b' }}>[OK]</span>
+            </div>
+            <div style={{ fontSize: '10px', lineHeight: '1.4', color: '#475569' }}>
+              MODEL: Nova-Lite-1.0<br />
+              REGION: us-east-1
+            </div>
+          </>
+        )}
       </div>
     </aside>
   );

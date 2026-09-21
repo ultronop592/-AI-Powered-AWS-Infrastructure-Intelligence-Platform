@@ -51,20 +51,20 @@ export default function HomePage() {
       <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
 
-        <main style={{ flex: 1, padding: '24px 32px', backgroundColor: '#f8fafc', overflowY: 'auto' }}>
+        <main style={{ flex: 1, padding: '20px 28px', backgroundColor: '#f8fafc', overflowY: 'auto' }}>
           
-          {/* Top Retro System Header Bar */}
+          {/* Top Status Header */}
           <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
-            gap: '12px',
-            marginBottom: '24px',
-            paddingBottom: '16px',
+            gap: '10px',
+            marginBottom: '18px',
+            paddingBottom: '12px',
             borderBottom: '2px solid #0f172a'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span style={{
                 fontSize: '11px',
                 fontFamily: 'var(--font-mono)',
@@ -72,107 +72,116 @@ export default function HomePage() {
                 color: '#ffffff',
                 padding: '3px 8px',
                 fontWeight: 800,
-                letterSpacing: '0.05em'
               }}>
-                [PRODUCT_HQ.EXE]
+                [PRODUCT_HQ]
               </span>
-              <span style={{ fontSize: '12px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 600 }}>
-                :: SYSTEM_SPECIFICATION &amp; OPERATIONAL_MANUAL
+              <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700 }}>
+                :: AUTONOMOUS_AWS_INTELLIGENCE_PLATFORM
               </span>
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{
+              <span className="anim-pulse" style={{
                 fontSize: '11px',
                 fontFamily: 'var(--font-mono)',
                 backgroundColor: '#ecfdf5',
                 color: '#059669',
                 border: '1.5px solid #059669',
-                padding: '3px 8px',
-                fontWeight: 700
+                padding: '2px 8px',
+                fontWeight: 800,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '5px'
               }}>
-                ● ENGINE: BEDROCK_NOVA_LITE
+                <span style={{ width: '6px', height: '6px', backgroundColor: '#059669', display: 'inline-block' }}></span>
+                BEDROCK_NOVA_ONLINE
               </span>
               <span style={{
                 fontSize: '11px',
                 fontFamily: 'var(--font-mono)',
-                backgroundColor: '#ffffff',
-                color: '#0f172a',
-                border: '1.5px solid #0f172a',
-                padding: '3px 8px',
-                fontWeight: 700,
-                boxShadow: '1.5px 1.5px 0px #0f172a'
+                backgroundColor: '#eff6ff',
+                color: '#0284c7',
+                border: '1.5px solid #0284c7',
+                padding: '2px 8px',
+                fontWeight: 800
               }}>
-                BUILD: v2.0-STABLE
+                STS: CLIENT_ISOLATED
               </span>
             </div>
           </div>
 
           {/* ================= HERO FRAME ================= */}
-          <div style={{
+          <div className="hover-neo" style={{
             backgroundColor: '#ffffff',
             border: '2px solid #0f172a',
-            boxShadow: '6px 6px 0px #0f172a',
-            padding: '32px 36px',
-            marginBottom: '32px',
+            boxShadow: '4px 4px 0px #0f172a',
+            padding: '24px 28px',
+            marginBottom: '24px',
             position: 'relative'
           }}>
-            <div style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              backgroundColor: '#fff7ed',
-              border: '1.5px solid #ec7211',
-              color: '#c2410c',
-              padding: '3px 10px',
-              fontSize: '11px',
-              fontFamily: 'var(--font-mono)',
-              fontWeight: 800,
-              marginBottom: '16px',
-              letterSpacing: '0.04em'
-            }}>
-              <span>⚡</span> AUTONOMOUS INFRASTRUCTURE GOVERNANCE &amp; FINOPS CONTROL PLANE
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px', marginBottom: '12px' }}>
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                backgroundColor: '#ffedd5',
+                border: '1.5px solid #ea580c',
+                color: '#9a3412',
+                padding: '2px 10px',
+                fontSize: '11px',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 800,
+              }}>
+                <span className="anim-float">⚡</span> AUTONOMOUS FINOPS &amp; SECOPS CONTROL PLANE
+              </div>
+              <span style={{
+                fontSize: '11px',
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 800,
+                color: '#475569',
+                backgroundColor: '#f1f5f9',
+                border: '1px solid #cbd5e1',
+                padding: '2px 6px'
+              }}>
+                v2.0_READY
+              </span>
             </div>
 
             <h1 style={{
-              fontSize: '34px',
+              fontSize: '30px',
               fontWeight: 800,
               color: '#0f172a',
               fontFamily: 'var(--font-display)',
               letterSpacing: '-0.03em',
-              lineHeight: 1.2,
-              marginBottom: '14px',
-              maxWidth: '900px'
+              lineHeight: 1.15,
+              marginBottom: '10px',
             }}>
-              Autonomous AWS Cloud Intelligence, Cost Optimization &amp; Self-Healing Infrastructure
+              Autonomous AWS Cloud Intelligence &amp; 1-Click Self-Healing
             </h1>
 
             <p style={{
-              fontSize: '15px',
+              fontSize: '14px',
               color: '#475569',
-              lineHeight: '1.7',
-              maxWidth: '850px',
-              marginBottom: '26px',
-              fontFamily: 'var(--font-sans)'
+              lineHeight: '1.5',
+              maxWidth: '820px',
+              marginBottom: '20px',
             }}>
-              A high-precision, zero-agent platform engineered for DevOps, FinOps, and SRE teams. 
-              Continuously ingests multi-service telemetry, synthesizes root-cause insights with 
-              <strong> Amazon Bedrock (Nova Lite)</strong>, and executes deterministic 1-click 
-              remediations across EC2, S3, RDS, EBS, Lambda, and Security tiers.
+              Zero-agent observability. Ingests CloudWatch telemetry, analyzes root causes with <strong>Amazon Bedrock (Nova Lite)</strong>, 
+              and executes instant 1-click remediations across EC2, S3, RDS, EBS, and IAM.
             </p>
 
-            {/* Hero Interactive Launchpad CTAs */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
+            {/* Hero Launchpad Buttons */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', alignItems: 'center' }}>
               <Link
                 href="/overview"
                 className="aws-btn-primary"
                 style={{
-                  padding: '10px 22px',
-                  fontSize: '13px',
+                  padding: '9px 18px',
+                  fontSize: '12px',
                   textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '8px'
+                  backgroundColor: '#ec7211',
+                  color: '#ffffff',
+                  boxShadow: '3px 3px 0px #0f172a'
                 }}
               >
                 <span>🚀 LAUNCH LIVE DASHBOARD</span>
@@ -181,42 +190,42 @@ export default function HomePage() {
 
               <button
                 onClick={() => setIsCopilotOpen(true)}
-                className="aws-btn-secondary"
+                className="aws-btn-secondary hover-neo"
                 style={{
-                  padding: '10px 18px',
-                  fontSize: '13px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px'
+                  padding: '9px 16px',
+                  fontSize: '12px',
+                  backgroundColor: '#faf5ff',
+                  borderColor: '#7c3aed',
+                  color: '#6d28d9'
                 }}
               >
-                <span>🤖</span> ASK BEDROCK COPILOT
+                <span>🤖</span> BEDROCK AI COPILOT
               </button>
 
               <button
                 onClick={() => setIsAWSModalOpen(true)}
-                className="aws-btn-secondary"
+                className="aws-btn-secondary hover-neo"
                 style={{
-                  padding: '10px 18px',
-                  fontSize: '13px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px'
+                  padding: '9px 16px',
+                  fontSize: '12px',
+                  backgroundColor: '#f0fdf4',
+                  borderColor: '#059669',
+                  color: '#047857'
                 }}
               >
-                <span>🔑</span> CONNECT LIVE AWS STS
+                <span>🔑</span> CONNECT AWS STS
               </button>
 
               <Link
                 href="/cost"
-                className="aws-btn-secondary"
+                className="aws-btn-secondary hover-neo"
                 style={{
-                  padding: '10px 18px',
-                  fontSize: '13px',
+                  padding: '9px 16px',
+                  fontSize: '12px',
                   textDecoration: 'none',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '6px'
+                  backgroundColor: '#f0f9ff',
+                  borderColor: '#0284c7',
+                  color: '#0369a1'
                 }}
               >
                 <span>💰</span> FINOPS EXPLORER
@@ -226,53 +235,53 @@ export default function HomePage() {
             {/* Live Telemetry Ribbon */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-              gap: '12px',
-              marginTop: '28px',
-              paddingTop: '20px',
-              borderTop: '2px dashed #cbd5e1'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+              gap: '10px',
+              marginTop: '20px',
+              paddingTop: '16px',
+              borderTop: '2px dashed #e2e8f0'
             }}>
-              <div>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700 }}>
-                  [ACTIVE_SPEND_TRACKED]
+              <div style={{ backgroundColor: '#fffaf5', border: '1.5px solid #ea580c', padding: '8px 12px' }}>
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#c2410c', fontWeight: 800 }}>
+                  [MONTHLY_SPEND]
                 </div>
-                <div style={{ fontSize: '18px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0f172a' }}>
-                  ${summary.monthly_cost.toFixed(2)} USD/mo
-                </div>
-              </div>
-
-              <div>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700 }}>
-                  [REMEDIATIONS_READY]
-                </div>
-                <div style={{ fontSize: '18px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#ec7211' }}>
-                  {recommendations.length} Auto-Fix Actions
+                <div style={{ fontSize: '17px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0f172a' }}>
+                  ${summary.monthly_cost.toFixed(2)}/mo
                 </div>
               </div>
 
-              <div>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700 }}>
+              <div style={{ backgroundColor: '#f0fdf4', border: '1.5px solid #059669', padding: '8px 12px' }}>
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#047857', fontWeight: 800 }}>
+                  [AUTO_FIX_ACTIONS]
+                </div>
+                <div style={{ fontSize: '17px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#059669' }}>
+                  {recommendations.length} Detected
+                </div>
+              </div>
+
+              <div style={{ backgroundColor: '#eff6ff', border: '1.5px solid #0284c7', padding: '8px 12px' }}>
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#0369a1', fontWeight: 800 }}>
                   [SECURITY_AUDIT]
                 </div>
-                <div style={{ fontSize: '18px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#059669' }}>
-                  SEC-001 Enforced
+                <div style={{ fontSize: '17px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0284c7' }}>
+                  SEC-001 PASS
                 </div>
               </div>
 
-              <div>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700 }}>
-                  [ARCHITECTURE]
+              <div style={{ backgroundColor: '#faf5ff', border: '1.5px solid #7c3aed', padding: '8px 12px' }}>
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#6d28d9', fontWeight: 800 }}>
+                  [INFRA_DAG]
                 </div>
-                <div style={{ fontSize: '18px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0284c7' }}>
-                  100% Agentless STS
+                <div style={{ fontSize: '17px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#7c3aed' }}>
+                  100% Agentless
                 </div>
               </div>
             </div>
           </div>
 
           {/* ================= SECTION 1: WHAT IS THIS PROJECT? ================= */}
-          <div style={{ marginBottom: '36px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+          <div style={{ marginBottom: '28px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
               <span style={{
                 fontSize: '11px',
                 fontFamily: 'var(--font-mono)',
@@ -282,158 +291,175 @@ export default function HomePage() {
                 fontWeight: 800,
                 border: '1.5px solid #0f172a'
               }}>
-                [01_CORE_FOUNDATION]
+                [01_CORE]
               </span>
-              <h2 style={{
-                fontSize: '20px',
-                fontWeight: 800,
-                color: '#0f172a',
-                fontFamily: 'var(--font-display)',
-                letterSpacing: '-0.02em',
-                margin: 0
-              }}>
+              <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
                 What is This Project?
               </h2>
             </div>
-            <p style={{ fontSize: '13px', color: '#475569', marginBottom: '16px', maxWidth: '750px' }}>
-              CloudOps AI is an enterprise-grade autonomous intelligence platform that bridges CloudWatch observability, 
-              FinOps cost governance, and security posture enforcement into a unified, high-speed HUD.
-            </p>
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '16px'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '14px'
             }}>
-              {/* Card 1 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              {/* Card 1: Blue */}
+              <div className="hover-neo" style={{
+                backgroundColor: '#f0f9ff',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px',
-                position: 'relative'
+                borderLeft: '6px solid #0284c7',
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '16px'
               }}>
-                <div style={{
-                  height: '4px',
-                  backgroundColor: '#0284c7',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0
-                }}></div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                  <span style={{ fontSize: '18px' }}>📡</span>
-                  <span style={{ fontSize: '13px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0f172a' }}>
-                    Agentless Telemetry Ingestion
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '20px' }}>📡</span>
+                  <span style={{
+                    fontSize: '10px',
+                    fontFamily: 'var(--font-mono)',
+                    backgroundColor: '#e0f2fe',
+                    color: '#0369a1',
+                    padding: '2px 6px',
+                    border: '1px solid #0284c7',
+                    fontWeight: 800
+                  }}>
+                    ZERO_AGENT
                   </span>
                 </div>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.6', margin: 0 }}>
-                  Zero agent installation and zero root privileges required. Ingests live telemetry, resource states, 
-                  and cost metrics directly via official AWS SDKs (Boto3 / STS) with zero daemon overhead.
+                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>
+                  Telemetry Ingestion
+                </h3>
+                <p style={{ fontSize: '12px', color: '#334155', lineHeight: '1.4', margin: '0 0 10px 0' }}>
+                  Direct AWS SDK polling for EC2, S3, RDS, EBS, Lambda, and CloudWatch. Zero host agents or root privileges.
                 </p>
-                <div style={{ marginTop: '12px', fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#0284c7', fontWeight: 700 }}>
-                  → EC2, S3, RDS, EBS, Lambda, CloudWatch
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #0284c7', padding: '1px 5px', color: '#0284c7', fontWeight: 700 }}>
+                    Boto3 Core
+                  </span>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #0284c7', padding: '1px 5px', color: '#0284c7', fontWeight: 700 }}>
+                    Sub-second DAG
+                  </span>
                 </div>
               </div>
 
-              {/* Card 2 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              {/* Card 2: Orange */}
+              <div className="hover-neo" style={{
+                backgroundColor: '#fffaf5',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px',
-                position: 'relative'
+                borderLeft: '6px solid #ec7211',
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '16px'
               }}>
-                <div style={{
-                  height: '4px',
-                  backgroundColor: '#ec7211',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0
-                }}></div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                  <span style={{ fontSize: '18px' }}>🧠</span>
-                  <span style={{ fontSize: '13px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0f172a' }}>
-                    Bedrock AI Generative Reasoning
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '20px' }}>🧠</span>
+                  <span style={{
+                    fontSize: '10px',
+                    fontFamily: 'var(--font-mono)',
+                    backgroundColor: '#ffedd5',
+                    color: '#c2410c',
+                    padding: '2px 6px',
+                    border: '1px solid #ec7211',
+                    fontWeight: 800
+                  }}>
+                    NOVA_LITE
                   </span>
                 </div>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.6', margin: 0 }}>
-                  Powered by <strong>Amazon Bedrock (Nova Lite)</strong>. Translates raw telemetry spikes into concise, 
-                  human-understandable root-cause narratives and synthesizes production-ready Terraform (HCL) snippets.
+                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>
+                  Bedrock AI Reasoning
+                </h3>
+                <p style={{ fontSize: '12px', color: '#334155', lineHeight: '1.4', margin: '0 0 10px 0' }}>
+                  Synthesizes alarms into plain root causes and instantly generates drop-in Terraform (HCL) fixes.
                 </p>
-                <div style={{ marginTop: '12px', fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#ec7211', fontWeight: 700 }}>
-                  → Instant IaC generation &amp; anomaly explanations
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #ec7211', padding: '1px 5px', color: '#ec7211', fontWeight: 700 }}>
+                    Terraform Gen
+                  </span>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #ec7211', padding: '1px 5px', color: '#ec7211', fontWeight: 700 }}>
+                    Cost Attribution
+                  </span>
                 </div>
               </div>
 
-              {/* Card 3 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              {/* Card 3: Green */}
+              <div className="hover-neo" style={{
+                backgroundColor: '#f0fdf4',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px',
-                position: 'relative'
+                borderLeft: '6px solid #059669',
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '16px'
               }}>
-                <div style={{
-                  height: '4px',
-                  backgroundColor: '#059669',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0
-                }}></div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                  <span style={{ fontSize: '18px' }}>⚡</span>
-                  <span style={{ fontSize: '13px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0f172a' }}>
-                    Deterministic 1-Click Auto-Fix
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '20px' }}>⚡</span>
+                  <span style={{
+                    fontSize: '10px',
+                    fontFamily: 'var(--font-mono)',
+                    backgroundColor: '#dcfce7',
+                    color: '#15803d',
+                    padding: '2px 6px',
+                    border: '1px solid #059669',
+                    fontWeight: 800
+                  }}>
+                    1-CLICK_FIX
                   </span>
                 </div>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.6', margin: 0 }}>
-                  Not just alerts—active closed-loop remediation. Safely stop idle instances, upgrade legacy `gp2` EBS 
-                  volumes to `gp3`, revoke dangerous SSH 0.0.0.0/0 rules, and enforce bucket encryption with rollback logs.
+                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>
+                  Deterministic Auto-Fix
+                </h3>
+                <p style={{ fontSize: '12px', color: '#334155', lineHeight: '1.4', margin: '0 0 10px 0' }}>
+                  Safely stops idle compute, converts gp2 to gp3 (20% savings), and locks down public SSH with rollback logs.
                 </p>
-                <div style={{ marginTop: '12px', fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#059669', fontWeight: 700 }}>
-                  → 1-click execution with full audit trail
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #059669', padding: '1px 5px', color: '#059669', fontWeight: 700 }}>
+                    Audit Receipts
+                  </span>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #059669', padding: '1px 5px', color: '#059669', fontWeight: 700 }}>
+                    Safe Rollback
+                  </span>
                 </div>
               </div>
 
-              {/* Card 4 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              {/* Card 4: Purple */}
+              <div className="hover-neo" style={{
+                backgroundColor: '#faf5ff',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px',
-                position: 'relative'
+                borderLeft: '6px solid #7c3aed',
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '16px'
               }}>
-                <div style={{
-                  height: '4px',
-                  backgroundColor: '#7c3aed',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  right: 0
-                }}></div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-                  <span style={{ fontSize: '18px' }}>🔒</span>
-                  <span style={{ fontSize: '13px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0f172a' }}>
-                    Zero-Trust Ephemeral STS Security
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+                  <span style={{ fontSize: '20px' }}>🔒</span>
+                  <span style={{
+                    fontSize: '10px',
+                    fontFamily: 'var(--font-mono)',
+                    backgroundColor: '#f3e8ff',
+                    color: '#7e22ce',
+                    padding: '2px 6px',
+                    border: '1px solid #7c3aed',
+                    fontWeight: 800
+                  }}>
+                    STS_ISOLATED
                   </span>
                 </div>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.6', margin: 0 }}>
-                  IAM access keys are validated directly against AWS STS and immediately discarded from memory. 
-                  Only temporary session tokens exist in the client. Zero credential persistence to backend disk.
+                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', marginBottom: '4px' }}>
+                  Ephemeral Security
+                </h3>
+                <p style={{ fontSize: '12px', color: '#334155', lineHeight: '1.4', margin: '0 0 10px 0' }}>
+                  Zero credential persistence on disk. Validated via STS GetCallerIdentity; temporary tokens only in memory.
                 </p>
-                <div style={{ marginTop: '12px', fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#7c3aed', fontWeight: 700 }}>
-                  → Client-side isolation &amp; complete privacy
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #7c3aed', padding: '1px 5px', color: '#7c3aed', fontWeight: 700 }}>
+                    0-Byte Leakage
+                  </span>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #7c3aed', padding: '1px 5px', color: '#7c3aed', fontWeight: 700 }}>
+                    Client Isolated
+                  </span>
                 </div>
               </div>
             </div>
           </div>
 
           {/* ================= SECTION 2: WHERE IS IT USED? ================= */}
-          <div style={{ marginBottom: '36px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+          <div style={{ marginBottom: '28px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
               <span style={{
                 fontSize: '11px',
                 fontFamily: 'var(--font-mono)',
@@ -443,161 +469,119 @@ export default function HomePage() {
                 fontWeight: 800,
                 border: '1.5px solid #0f172a'
               }}>
-                [02_DEPLOYMENT_DOMAINS]
+                [02_DOMAINS]
               </span>
-              <h2 style={{
-                fontSize: '20px',
-                fontWeight: 800,
-                color: '#0f172a',
-                fontFamily: 'var(--font-display)',
-                letterSpacing: '-0.02em',
-                margin: 0
-              }}>
+              <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
                 Where is It Used?
               </h2>
             </div>
-            <p style={{ fontSize: '13px', color: '#475569', marginBottom: '16px', maxWidth: '750px' }}>
-              Designed to solve acute operational pain points across engineering, finance, and security departments.
-            </p>
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '16px'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+              gap: '14px'
             }}>
-              {/* Domain 1 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              {/* Domain 1: FinOps */}
+              <div className="hover-neo" style={{
+                backgroundColor: '#fffaf5',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px'
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '16px'
               }}>
-                <div style={{
-                  fontSize: '11px',
-                  fontFamily: 'var(--font-mono)',
-                  backgroundColor: '#ecfdf5',
-                  color: '#047857',
-                  border: '1px solid #059669',
-                  display: 'inline-block',
-                  padding: '2px 6px',
-                  fontWeight: 800,
-                  marginBottom: '10px'
-                }}>
-                  FINOPS &amp; CLOUD ECONOMICS
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '18px' }}>💰</span>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffedd5', color: '#c2410c', padding: '2px 6px', border: '1px solid #ea580c', fontWeight: 800 }}>
+                    FINOPS
+                  </span>
                 </div>
-                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
+                <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#0f172a', margin: '0 0 4px 0' }}>
                   Cloud Waste Elimination
                 </h3>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.6' }}>
-                  Used by engineering leaders and finance controllers to eliminate $5,000–$50,000/mo in abandoned EBS 
-                  volumes, zombie dev EC2 instances running over weekends, and outdated storage allocations.
+                <p style={{ fontSize: '12px', color: '#475569', margin: '0 0 8px 0', lineHeight: '1.4' }}>
+                  Removes unattached EBS volumes, zombie EC2 dev instances, and over-provisioned Lambda memory.
                 </p>
-                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#0f172a', fontWeight: 700 }}>
-                  ROI: 20% to 45% immediate AWS bill reduction
+                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#c2410c', fontWeight: 800 }}>
+                  ★ 20% – 45% Monthly Cost Reduction
                 </div>
               </div>
 
-              {/* Domain 2 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              {/* Domain 2: DevSecOps */}
+              <div className="hover-neo" style={{
+                backgroundColor: '#fef2f2',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px'
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '16px'
               }}>
-                <div style={{
-                  fontSize: '11px',
-                  fontFamily: 'var(--font-mono)',
-                  backgroundColor: '#fef2f2',
-                  color: '#b91c1c',
-                  border: '1px solid #dc2626',
-                  display: 'inline-block',
-                  padding: '2px 6px',
-                  fontWeight: 800,
-                  marginBottom: '10px'
-                }}>
-                  DEVSECOPS &amp; SECURITY TEAMS
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '18px' }}>🛡️</span>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#fee2e2', color: '#b91c1c', padding: '2px 6px', border: '1px solid #dc2626', fontWeight: 800 }}>
+                    DEVSECOPS
+                  </span>
                 </div>
-                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
+                <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#0f172a', margin: '0 0 4px 0' }}>
                   Security Posture Hardening
                 </h3>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.6' }}>
-                  Identifies open SSH/RDP ports exposed to `0.0.0.0/0`, unencrypted S3 buckets, and overly permissive 
-                  security group rules, offering instant one-click automated revocation before audit penalties.
+                <p style={{ fontSize: '12px', color: '#475569', margin: '0 0 8px 0', lineHeight: '1.4' }}>
+                  Detects and revokes open SSH Port 22, public S3 buckets, and unencrypted storage before audits.
                 </p>
-                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#0f172a', fontWeight: 700 }}>
-                  ROI: Sub-minute MTTR for critical vulnerabilities
+                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#b91c1c', fontWeight: 800 }}>
+                  ★ &lt; 60s Vulnerability MTTR
                 </div>
               </div>
 
-              {/* Domain 3 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              {/* Domain 3: SRE */}
+              <div className="hover-neo" style={{
+                backgroundColor: '#faf5ff',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px'
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '16px'
               }}>
-                <div style={{
-                  fontSize: '11px',
-                  fontFamily: 'var(--font-mono)',
-                  backgroundColor: '#f5f3ff',
-                  color: '#6d28d9',
-                  border: '1px solid #7c3aed',
-                  display: 'inline-block',
-                  padding: '2px 6px',
-                  fontWeight: 800,
-                  marginBottom: '10px'
-                }}>
-                  SRE &amp; CLOUD ARCHITECTS
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '18px' }}>🏛️</span>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#f3e8ff', color: '#7e22ce', padding: '2px 6px', border: '1px solid #7c3aed', fontWeight: 800 }}>
+                    SRE_ARCH
+                  </span>
                 </div>
-                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
-                  Well-Architected Auditing
+                <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#0f172a', margin: '0 0 4px 0' }}>
+                  Well-Architected Radar
                 </h3>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.6' }}>
-                  Evaluates existing production stacks against the 5 pillars of the AWS Well-Architected Framework: 
-                  Cost, Security, Reliability, Performance, and Operational Excellence with radar balance scoring.
+                <p style={{ fontSize: '12px', color: '#475569', margin: '0 0 8px 0', lineHeight: '1.4' }}>
+                  Scores active fleets across 5 AWS pillars: Cost, Security, Reliability, Performance, and Ops.
                 </p>
-                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#0f172a', fontWeight: 700 }}>
-                  ROI: 100% compliance alignment with AWS best practices
+                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#7e22ce', fontWeight: 800 }}>
+                  ★ 100% Best-Practice Alignment
                 </div>
               </div>
 
-              {/* Domain 4 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              {/* Domain 4: Startups */}
+              <div className="hover-neo" style={{
+                backgroundColor: '#f0fdf4',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px'
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '16px'
               }}>
-                <div style={{
-                  fontSize: '11px',
-                  fontFamily: 'var(--font-mono)',
-                  backgroundColor: '#fff7ed',
-                  color: '#c2410c',
-                  border: '1px solid #ec7211',
-                  display: 'inline-block',
-                  padding: '2px 6px',
-                  fontWeight: 800,
-                  marginBottom: '10px'
-                }}>
-                  FAST-GROWING STARTUPS
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
+                  <span style={{ fontSize: '18px' }}>⚡</span>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#dcfce7', color: '#15803d', padding: '2px 6px', border: '1px solid #059669', fontWeight: 800 }}>
+                    STARTUPS
+                  </span>
                 </div>
-                <h3 style={{ fontSize: '15px', fontWeight: 800, color: '#0f172a', marginBottom: '6px' }}>
+                <h3 style={{ fontSize: '14px', fontWeight: 800, color: '#0f172a', margin: '0 0 4px 0' }}>
                   Zero-Licensing Cloud Ops
                 </h3>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.6' }}>
-                  Replaces bloated $50,000/year enterprise monitoring platforms with an open, high-speed, local HUD 
-                  that works out-of-the-box in simulation or live production mode.
+                <p style={{ fontSize: '12px', color: '#475569', margin: '0 0 8px 0', lineHeight: '1.4' }}>
+                  High-speed local HUD replacing expensive $50,000/year enterprise monitoring platforms.
                 </p>
-                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#0f172a', fontWeight: 700 }}>
-                  ROI: $0 recurring licensing fees, 100% local control
+                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#15803d', fontWeight: 800 }}>
+                  ★ $0 Software Markup / Open-Source
                 </div>
               </div>
             </div>
           </div>
 
           {/* ================= SECTION 3: HOW TO USE IT? ================= */}
-          <div style={{ marginBottom: '36px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+          <div style={{ marginBottom: '28px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
               <span style={{
                 fontSize: '11px',
                 fontFamily: 'var(--font-mono)',
@@ -607,178 +591,139 @@ export default function HomePage() {
                 fontWeight: 800,
                 border: '1.5px solid #0f172a'
               }}>
-                [03_WORKFLOW_ENGINE]
+                [03_PIPELINE]
               </span>
-              <h2 style={{
-                fontSize: '20px',
-                fontWeight: 800,
-                color: '#0f172a',
-                fontFamily: 'var(--font-display)',
-                letterSpacing: '-0.02em',
-                margin: 0
-              }}>
-                How to Use It? (Interactive 4-Step Operational Flow)
+              <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                How to Use It? (Interactive 4-Step Flow)
               </h2>
             </div>
 
-            {/* Interactive Step Switcher Bar */}
-            <div style={{
-              display: 'flex',
-              gap: '8px',
-              marginBottom: '14px',
-              overflowX: 'auto',
-              paddingBottom: '4px'
-            }}>
+            {/* Interactive Step Buttons */}
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '10px', overflowX: 'auto', paddingBottom: '4px' }}>
               {[
-                { step: 1, label: '01. AUTHENTICATE', icon: '🔑' },
-                { step: 2, label: '02. INGEST & AUDIT', icon: '📡' },
-                { step: 3, label: '03. BEDROCK REASONING', icon: '🤖' },
-                { step: 4, label: '04. ONE-CLICK AUTO-FIX', icon: '⚡' },
+                { step: 1, label: '01. AUTHENTICATE', color: '#0284c7', bg: '#eff6ff' },
+                { step: 2, label: '02. INGEST & AUDIT', color: '#059669', bg: '#f0fdf4' },
+                { step: 3, label: '03. BEDROCK REASONING', color: '#7c3aed', bg: '#faf5ff' },
+                { step: 4, label: '04. ONE-CLICK AUTO-FIX', color: '#ea580c', bg: '#fff7ed' },
               ].map((s) => (
                 <button
                   key={s.step}
                   onClick={() => setActiveStepTab(s.step)}
                   style={{
-                    padding: '8px 16px',
-                    fontSize: '12px',
+                    padding: '6px 14px',
+                    fontSize: '11px',
                     fontFamily: 'var(--font-mono)',
                     fontWeight: 800,
                     border: '2px solid #0f172a',
-                    backgroundColor: activeStepTab === s.step ? '#0f172a' : '#ffffff',
+                    backgroundColor: activeStepTab === s.step ? s.color : s.bg,
                     color: activeStepTab === s.step ? '#ffffff' : '#0f172a',
+                    boxShadow: activeStepTab === s.step ? 'none' : '2px 2px 0px #0f172a',
                     cursor: 'pointer',
-                    boxShadow: activeStepTab === s.step ? 'none' : '3px 3px 0px #0f172a',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px'
+                    transition: 'all 0.1s ease',
+                    whiteSpace: 'nowrap'
                   }}
                 >
-                  <span>{s.icon}</span>
-                  <span>{s.label}</span>
+                  {s.label}
                 </button>
               ))}
             </div>
 
-            {/* Step Detail Content Card */}
-            <div style={{
+            {/* Step Detail Card */}
+            <div className="hover-neo" style={{
               backgroundColor: '#ffffff',
               border: '2px solid #0f172a',
-              boxShadow: '6px 6px 0px #0f172a',
-              padding: '24px 28px'
+              boxShadow: '4px 4px 0px #0f172a',
+              padding: '18px 22px'
             }}>
               {activeStepTab === 1 && (
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', backgroundColor: '#fff7ed', color: '#c2410c', border: '1px solid #ec7211', padding: '1px 6px', fontWeight: 800 }}>
-                      PHASE_01
-                    </span>
-                    <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
-                      Authenticate via Ephemeral AWS STS or Explore Demo Sandbox
-                    </h3>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+                  <div style={{ maxWidth: '650px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                      <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#eff6ff', color: '#0284c7', border: '1px solid #0284c7', padding: '1px 6px', fontWeight: 800 }}>
+                        STEP_01
+                      </span>
+                      <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                        Connect via Ephemeral STS or Sandbox Demo
+                      </h3>
+                    </div>
+                    <p style={{ fontSize: '12px', color: '#475569', margin: 0, lineHeight: '1.5' }}>
+                      Supply IAM Access Keys via <strong>Connect AWS</strong> or test in Simulation Mode. Keys validate via STS and are never saved to disk.
+                    </p>
                   </div>
-                  <p style={{ fontSize: '13px', color: '#475569', lineHeight: '1.6', maxWidth: '800px', marginBottom: '14px' }}>
-                    Click <strong>Connect AWS</strong> in the top navigation or sidebar. Provide read-only IAM credentials 
-                    (e.g., `SecurityAudit`, `ReadOnlyAccess`). The platform calls `sts:GetCallerIdentity` to issue a temporary session token. 
-                    If you don&apos;t have an AWS account ready, the platform runs in realistic sandbox simulation mode automatically.
-                  </p>
-                  <div style={{
-                    backgroundColor: '#f8fafc',
-                    border: '1.5px solid #0f172a',
-                    padding: '12px 16px',
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '12px',
-                    color: '#0f172a',
-                    marginBottom: '14px'
-                  }}>
-                    $ aws sts get-caller-identity --query &apos;{`{Account:Account,Arn:Arn}`}&apos;<br />
-                    <span style={{ color: '#059669' }}>✓ Verified: Account 123456789012, Region: us-east-1, Session: Active</span>
-                  </div>
-                  <button onClick={() => setIsAWSModalOpen(true)} className="aws-btn-primary" style={{ padding: '6px 14px', fontSize: '12px' }}>
-                    OPEN CREDENTIAL MANAGER MODAL
+                  <button onClick={() => setIsAWSModalOpen(true)} className="aws-btn-primary" style={{ padding: '7px 14px', fontSize: '11px' }}>
+                    OPEN CREDENTIAL MODAL
                   </button>
                 </div>
               )}
 
               {activeStepTab === 2 && (
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', backgroundColor: '#ecfdf5', color: '#047857', border: '1px solid #059669', padding: '1px 6px', fontWeight: 800 }}>
-                      PHASE_02
-                    </span>
-                    <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
-                      Automatic Multi-Service Telemetry Ingestion &amp; Topology Mapping
-                    </h3>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+                  <div style={{ maxWidth: '650px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                      <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#f0fdf4', color: '#059669', border: '1px solid #059669', padding: '1px 6px', fontWeight: 800 }}>
+                        STEP_02
+                      </span>
+                      <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                        Continuous CloudWatch &amp; Topology Mapping
+                      </h3>
+                    </div>
+                    <p style={{ fontSize: '12px', color: '#475569', margin: 0, lineHeight: '1.5' }}>
+                      Pulls metrics for CPU, IOPS, EBS types (gp2 vs gp3), S3 encryption, and security group rules into an interactive DAG network.
+                    </p>
                   </div>
-                  <p style={{ fontSize: '13px', color: '#475569', lineHeight: '1.6', maxWidth: '800px', marginBottom: '14px' }}>
-                    The backend queries CloudWatch metrics (CPU utilization, IOPS, Network packets), EC2 instance reservations, 
-                    EBS volume types (gp2 vs gp3), S3 bucket configurations (SSE-S3, Public Access Blocks), and RDS database instances. 
-                    A directed acyclic graph (DAG) models relationships between VPCs, subnets, and instances.
-                  </p>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <Link href="/graph" className="aws-btn-secondary" style={{ padding: '6px 14px', fontSize: '12px', textDecoration: 'none' }}>
-                      EXPLORE TOPOLOGY GRAPH →
-                    </Link>
-                    <Link href="/metrics" className="aws-btn-secondary" style={{ padding: '6px 14px', fontSize: '12px', textDecoration: 'none' }}>
-                      VIEW CLOUDWATCH METRICS →
-                    </Link>
-                  </div>
+                  <Link href="/graph" className="aws-btn-secondary" style={{ padding: '7px 14px', fontSize: '11px', textDecoration: 'none' }}>
+                    VIEW TOPOLOGY GRAPH →
+                  </Link>
                 </div>
               )}
 
               {activeStepTab === 3 && (
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', backgroundColor: '#f5f3ff', color: '#6d28d9', border: '1px solid #7c3aed', padding: '1px 6px', fontWeight: 800 }}>
-                      PHASE_03
-                    </span>
-                    <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
-                      Amazon Bedrock (Nova Lite) Anomaly Reasoning &amp; IaC Synthesis
-                    </h3>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+                  <div style={{ maxWidth: '650px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                      <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#faf5ff', color: '#7c3aed', border: '1px solid #7c3aed', padding: '1px 6px', fontWeight: 800 }}>
+                        STEP_03
+                      </span>
+                      <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                        Amazon Bedrock Anomaly Synthesis &amp; IaC Code
+                      </h3>
+                    </div>
+                    <p style={{ fontSize: '12px', color: '#475569', margin: 0, lineHeight: '1.5' }}>
+                      Nova Lite flags idle instances, misconfigured volumes, and open ports with exact monthly dollar savings and Terraform code.
+                    </p>
                   </div>
-                  <p style={{ fontSize: '13px', color: '#475569', lineHeight: '1.6', maxWidth: '800px', marginBottom: '14px' }}>
-                    The generative AI engine identifies high-impact opportunities: instances with under 5% average CPU for 14 days, 
-                    `gp2` volumes eligible for 20% cheaper `gp3` throughput, and exposed SSH ports. The AI outputs exact dollar savings 
-                    and generates drop-in Terraform HCL snippets.
-                  </p>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <button onClick={() => setIsCopilotOpen(true)} className="aws-btn-primary" style={{ padding: '6px 14px', fontSize: '12px' }}>
-                      CHAT WITH BEDROCK COPILOT NOW
-                    </button>
-                    <Link href="/ai-insights" className="aws-btn-secondary" style={{ padding: '6px 14px', fontSize: '12px', textDecoration: 'none' }}>
-                      VIEW BEDROCK INSIGHTS REPORT →
-                    </Link>
-                  </div>
+                  <button onClick={() => setIsCopilotOpen(true)} className="aws-btn-primary" style={{ padding: '7px 14px', fontSize: '11px', backgroundColor: '#7c3aed' }}>
+                    OPEN BEDROCK COPILOT
+                  </button>
                 </div>
               )}
 
               {activeStepTab === 4 && (
-                <div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                    <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', backgroundColor: '#fff7ed', color: '#c2410c', border: '1px solid #ec7211', padding: '1px 6px', fontWeight: 800 }}>
-                      PHASE_04
-                    </span>
-                    <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
-                      Deterministic 1-Click Execution &amp; Rollback Receipts
-                    </h3>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
+                  <div style={{ maxWidth: '650px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
+                      <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#fff7ed', color: '#ea580c', border: '1px solid #ea580c', padding: '1px 6px', fontWeight: 800 }}>
+                        STEP_04
+                      </span>
+                      <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                        Deterministic 1-Click Execution &amp; Rollback Logs
+                      </h3>
+                    </div>
+                    <p style={{ fontSize: '12px', color: '#475569', margin: 0, lineHeight: '1.5' }}>
+                      Click <strong>EXECUTE AUTO-FIX</strong> in the recommendations list to apply live modifications with audit receipts.
+                    </p>
                   </div>
-                  <p style={{ fontSize: '13px', color: '#475569', lineHeight: '1.6', maxWidth: '800px', marginBottom: '14px' }}>
-                    Review recommended actions in the <strong>Active Recommendations</strong> panel. Click <strong>EXECUTE AUTO-FIX</strong>. 
-                    The platform verifies permissions, executes the API call (e.g., `ec2:ModifyVolume` or `ec2:RevokeSecurityGroupIngress`), 
-                    and immediately renders an audit receipt with status confirmation and rollback instructions.
-                  </p>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <Link href="/overview" className="aws-btn-primary" style={{ padding: '6px 14px', fontSize: '12px', textDecoration: 'none' }}>
-                      VIEW ACTIVE RECOMMENDATIONS LIST →
-                    </Link>
-                  </div>
+                  <Link href="/overview" className="aws-btn-primary" style={{ padding: '7px 14px', fontSize: '11px', textDecoration: 'none' }}>
+                    SEE RECOMMENDATIONS →
+                  </Link>
                 </div>
               )}
             </div>
           </div>
 
-          {/* ================= SECTION 4: HOW IS IT DIFFERENT FROM OTHER TOOLS? ================= */}
-          <div style={{ marginBottom: '36px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+          {/* ================= SECTION 4: COMPARISON MATRIX ================= */}
+          <div style={{ marginBottom: '28px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
               <span style={{
                 fontSize: '11px',
                 fontFamily: 'var(--font-mono)',
@@ -788,126 +733,70 @@ export default function HomePage() {
                 fontWeight: 800,
                 border: '1.5px solid #0f172a'
               }}>
-                [04_COMPARATIVE_ADVANTAGE]
+                [04_MATRIX]
               </span>
-              <h2 style={{
-                fontSize: '20px',
-                fontWeight: 800,
-                color: '#0f172a',
-                fontFamily: 'var(--font-display)',
-                letterSpacing: '-0.02em',
-                margin: 0
-              }}>
-                How is It Different From Other Projects?
+              <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                How is It Different From Other Solutions?
               </h2>
             </div>
-            <p style={{ fontSize: '13px', color: '#475569', marginBottom: '16px', maxWidth: '750px' }}>
-              Most tools either overwhelm you with complex dashboards, charge enterprise fees, or hallucinate answers without access to your infrastructure. CloudOps AI takes a radically practical approach:
-            </p>
 
-            {/* High-Contrast Comparison Matrix */}
-            <div style={{
+            <div className="hover-neo" style={{
               backgroundColor: '#ffffff',
               border: '2px solid #0f172a',
-              boxShadow: '6px 6px 0px #0f172a',
+              boxShadow: '4px 4px 0px #0f172a',
               overflowX: 'auto'
             }}>
-              <table style={{
-                width: '100%',
-                borderCollapse: 'collapse',
-                fontSize: '12px',
-                textAlign: 'left'
-              }}>
+              <table className="aws-table" style={{ width: '100%', borderCollapse: 'collapse', fontSize: '12px' }}>
                 <thead>
                   <tr style={{ backgroundColor: '#f1f5f9', borderBottom: '2px solid #0f172a' }}>
-                    <th style={{ padding: '12px 16px', fontFamily: 'var(--font-mono)', fontWeight: 800, color: '#0f172a', width: '22%' }}>
-                      CAPABILITY / DIMENSION
-                    </th>
-                    <th style={{ padding: '12px 16px', fontFamily: 'var(--font-mono)', fontWeight: 800, color: '#ec7211', width: '26%', backgroundColor: '#fff7ed', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a' }}>
+                    <th style={{ padding: '10px 14px', width: '25%' }}>FEATURE / CAPABILITY</th>
+                    <th style={{ padding: '10px 14px', width: '28%', backgroundColor: '#fff7ed', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', color: '#ea580c', fontWeight: 800 }}>
                       ★ CLOUDOPS AI (THIS PROJECT)
                     </th>
-                    <th style={{ padding: '12px 16px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#64748b', width: '26%' }}>
-                      AWS MANAGEMENT CONSOLE
-                    </th>
-                    <th style={{ padding: '12px 16px', fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#64748b', width: '26%' }}>
-                      DATADOG / NEW RELIC / AGENTS
-                    </th>
+                    <th style={{ padding: '10px 14px', width: '23%' }}>AWS CONSOLE</th>
+                    <th style={{ padding: '10px 14px', width: '24%' }}>DATADOG / AGENTS</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
-                    <td style={{ padding: '12px 16px', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                      Automated 1-Click Remediation
-                    </td>
-                    <td style={{ padding: '12px 16px', backgroundColor: '#fff7ed', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', fontWeight: 700, color: '#059669' }}>
-                      ✓ Built-in (gp3 upgrade, SSH lockdown, instance stops)
-                    </td>
-                    <td style={{ padding: '12px 16px', color: '#dc2626' }}>
-                      ✕ Manual click-ops across 10+ nested pages
-                    </td>
-                    <td style={{ padding: '12px 16px', color: '#d97706' }}>
-                      ⚠ Read-only alerts (requires manual engineer action)
-                    </td>
-                  </tr>
-
-                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
-                    <td style={{ padding: '12px 16px', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                      Generative AI &amp; Terraform Synthesis
-                    </td>
-                    <td style={{ padding: '12px 16px', backgroundColor: '#fff7ed', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', fontWeight: 700, color: '#059669' }}>
-                      ✓ Amazon Bedrock (Nova Lite) generates drop-in HCL
-                    </td>
-                    <td style={{ padding: '12px 16px', color: '#dc2626' }}>
-                      ✕ None (Raw logs &amp; JSON metrics only)
-                    </td>
-                    <td style={{ padding: '12px 16px', color: '#d97706' }}>
-                      ⚠ Extra enterprise tier add-on ($$$)
-                    </td>
-                  </tr>
-
-                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
-                    <td style={{ padding: '12px 16px', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                      Agent Installation &amp; Overhead
-                    </td>
-                    <td style={{ padding: '12px 16px', backgroundColor: '#fff7ed', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', fontWeight: 700, color: '#059669' }}>
-                      ✓ 100% Zero-Agent (Direct AWS STS APIs)
-                    </td>
-                    <td style={{ padding: '12px 16px', color: '#059669' }}>
-                      ✓ Native AWS APIs
-                    </td>
-                    <td style={{ padding: '12px 16px', color: '#dc2626' }}>
-                      ✕ Heavy host daemon (CPU/RAM consumption)
-                    </td>
-                  </tr>
-
-                  <tr style={{ borderBottom: '1px solid #e2e8f0' }}>
-                    <td style={{ padding: '12px 16px', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                      Interface Speed &amp; Aesthetic
-                    </td>
-                    <td style={{ padding: '12px 16px', backgroundColor: '#fff7ed', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', fontWeight: 700, color: '#059669' }}>
-                      ✓ Neo-Brutalist HUD (Sub-second, high clarity, light mode)
-                    </td>
-                    <td style={{ padding: '12px 16px', color: '#dc2626' }}>
-                      ✕ Slow loading, fragmented consoles, multi-tab lag
-                    </td>
-                    <td style={{ padding: '12px 16px', color: '#d97706' }}>
-                      ⚠ Cluttered graphs &amp; noisy alert fatigue
-                    </td>
-                  </tr>
-
                   <tr>
-                    <td style={{ padding: '12px 16px', fontWeight: 700, fontFamily: 'var(--font-mono)' }}>
-                      Pricing &amp; Data Sovereignty
+                    <td style={{ fontWeight: 700 }}>1-Click Safe Auto-Remediation</td>
+                    <td style={{ backgroundColor: '#fffaf5', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', color: '#059669', fontWeight: 800 }}>
+                      ✓ BUILT-IN (gp3, SSH, Stop)
                     </td>
-                    <td style={{ padding: '12px 16px', backgroundColor: '#fff7ed', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', fontWeight: 700, color: '#059669' }}>
-                      ✓ Self-hosted, 100% Local STS, $0 markup
+                    <td style={{ color: '#dc2626' }}>✕ 10+ Manual Clicks</td>
+                    <td style={{ color: '#d97706' }}>⚠ Alerts Only (No Auto-Fix)</td>
+                  </tr>
+                  <tr>
+                    <td style={{ fontWeight: 700 }}>AI IaC &amp; Terraform Synthesis</td>
+                    <td style={{ backgroundColor: '#fffaf5', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', color: '#059669', fontWeight: 800 }}>
+                      ✓ Amazon Bedrock (Nova Lite)
                     </td>
-                    <td style={{ padding: '12px 16px', color: '#059669' }}>
-                      ✓ Included with AWS
+                    <td style={{ color: '#dc2626' }}>✕ None (Raw JSON)</td>
+                    <td style={{ color: '#d97706' }}>⚠ Expensive Add-on</td>
+                  </tr>
+                  <tr>
+                    <td style={{ fontWeight: 700 }}>Host Agent Overhead</td>
+                    <td style={{ backgroundColor: '#fffaf5', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', color: '#059669', fontWeight: 800 }}>
+                      ✓ 100% Agentless STS
                     </td>
-                    <td style={{ padding: '12px 16px', color: '#dc2626' }}>
-                      ✕ $15–$23 per host/mo + log volume penalties
+                    <td style={{ color: '#059669' }}>✓ Native AWS</td>
+                    <td style={{ color: '#dc2626' }}>✕ Heavy Host Daemons</td>
+                  </tr>
+                  <tr>
+                    <td style={{ fontWeight: 700 }}>Speed &amp; HUD Design</td>
+                    <td style={{ backgroundColor: '#fffaf5', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', color: '#059669', fontWeight: 800 }}>
+                      ✓ Sub-Second Neo-Brutalist HUD
                     </td>
+                    <td style={{ color: '#dc2626' }}>✕ Multi-Tab Latency</td>
+                    <td style={{ color: '#d97706' }}>⚠ Complex Alert Clutter</td>
+                  </tr>
+                  <tr>
+                    <td style={{ fontWeight: 700 }}>Licensing Costs</td>
+                    <td style={{ backgroundColor: '#fffaf5', borderLeft: '2px solid #0f172a', borderRight: '2px solid #0f172a', color: '#059669', fontWeight: 800 }}>
+                      ✓ $0 / Open-Source Local
+                    </td>
+                    <td style={{ color: '#059669' }}>✓ Included</td>
+                    <td style={{ color: '#dc2626' }}>✕ $15–$23/host/month</td>
                   </tr>
                 </tbody>
               </table>
@@ -915,8 +804,8 @@ export default function HomePage() {
           </div>
 
           {/* ================= SECTION 5: HOW IS IT USEFUL? ================= */}
-          <div style={{ marginBottom: '36px' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
+          <div style={{ marginBottom: '28px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
               <span style={{
                 fontSize: '11px',
                 fontFamily: 'var(--font-mono)',
@@ -926,232 +815,164 @@ export default function HomePage() {
                 fontWeight: 800,
                 border: '1.5px solid #0f172a'
               }}>
-                [05_QUANTIFIED_VALUE]
+                [05_VALUE]
               </span>
-              <h2 style={{
-                fontSize: '20px',
-                fontWeight: 800,
-                color: '#0f172a',
-                fontFamily: 'var(--font-display)',
-                letterSpacing: '-0.02em',
-                margin: 0
-              }}>
-                How is It Useful? (Quantified ROI &amp; Proven Impact)
+              <h2 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                How is It Useful? (Measurable ROI)
               </h2>
             </div>
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-              gap: '16px'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+              gap: '12px'
             }}>
-              {/* Stat 1 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              <div className="hover-neo" style={{
+                backgroundColor: '#f0fdf4',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px'
+                borderLeft: '5px solid #059669',
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '14px'
               }}>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700, marginBottom: '6px' }}>
-                  [FINOPS_COST_IMPACT]
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#047857', fontWeight: 800, marginBottom: '2px' }}>
+                  [COST_SAVINGS]
                 </div>
-                <div style={{ fontSize: '32px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#059669', marginBottom: '4px' }}>
+                <div style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#059669', lineHeight: 1.1 }}>
                   35.8%
                 </div>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
-                  Average Cloud Bill Reduction
+                <div style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a', marginTop: '4px' }}>
+                  Average Bill Cut
                 </div>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.5', margin: 0 }}>
-                  Immediate cost savings achieved through EBS `gp2` to `gp3` conversion (20% flat savings) and automatic termination of idle dev instances.
-                </p>
+                <div style={{ fontSize: '11px', color: '#475569' }}>
+                  gp2→gp3 + idle stops
+                </div>
               </div>
 
-              {/* Stat 2 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              <div className="hover-neo" style={{
+                backgroundColor: '#eff6ff',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px'
+                borderLeft: '5px solid #0284c7',
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '14px'
               }}>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700, marginBottom: '6px' }}>
-                  [SECURITY_RESOLUTION_SPEED]
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#0369a1', fontWeight: 800, marginBottom: '2px' }}>
+                  [SPEED_MTTR]
                 </div>
-                <div style={{ fontSize: '32px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0284c7', marginBottom: '4px' }}>
+                <div style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0284c7', lineHeight: 1.1 }}>
                   &lt; 60s
                 </div>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
-                  Mean Time to Remediation (MTTR)
+                <div style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a', marginTop: '4px' }}>
+                  Mean Time to Fix
                 </div>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.5', margin: 0 }}>
-                  Critical vulnerabilities like exposed SSH port 22 or unencrypted S3 buckets are closed in seconds rather than sitting in backlog tickets for weeks.
-                </p>
+                <div style={{ fontSize: '11px', color: '#475569' }}>
+                  Instant port lockdown
+                </div>
               </div>
 
-              {/* Stat 3 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              <div className="hover-neo" style={{
+                backgroundColor: '#faf5ff',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px'
+                borderLeft: '5px solid #7c3aed',
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '14px'
               }}>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700, marginBottom: '6px' }}>
-                  [COMPLIANCE_BENCHMARK]
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#6d28d9', fontWeight: 800, marginBottom: '2px' }}>
+                  [COMPLIANCE]
                 </div>
-                <div style={{ fontSize: '32px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#7c3aed', marginBottom: '4px' }}>
+                <div style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#7c3aed', lineHeight: 1.1 }}>
                   100%
                 </div>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
-                  Well-Architected Alignment
+                <div style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a', marginTop: '4px' }}>
+                  WAF Alignment
                 </div>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.5', margin: 0 }}>
-                  Continuous radar scoring against Cost Optimization, Operational Excellence, Security, Performance, and Reliability pillars.
-                </p>
+                <div style={{ fontSize: '11px', color: '#475569' }}>
+                  All 5 pillars verified
+                </div>
               </div>
 
-              {/* Stat 4 */}
-              <div style={{
-                backgroundColor: '#ffffff',
+              <div className="hover-neo" style={{
+                backgroundColor: '#fffaf5',
                 border: '2px solid #0f172a',
-                boxShadow: '4px 4px 0px #0f172a',
-                padding: '20px'
+                borderLeft: '5px solid #ea580c',
+                boxShadow: '3px 3px 0px #0f172a',
+                padding: '14px'
               }}>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700, marginBottom: '6px' }}>
-                  [DATA_PRIVACY_RATING]
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#c2410c', fontWeight: 800, marginBottom: '2px' }}>
+                  [PRIVACY]
                 </div>
-                <div style={{ fontSize: '32px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#ec7211', marginBottom: '4px' }}>
+                <div style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#ea580c', lineHeight: 1.1 }}>
                   0 B
                 </div>
-                <div style={{ fontSize: '13px', fontWeight: 700, color: '#0f172a', marginBottom: '6px' }}>
-                  Permanent Credential Storage
+                <div style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a', marginTop: '4px' }}>
+                  Credentials Stored
                 </div>
-                <p style={{ fontSize: '12px', color: '#475569', lineHeight: '1.5', margin: 0 }}>
-                  Zero data exfiltration. Client-side ephemeral session handling means your secret keys never touch disk or external third-party proxies.
-                </p>
+                <div style={{ fontSize: '11px', color: '#475569' }}>
+                  Client STS isolation
+                </div>
               </div>
             </div>
           </div>
 
-          {/* ================= SECTION 6: QUICK SYSTEM LAUNCH TILES ================= */}
-          <div style={{
+          {/* ================= SECTION 6: QUICK CONSOLE TILES ================= */}
+          <div className="hover-neo" style={{
             backgroundColor: '#ffffff',
             border: '2px solid #0f172a',
-            boxShadow: '6px 6px 0px #0f172a',
-            padding: '24px 28px',
-            marginBottom: '20px'
+            boxShadow: '4px 4px 0px #0f172a',
+            padding: '18px 22px'
           }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '18px', flexWrap: 'wrap', gap: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '14px', flexWrap: 'wrap', gap: '8px' }}>
               <div>
-                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700 }}>
-                  [SUBSYSTEM_DIRECT_ROUTING]
-                </div>
-                <h3 style={{ fontSize: '18px', fontWeight: 800, color: '#0f172a', margin: 0, fontFamily: 'var(--font-display)' }}>
-                  Explore Specialized Subsystem Control Consoles
+                <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#64748b', fontWeight: 700 }}>
+                  [SUBSYSTEMS]
+                </span>
+                <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
+                  Specialized Subsystem Consoles
                 </h3>
               </div>
-              <Link href="/overview" className="aws-btn-primary" style={{ padding: '6px 14px', fontSize: '11px', textDecoration: 'none' }}>
-                VIEW FULL OPS DASHBOARD →
+              <Link href="/overview" className="aws-btn-primary" style={{ padding: '6px 12px', fontSize: '11px', textDecoration: 'none' }}>
+                FULL OPS DASHBOARD →
               </Link>
             </div>
 
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-              gap: '12px'
+              gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
+              gap: '10px'
             }}>
-              <Link
-                href="/cost"
-                style={{
-                  padding: '14px',
-                  border: '1.5px solid #0f172a',
-                  boxShadow: '2px 2px 0px #0f172a',
-                  textDecoration: 'none',
-                  color: '#0f172a',
-                  backgroundColor: '#f8fafc'
-                }}
-              >
-                <div style={{ fontSize: '18px', marginBottom: '4px' }}>💰</div>
-                <div style={{ fontWeight: 800, fontSize: '13px', fontFamily: 'var(--font-mono)' }}>Cost Explorer</div>
-                <div style={{ fontSize: '11px', color: '#64748b' }}>FinOps breakdown &amp; spend treemap</div>
+              <Link href="/cost" className="hover-neo" style={{ padding: '12px', border: '1.5px solid #0f172a', boxShadow: '2px 2px 0px #0f172a', textDecoration: 'none', color: '#0f172a', backgroundColor: '#fffaf5' }}>
+                <div style={{ fontSize: '16px' }}>💰</div>
+                <div style={{ fontWeight: 800, fontSize: '12px', fontFamily: 'var(--font-mono)' }}>Cost Explorer</div>
+                <div style={{ fontSize: '10px', color: '#64748b' }}>FinOps treemap</div>
               </Link>
 
-              <Link
-                href="/ec2"
-                style={{
-                  padding: '14px',
-                  border: '1.5px solid #0f172a',
-                  boxShadow: '2px 2px 0px #0f172a',
-                  textDecoration: 'none',
-                  color: '#0f172a',
-                  backgroundColor: '#f8fafc'
-                }}
-              >
-                <div style={{ fontSize: '18px', marginBottom: '4px' }}>⚡</div>
-                <div style={{ fontWeight: 800, fontSize: '13px', fontFamily: 'var(--font-mono)' }}>EC2 Compute</div>
-                <div style={{ fontSize: '11px', color: '#64748b' }}>Instance health &amp; stop actions</div>
+              <Link href="/ec2" className="hover-neo" style={{ padding: '12px', border: '1.5px solid #0f172a', boxShadow: '2px 2px 0px #0f172a', textDecoration: 'none', color: '#0f172a', backgroundColor: '#eff6ff' }}>
+                <div style={{ fontSize: '16px' }}>⚡</div>
+                <div style={{ fontWeight: 800, fontSize: '12px', fontFamily: 'var(--font-mono)' }}>EC2 Compute</div>
+                <div style={{ fontSize: '10px', color: '#64748b' }}>Instance health</div>
               </Link>
 
-              <Link
-                href="/s3"
-                style={{
-                  padding: '14px',
-                  border: '1.5px solid #0f172a',
-                  boxShadow: '2px 2px 0px #0f172a',
-                  textDecoration: 'none',
-                  color: '#0f172a',
-                  backgroundColor: '#f8fafc'
-                }}
-              >
-                <div style={{ fontSize: '18px', marginBottom: '4px' }}>📦</div>
-                <div style={{ fontWeight: 800, fontSize: '13px', fontFamily: 'var(--font-mono)' }}>S3 Storage</div>
-                <div style={{ fontSize: '11px', color: '#64748b' }}>Public bucket leaks &amp; encryption</div>
+              <Link href="/s3" className="hover-neo" style={{ padding: '12px', border: '1.5px solid #0f172a', boxShadow: '2px 2px 0px #0f172a', textDecoration: 'none', color: '#0f172a', backgroundColor: '#f0fdf4' }}>
+                <div style={{ fontSize: '16px' }}>📦</div>
+                <div style={{ fontWeight: 800, fontSize: '12px', fontFamily: 'var(--font-mono)' }}>S3 Storage</div>
+                <div style={{ fontSize: '10px', color: '#64748b' }}>Bucket encryption</div>
               </Link>
 
-              <Link
-                href="/security"
-                style={{
-                  padding: '14px',
-                  border: '1.5px solid #0f172a',
-                  boxShadow: '2px 2px 0px #0f172a',
-                  textDecoration: 'none',
-                  color: '#0f172a',
-                  backgroundColor: '#f8fafc'
-                }}
-              >
-                <div style={{ fontSize: '18px', marginBottom: '4px' }}>🛡️</div>
-                <div style={{ fontWeight: 800, fontSize: '13px', fontFamily: 'var(--font-mono)' }}>Security Guard</div>
-                <div style={{ fontSize: '11px', color: '#64748b' }}>SSH port 22 &amp; IAM audit</div>
+              <Link href="/security" className="hover-neo" style={{ padding: '12px', border: '1.5px solid #0f172a', boxShadow: '2px 2px 0px #0f172a', textDecoration: 'none', color: '#0f172a', backgroundColor: '#fef2f2' }}>
+                <div style={{ fontSize: '16px' }}>🛡️</div>
+                <div style={{ fontWeight: 800, fontSize: '12px', fontFamily: 'var(--font-mono)' }}>Security Guard</div>
+                <div style={{ fontSize: '10px', color: '#64748b' }}>Port 22 lockdown</div>
               </Link>
 
-              <Link
-                href="/graph"
-                style={{
-                  padding: '14px',
-                  border: '1.5px solid #0f172a',
-                  boxShadow: '2px 2px 0px #0f172a',
-                  textDecoration: 'none',
-                  color: '#0f172a',
-                  backgroundColor: '#f8fafc'
-                }}
-              >
-                <div style={{ fontSize: '18px', marginBottom: '4px' }}>🕸️</div>
-                <div style={{ fontWeight: 800, fontSize: '13px', fontFamily: 'var(--font-mono)' }}>Topology Graph</div>
-                <div style={{ fontSize: '11px', color: '#64748b' }}>Interactive DAG node network</div>
+              <Link href="/graph" className="hover-neo" style={{ padding: '12px', border: '1.5px solid #0f172a', boxShadow: '2px 2px 0px #0f172a', textDecoration: 'none', color: '#0f172a', backgroundColor: '#faf5ff' }}>
+                <div style={{ fontSize: '16px' }}>🕸️</div>
+                <div style={{ fontWeight: 800, fontSize: '12px', fontFamily: 'var(--font-mono)' }}>DAG Graph</div>
+                <div style={{ fontSize: '10px', color: '#64748b' }}>Topology nodes</div>
               </Link>
 
-              <Link
-                href="/compliance"
-                style={{
-                  padding: '14px',
-                  border: '1.5px solid #0f172a',
-                  boxShadow: '2px 2px 0px #0f172a',
-                  textDecoration: 'none',
-                  color: '#0f172a',
-                  backgroundColor: '#f8fafc'
-                }}
-              >
-                <div style={{ fontSize: '18px', marginBottom: '4px' }}>🏛️</div>
-                <div style={{ fontWeight: 800, fontSize: '13px', fontFamily: 'var(--font-mono)' }}>Well-Architected</div>
-                <div style={{ fontSize: '11px', color: '#64748b' }}>5 pillars audit radar</div>
+              <Link href="/compliance" className="hover-neo" style={{ padding: '12px', border: '1.5px solid #0f172a', boxShadow: '2px 2px 0px #0f172a', textDecoration: 'none', color: '#0f172a', backgroundColor: '#fffbeb' }}>
+                <div style={{ fontSize: '16px' }}>🏛️</div>
+                <div style={{ fontWeight: 800, fontSize: '12px', fontFamily: 'var(--font-mono)' }}>WAF Radar</div>
+                <div style={{ fontSize: '10px', color: '#64748b' }}>5-Pillar scores</div>
               </Link>
             </div>
           </div>
