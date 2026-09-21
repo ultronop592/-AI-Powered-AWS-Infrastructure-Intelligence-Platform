@@ -20,9 +20,9 @@ export default function CostChart({ costByService, totalCost, currency = 'USD' }
     if (lower.includes('s3') || lower.includes('simple storage')) return '#059669'; // Emerald
     if (lower.includes('rds') || lower.includes('relational')) return '#0284c7'; // Sky Blue
     if (lower.includes('lambda')) return '#dc2626'; // Red
-    if (lower.includes('kms') || lower.includes('key management')) return '#7c3aed'; // Purple
+    if (lower.includes('kms') || lower.includes('key management')) return '#0f172a'; // Gunmetal Dark
     if (lower.includes('cloudwatch') || lower.includes('telemetry')) return '#475569'; // Slate
-    const palette = ['#ec7211', '#0284c7', '#059669', '#d97706', '#7c3aed', '#dc2626'];
+    const palette = ['#ec7211', '#0284c7', '#059669', '#d97706', '#0f172a', '#dc2626'];
     return palette[idx % palette.length];
   };
 

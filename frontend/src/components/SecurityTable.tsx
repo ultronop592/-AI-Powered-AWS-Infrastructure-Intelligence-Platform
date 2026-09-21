@@ -31,7 +31,7 @@ export default function SecurityTable({ securityGroups, onRefresh }: SecurityTab
       <div className="aws-card-header" style={{ backgroundColor: '#f1f5f9' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
           <span style={{
-            backgroundColor: '#7c3aed',
+            backgroundColor: '#0f172a',
             color: '#ffffff',
             padding: '1px 5px',
             fontSize: '10px',

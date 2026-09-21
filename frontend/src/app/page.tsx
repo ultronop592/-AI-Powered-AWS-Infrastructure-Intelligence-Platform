@@ -194,9 +194,9 @@ export default function HomePage() {
                 style={{
                   padding: '9px 16px',
                   fontSize: '12px',
-                  backgroundColor: '#faf5ff',
-                  borderColor: '#7c3aed',
-                  color: '#6d28d9'
+                  backgroundColor: '#0f172a',
+                  borderColor: '#0f172a',
+                  color: '#ffffff'
                 }}
               >
                 <span>🤖</span> BEDROCK AI COPILOT
@@ -268,11 +268,11 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <div style={{ backgroundColor: '#faf5ff', border: '1.5px solid #7c3aed', padding: '8px 12px' }}>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#6d28d9', fontWeight: 800 }}>
+              <div style={{ backgroundColor: '#f1f5f9', border: '1.5px solid #0f172a', padding: '8px 12px' }}>
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#0f172a', fontWeight: 800 }}>
                   [INFRA_DAG]
                 </div>
-                <div style={{ fontSize: '17px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#7c3aed' }}>
+                <div style={{ fontSize: '17px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0f172a' }}>
                   100% Agentless
                 </div>
               </div>
@@ -417,11 +417,11 @@ export default function HomePage() {
                 </div>
               </div>
 
-              {/* Card 4: Purple */}
+              {/* Card 4: Premium Dark Slate */}
               <div className="hover-neo" style={{
-                backgroundColor: '#faf5ff',
+                backgroundColor: '#f8fafc',
                 border: '2px solid #0f172a',
-                borderLeft: '6px solid #7c3aed',
+                borderLeft: '6px solid #0f172a',
                 boxShadow: '3px 3px 0px #0f172a',
                 padding: '16px'
               }}>
@@ -430,10 +430,10 @@ export default function HomePage() {
                   <span style={{
                     fontSize: '10px',
                     fontFamily: 'var(--font-mono)',
-                    backgroundColor: '#f3e8ff',
-                    color: '#7e22ce',
+                    backgroundColor: '#0f172a',
+                    color: '#ffffff',
                     padding: '2px 6px',
-                    border: '1px solid #7c3aed',
+                    border: '1px solid #0f172a',
                     fontWeight: 800
                   }}>
                     STS_ISOLATED
@@ -446,10 +446,10 @@ export default function HomePage() {
                   Zero credential persistence on disk. Validated via STS GetCallerIdentity; temporary tokens only in memory.
                 </p>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
-                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #7c3aed', padding: '1px 5px', color: '#7c3aed', fontWeight: 700 }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #0f172a', padding: '1px 5px', color: '#0f172a', fontWeight: 700 }}>
                     0-Byte Leakage
                   </span>
-                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #7c3aed', padding: '1px 5px', color: '#7c3aed', fontWeight: 700 }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#ffffff', border: '1px solid #0f172a', padding: '1px 5px', color: '#0f172a', fontWeight: 700 }}>
                     Client Isolated
                   </span>
                 </div>
@@ -531,14 +531,15 @@ export default function HomePage() {
 
               {/* Domain 3: SRE */}
               <div className="hover-neo" style={{
-                backgroundColor: '#faf5ff',
+                backgroundColor: '#f8fafc',
                 border: '2px solid #0f172a',
+                borderLeft: '5px solid #0f172a',
                 boxShadow: '3px 3px 0px #0f172a',
                 padding: '16px'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
                   <span style={{ fontSize: '18px' }}>🏛️</span>
-                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#f3e8ff', color: '#7e22ce', padding: '2px 6px', border: '1px solid #7c3aed', fontWeight: 800 }}>
+                  <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#0f172a', color: '#ffffff', padding: '2px 6px', border: '1px solid #0f172a', fontWeight: 800 }}>
                     SRE_ARCH
                   </span>
                 </div>
@@ -548,7 +549,7 @@ export default function HomePage() {
                 <p style={{ fontSize: '12px', color: '#475569', margin: '0 0 8px 0', lineHeight: '1.4' }}>
                   Scores active fleets across 5 AWS pillars: Cost, Security, Reliability, Performance, and Ops.
                 </p>
-                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#7e22ce', fontWeight: 800 }}>
+                <div style={{ fontSize: '11px', fontFamily: 'var(--font-mono)', color: '#0f172a', fontWeight: 800 }}>
                   ★ 100% Best-Practice Alignment
                 </div>
               </div>
@@ -603,7 +604,7 @@ export default function HomePage() {
               {[
                 { step: 1, label: '01. AUTHENTICATE', color: '#0284c7', bg: '#eff6ff' },
                 { step: 2, label: '02. INGEST & AUDIT', color: '#059669', bg: '#f0fdf4' },
-                { step: 3, label: '03. BEDROCK REASONING', color: '#7c3aed', bg: '#faf5ff' },
+                { step: 3, label: '03. BEDROCK REASONING', color: '#0f172a', bg: '#f1f5f9' },
                 { step: 4, label: '04. ONE-CLICK AUTO-FIX', color: '#ea580c', bg: '#fff7ed' },
               ].map((s) => (
                 <button
@@ -681,7 +682,7 @@ export default function HomePage() {
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '14px' }}>
                   <div style={{ maxWidth: '650px' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '6px' }}>
-                      <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#faf5ff', color: '#7c3aed', border: '1px solid #7c3aed', padding: '1px 6px', fontWeight: 800 }}>
+                      <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', backgroundColor: '#f1f5f9', color: '#0f172a', border: '1px solid #0f172a', padding: '1px 6px', fontWeight: 800 }}>
                         STEP_03
                       </span>
                       <h3 style={{ fontSize: '16px', fontWeight: 800, color: '#0f172a', margin: 0 }}>
@@ -692,7 +693,7 @@ export default function HomePage() {
                       Nova Lite flags idle instances, misconfigured volumes, and open ports with exact monthly dollar savings and Terraform code.
                     </p>
                   </div>
-                  <button onClick={() => setIsCopilotOpen(true)} className="aws-btn-primary" style={{ padding: '7px 14px', fontSize: '11px', backgroundColor: '#7c3aed' }}>
+                  <button onClick={() => setIsCopilotOpen(true)} className="aws-btn-primary" style={{ padding: '7px 14px', fontSize: '11px', backgroundColor: '#0f172a' }}>
                     OPEN BEDROCK COPILOT
                   </button>
                 </div>
@@ -727,7 +728,7 @@ export default function HomePage() {
               <span style={{
                 fontSize: '11px',
                 fontFamily: 'var(--font-mono)',
-                backgroundColor: '#7c3aed',
+                backgroundColor: '#0f172a',
                 color: '#ffffff',
                 padding: '2px 8px',
                 fontWeight: 800,
@@ -870,16 +871,16 @@ export default function HomePage() {
               </div>
 
               <div className="hover-neo" style={{
-                backgroundColor: '#faf5ff',
+                backgroundColor: '#f8fafc',
                 border: '2px solid #0f172a',
-                borderLeft: '5px solid #7c3aed',
+                borderLeft: '5px solid #0f172a',
                 boxShadow: '3px 3px 0px #0f172a',
                 padding: '14px'
               }}>
-                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#6d28d9', fontWeight: 800, marginBottom: '2px' }}>
+                <div style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#0f172a', fontWeight: 800, marginBottom: '2px' }}>
                   [COMPLIANCE]
                 </div>
-                <div style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#7c3aed', lineHeight: 1.1 }}>
+                <div style={{ fontSize: '28px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0f172a', lineHeight: 1.1 }}>
                   100%
                 </div>
                 <div style={{ fontSize: '12px', fontWeight: 800, color: '#0f172a', marginTop: '4px' }}>
@@ -963,7 +964,7 @@ export default function HomePage() {
                 <div style={{ fontSize: '10px', color: '#64748b' }}>Port 22 lockdown</div>
               </Link>
 
-              <Link href="/graph" className="hover-neo" style={{ padding: '12px', border: '1.5px solid #0f172a', boxShadow: '2px 2px 0px #0f172a', textDecoration: 'none', color: '#0f172a', backgroundColor: '#faf5ff' }}>
+              <Link href="/graph" className="hover-neo" style={{ padding: '12px', border: '1.5px solid #0f172a', boxShadow: '2px 2px 0px #0f172a', textDecoration: 'none', color: '#0f172a', backgroundColor: '#f1f5f9' }}>
                 <div style={{ fontSize: '16px' }}>🕸️</div>
                 <div style={{ fontWeight: 800, fontSize: '12px', fontFamily: 'var(--font-mono)' }}>DAG Graph</div>
                 <div style={{ fontSize: '10px', color: '#64748b' }}>Topology nodes</div>

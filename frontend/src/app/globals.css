@@ -27,8 +27,8 @@
   --aws-status-red-text: #dc2626;
   --aws-status-blue-bg: #f0f9ff;
   --aws-status-blue-text: #0284c7;
-  --aws-status-purple-bg: #faf5ff;
-  --aws-status-purple-text: #7c3aed;
+  --aws-status-dark-bg: #0f172a;
+  --aws-status-dark-text: #ffffff;
 
   /* Neo-Brutalist & Retro-OS Design System Variables */
   --retro-border-color: #0f172a;
@@ -227,10 +227,10 @@ button, input, select, textarea, .mono, .retro-mono, code, pre {
   border-color: var(--retro-border-color);
 }
 
-.aws-badge-purple {
-  background-color: var(--aws-status-purple-bg);
-  color: var(--aws-status-purple-text);
-  border-color: var(--retro-border-color);
+.aws-badge-dark {
+  background-color: #0f172a;
+  color: #ffffff;
+  border-color: #0f172a;
 }
 
 /* Retro OS Tables */
@@ -250,13 +250,13 @@ button, input, select, textarea, .mono, .retro-mono, code, pre {
 }
 
 .aws-table th {
-  background-color: #f1f5f9;
-  color: var(--aws-text-primary);
+  background-color: #0f172a;
+  color: #ffffff;
   font-family: var(--font-mono);
   font-weight: 700;
   padding: 10px 14px;
-  border-bottom: var(--retro-border);
-  border-right: 1px solid #cbd5e1;
+  border-bottom: 2px solid #0f172a;
+  border-right: 1px solid #334155;
   text-transform: uppercase;
   font-size: 11px;
   letter-spacing: 0.04em;
@@ -377,10 +377,10 @@ input[type="text"]:focus, input[type="password"]:focus, select:focus, textarea:f
   border-left: 5px solid #059669 !important;
 }
 
-.card-tint-purple {
-  background-color: #faf5ff !important;
+.card-tint-dark {
+  background-color: #f8fafc !important;
   border: 2px solid #0f172a !important;
-  border-left: 5px solid #7c3aed !important;
+  border-left: 5px solid #0f172a !important;
 }
 
 .card-tint-amber {

@@ -221,7 +221,7 @@ export default function OverviewPage() {
                 [WAF_FRAMEWORK]
               </div>
               <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
-                <span style={{ fontSize: '16px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#7c3aed' }}>
+                <span style={{ fontSize: '16px', fontWeight: 800, fontFamily: 'var(--font-mono)', color: '#0f172a' }}>
                   82/100
                 </span>
                 <span style={{ fontSize: '10px', fontFamily: 'var(--font-mono)', color: '#0f172a' }}>

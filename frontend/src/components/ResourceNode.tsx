@@ -35,7 +35,7 @@ export default function ResourceNode({ data, selected }: ResourceNodeProps) {
       case 'ebs':
         return { color: '#d97706', icon: '💾', label: 'Amazon EBS' };
       case 'security_group':
-        return { color: '#7c3aed', icon: '🛡️', label: 'Security Group' };
+        return { color: '#0f172a', icon: '🛡️', label: 'Security Group' };
       case 'vpc':
         return { color: '#475569', icon: '🌐', label: 'Amazon VPC' };
       case 'ecs':
